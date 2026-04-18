@@ -374,48 +374,73 @@
                 bottom: 145px;
             }
         }
-                       /* Анимация для тайтла */
-            .hero-title {
-                animation: titleReveal 0.8s ease forwards;
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            
-            /* Анимация для строк слогана */
-            .slogan-left, .slogan-right {
-                opacity: 0;
-                animation: fadeInUp 0.8s ease forwards;
-            }
-            
-            .slogan-left {
-                animation-delay: 0.3s;
-            }
-            
-            .slogan-right {
-                animation-delay: 0.6s;
-            }
-            
-            @keyframes titleReveal {
-                0% {
-                    opacity: 0;
-                    transform: translateY(-20px);
-                }
-                100% {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            
-            @keyframes fadeInUp {
-                0% {
-                    opacity: 0;
-                    transform: translateY(15px);
-                }
-                100% {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
+              /* Анимация тайтла */
+.hero-title {
+    animation: titleSlowReveal 1.2s ease forwards;
+    opacity: 0;
+    transform: translateY(-8px);
+}
+
+/* Анимация строк слогана */
+.slogan-left, .slogan-right {
+    opacity: 0;
+    animation: sloganReveal 0.8s ease forwards;
+}
+
+.slogan-left {
+    animation-delay: 2.0s;
+}
+
+.slogan-right {
+    animation-delay: 3.2s;
+}
+
+/* Анимация кнопки */
+.hero-btn {
+    animation: btnFadeIn 0.6s ease forwards;
+    opacity: 0;
+    animation-delay: 4.2s;
+}
+
+/* Ключевые кадры */
+@keyframes titleSlowReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(-15px);
+        filter: blur(3px);
+    }
+    40% {
+        opacity: 0.5;
+        filter: blur(1px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes sloganReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes btnFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.95);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
     </style>
 </head>
 <body>
