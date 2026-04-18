@@ -263,27 +263,26 @@
 
         /* СИНЯЯ 3D КНОПКА С БЛИКАМИ */
         .hero-btn {
-            position: fixed;
-            bottom: 60px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(145deg, #2a6ad4, #1a4a9e);
-            border: none;
-            padding: 16px 48px;
-            font-size: 24px;
-            font-weight: bold;
-            border-radius: 60px;
-            color: white;
-            cursor: pointer;
-            box-shadow: 0 10px 0 0 #0d2a5a, 0 8px 25px rgba(0, 0, 0, 0.4);
-            transition: 0.07s linear;
-            font-family: inherit;
-            letter-spacing: 2px;
-            z-index: 10;
-            text-transform: uppercase;
-            position: relative;
-            overflow: hidden;
-        }
+    position: fixed;
+    bottom: 40px;          /* ← отступ от низа */
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(145deg, #2a6ad4, #1a4a9e);
+    border: none;
+    padding: 16px 48px;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 60px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 10px 0 0 #0d2a5a, 0 8px 25px rgba(0, 0, 0, 0.4);
+    transition: 0.07s linear;
+    font-family: inherit;
+    letter-spacing: 2px;
+    z-index: 10;
+    text-transform: uppercase;
+    overflow: hidden;
+}
 
         /* Блик на кнопке */
         .hero-btn::before {
