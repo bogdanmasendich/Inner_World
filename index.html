@@ -18,7 +18,7 @@
             color: white;
         }
 
-        /* Основной контейнер с фиксированным фоном */
+        /* Основной контейнер */
         .app {
             width: 100%;
             height: 100vh;
@@ -26,7 +26,7 @@
             overflow: hidden;
         }
 
-        /* ФОН — ваше изображение на весь экран */
+        /* ФОН — ваше изображение */
         .app::before {
             content: '';
             position: fixed;
@@ -34,33 +34,32 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('image.png'); /* ← ваше изображение */
+            background-image: url('image.png');
             background-position: center center;
             background-size: cover;
             background-repeat: no-repeat;
             z-index: 0;
         }
 
-        /* Полупрозрачный слой для читаемости слайдов (но первый экран остаётся ярким) */
+        /* Затемнение для слайдов */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(10, 15, 42, 0);
+            background: rgba(0, 20, 50, 0);
             transition: background 0.5s ease;
             z-index: 1;
             pointer-events: none;
         }
 
-        /* Затемнение появляется только после перехода к слайдам */
         .app.dimmed .overlay {
-            background: rgba(10, 15, 42, 0.85);
+            background: rgba(0, 20, 50, 0.85);
             pointer-events: auto;
         }
 
-        /* Слайдер — поверх фона */
+        /* Слайдер */
         .slider-container {
             position: relative;
             z-index: 2;
@@ -83,18 +82,18 @@
             overflow-y: auto;
             padding: 32px 24px 100px 24px;
             scrollbar-width: thin;
-            scrollbar-color: #cc3300 #1e2a4a;
+            scrollbar-color: #3a86ff #1a2a4a;
         }
 
         .slide::-webkit-scrollbar {
             width: 4px;
         }
         .slide::-webkit-scrollbar-track {
-            background: #1e2a4a;
+            background: #1a2a4a;
             border-radius: 10px;
         }
         .slide::-webkit-scrollbar-thumb {
-            background: #cc3300;
+            background: #3a86ff;
             border-radius: 10px;
         }
 
@@ -104,20 +103,21 @@
             padding-bottom: 40px;
         }
 
-        /* Стили текста внутри слайдов */
+        /* Стили текста внутри слайдов (синяя гамма) */
         h2 {
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 24px;
             letter-spacing: -0.01em;
-            border-left: 4px solid #cc3300;
+            border-left: 4px solid #3a86ff;
             padding-left: 16px;
+            color: #fff;
         }
 
         .lead-text {
             font-size: 18px;
             line-height: 1.5;
-            color: #e0e8ff;
+            color: #c5e0ff;
             margin-bottom: 24px;
             font-weight: 400;
         }
@@ -125,7 +125,7 @@
         .description {
             font-size: 16px;
             line-height: 1.6;
-            color: #d0d8ff;
+            color: #b8d4ff;
             margin-bottom: 20px;
         }
 
@@ -137,17 +137,17 @@
         }
 
         .step-item {
-            background: rgba(30, 42, 74, 0.7);
+            background: rgba(20, 40, 70, 0.7);
             backdrop-filter: blur(8px);
             border-radius: 20px;
             padding: 20px;
-            border: 1px solid rgba(204, 51, 0, 0.3);
+            border: 1px solid rgba(58, 134, 255, 0.4);
         }
 
         .step-number {
             font-size: 28px;
             font-weight: 800;
-            color: #cc3300;
+            color: #3a86ff;
             margin-bottom: 8px;
         }
 
@@ -155,11 +155,12 @@
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 8px;
+            color: #fff;
         }
 
         .step-desc {
             font-size: 14px;
-            color: #c0c8f0;
+            color: #b0c8f0;
             line-height: 1.5;
         }
 
@@ -171,23 +172,28 @@
         }
 
         .class-card {
-            background: rgba(20, 30, 60, 0.8);
+            background: rgba(20, 40, 70, 0.8);
             backdrop-filter: blur(8px);
             border-radius: 20px;
             padding: 18px;
-            border-left: 3px solid #cc3300;
+            border-left: 3px solid #3a86ff;
         }
 
         .class-title {
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 6px;
+            color: #fff;
         }
 
-        /* Кнопки навигации */
+        .class-card div:last-child {
+            color: #b8d4ff;
+        }
+
+        /* Кнопки навигации — подняты на 10px */
         .nav-buttons {
             position: fixed;
-            bottom: 24px;
+            bottom: 34px;
             left: 0;
             right: 0;
             display: flex;
@@ -198,9 +204,9 @@
         }
 
         .nav-btn {
-            background: rgba(10, 15, 42, 0.85);
+            background: rgba(10, 20, 40, 0.85);
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(204, 51, 0, 0.5);
+            border: 1px solid rgba(58, 134, 255, 0.5);
             padding: 12px 28px;
             border-radius: 60px;
             font-size: 16px;
@@ -211,9 +217,9 @@
         }
 
         .nav-btn-primary {
-            background: #cc3300;
+            background: #2a6ad4;
             border: none;
-            box-shadow: 0 4px 20px rgba(204, 51, 0, 0.4);
+            box-shadow: 0 4px 20px rgba(58, 134, 255, 0.4);
         }
 
         .nav-btn-primary:active {
@@ -224,13 +230,44 @@
             transform: scale(0.96);
         }
 
-        /* Первый экран — кнопка поверх вашего фона */
+        /* ПЕРВЫЙ ЭКРАН — ТЕКСТ СВЕРХУ + СИНЯЯ 3D КНОПКА */
+        .hero-header {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 42px;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #ffffff, #7ab8ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 10px rgba(58, 134, 255, 0.3);
+            margin-bottom: 12px;
+        }
+
+        .hero-slogan {
+            font-size: 16px;
+            line-height: 1.4;
+            color: #c5e0ff;
+            font-weight: 500;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+        }
+
+        /* СИНЯЯ 3D КНОПКА С БЛИКАМИ */
         .hero-btn {
             position: fixed;
-            bottom: 80px;
+            bottom: 60px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(145deg, #cc3300, #991f00);
+            background: linear-gradient(145deg, #2a6ad4, #1a4a9e);
             border: none;
             padding: 16px 48px;
             font-size: 24px;
@@ -238,46 +275,64 @@
             border-radius: 60px;
             color: white;
             cursor: pointer;
-            box-shadow: 0 10px 0 0 #4a0f00, 0 5px 25px rgba(204, 51, 0, 0.6);
+            box-shadow: 0 10px 0 0 #0d2a5a, 0 8px 25px rgba(0, 0, 0, 0.4);
             transition: 0.07s linear;
             font-family: inherit;
-            z-index: 10;
             letter-spacing: 2px;
+            z-index: 10;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Блик на кнопке */
+        .hero-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .hero-btn:hover::before {
+            left: 100%;
         }
 
         .hero-btn:active {
             transform: translateX(-50%) translateY(4px);
-            box-shadow: 0 6px 0 0 #4a0f00, 0 5px 20px rgba(204, 51, 0, 0.6);
+            box-shadow: 0 6px 0 0 #0d2a5a, 0 8px 20px rgba(0, 0, 0, 0.4);
         }
 
         .slide-indicator {
             position: fixed;
-            bottom: 100px;
+            bottom: 110px;
             left: 0;
             right: 0;
             text-align: center;
             font-size: 12px;
-            color: #aaa;
+            color: #8a9acc;
             z-index: 10;
         }
 
         .telegram-link {
             display: inline-block;
-            background: #1e2a4a;
+            background: #1a3a6a;
             padding: 14px 28px;
             border-radius: 60px;
             color: white;
             text-decoration: none;
             font-weight: 600;
             margin-top: 20px;
-            border: 1px solid #cc3300;
+            border: 1px solid #3a86ff;
         }
 
         .telegram-link:active {
-            background: #cc3300;
+            background: #2a6ad4;
         }
 
-        /* Скрытые элементы */
         .hidden {
             display: none;
         }
@@ -289,10 +344,22 @@
             h2 {
                 font-size: 24px;
             }
+            .hero-title {
+                font-size: 32px;
+            }
+            .hero-slogan {
+                font-size: 13px;
+            }
             .hero-btn {
                 font-size: 20px;
                 padding: 14px 40px;
-                bottom: 60px;
+                bottom: 50px;
+            }
+            .nav-buttons {
+                bottom: 28px;
+            }
+            .slide-indicator {
+                bottom: 105px;
             }
         }
     </style>
@@ -301,7 +368,13 @@
 <div class="app" id="app">
     <div class="overlay"></div>
     
-    <!-- Кнопка на первом экране (поверх вашей картинки) -->
+    <!-- ШАПКА НА ГЛАВНОМ ЭКРАНЕ -->
+    <div class="hero-header" id="heroHeader">
+        <div class="hero-title">INNER WORLD</div>
+        <div class="hero-slogan">Овладей миром причин —<br>и мир результатов станет твоим</div>
+    </div>
+
+    <!-- СИНЯЯ 3D КНОПКА -->
     <button class="hero-btn" id="heroOpenBtn">ОТКРЫТЬ</button>
 
     <div class="slider-container hidden" id="sliderContainer">
@@ -313,8 +386,8 @@
                     <div class="lead-text">Большинство пытаются изменить жизнь через действия. Цели, мотивация, информация — но результат не держится.</div>
                     <div class="description">Потому что проблема не в действиях. И даже не в мышлении.</div>
                     <div class="description">Проблема в том, что создаёт их.</div>
-                    <div class="description"><strong style="color:#cc3300">Есть уровень глубже</strong> — уровень внутренних программ. Именно он определяет твои решения, реакции и поведение.</div>
-                    <div class="description">Виртуоз — это не тот, кто делает больше. Это тот, кто работает на уровне <strong style="color:#cc3300">причины</strong>. Он управляет механизмом, который создаёт жизнь.</div>
+                    <div class="description"><strong style="color:#3a86ff">Есть уровень глубже</strong> — уровень внутренних программ. Именно он определяет твои решения, реакции и поведение.</div>
+                    <div class="description">Виртуоз — это не тот, кто делает больше. Это тот, кто работает на уровне <strong style="color:#3a86ff">причины</strong>. Он управляет механизмом, который создаёт жизнь.</div>
                 </div>
             </div>
 
@@ -323,9 +396,9 @@
                 <div class="slide-content">
                     <h2>Уровень причин</h2>
                     <div class="description">Ты устал от практик, психологов, книг? Читал десятки методик, но внутри ничего не меняется?</div>
-                    <div class="description"><strong style="color:#cc3300">Inner World</strong> — это не очередная теория. Это навык работы с подсознанием.</div>
+                    <div class="description"><strong style="color:#3a86ff">Inner World</strong> — это не очередная теория. Это навык работы с подсознанием.</div>
                     <div class="description">Гибко решай задачи: от глубоких проблем до достижения целей. Без борьбы с собой.</div>
-                    <div style="margin-top: 30px; background: rgba(204,51,0,0.2); border-radius: 20px; padding: 20px;">
+                    <div style="margin-top: 30px; background: rgba(58,134,255,0.15); border-radius: 20px; padding: 20px;">
                         <div style="font-weight:700">Обрети мастерство:</div>
                         <div style="margin-top: 12px;">✔ Власть над внутренним миром<br>✔ Сила влиять на причины<br>✔ Чёткое разделение: внутреннее → внешнее</div>
                     </div>
@@ -358,8 +431,8 @@
                         <div class="class-card"><div class="class-title">🔍 Поиск и выявление</div><div>Понимание внутренних механизмов и сценариев</div></div>
                         <div class="class-card"><div class="class-title">⚙️ Самопрограммирование</div><div>Изменение структур и закрепление состояний</div></div>
                     </div>
-                    <div class="description"><strong style="color:#cc3300">Живая среда:</strong> общие встречи, разборы, открытые взаимодействия.</div>
-                    <div class="description"><strong style="color:#cc3300">Рост:</strong> участник → результат → углубление → проводник.</div>
+                    <div class="description"><strong style="color:#3a86ff">Живая среда:</strong> общие встречи, разборы, открытые взаимодействия.</div>
+                    <div class="description"><strong style="color:#3a86ff">Рост:</strong> участник → результат → углубление → проводник.</div>
                 </div>
             </div>
 
@@ -370,7 +443,7 @@
                     <div class="lead-text">Ты уже на уровне причины. Осталось сделать одно действие.</div>
                     <div class="description">Напиши мне в Telegram. Расскажу, как войти в Inner World и начать управлять внутренним механизмом.</div>
                     <a href="https://t.me/ваш_логин" class="telegram-link" id="telegramLink" target="_blank">✧ Написать в Telegram ✧</a>
-                    <div style="margin-top: 40px; font-size: 12px; color: #aaa;">После перехода ты вернёшься сюда</div>
+                    <div style="margin-top: 40px; font-size: 12px; color: #8a9acc;">После перехода ты вернёшься сюда</div>
                 </div>
             </div>
         </div>
@@ -389,6 +462,7 @@
     tg.expand();
 
     const app = document.getElementById('app');
+    const heroHeader = document.getElementById('heroHeader');
     const heroBtn = document.getElementById('heroOpenBtn');
     const sliderContainer = document.getElementById('sliderContainer');
     const slidesWrapper = document.getElementById('slidesWrapper');
@@ -397,11 +471,11 @@
     const slideIndicator = document.getElementById('slideIndicator');
     const slides = document.querySelectorAll('.slide');
     const telegramLink = document.getElementById('telegramLink');
-                    
+
     let currentIndex = 0;
     const totalSlides = slides.length;
 
-    // Замените на свой Telegram username
+    // ЗАМЕНИТЕ НА СВОЙ TELEGRAM USERNAME
     if (telegramLink) {
         telegramLink.href = 'https://t.me/bogdans_network';
     }
@@ -445,8 +519,9 @@
     // Переход от первого экрана к слайдам
     heroBtn.addEventListener('click', () => {
         heroBtn.classList.add('hidden');
+        heroHeader.classList.add('hidden');
         sliderContainer.classList.remove('hidden');
-        app.classList.add('dimmed'); // затемняем фон
+        app.classList.add('dimmed');
         updateSlider();
     });
 
