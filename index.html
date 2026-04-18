@@ -257,15 +257,21 @@
 }
 
 .hero-slogan {
-    font-size: 16px;
-    line-height: 1.4;
-    color: #c5e0ff;
-    font-weight: 500;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-    text-align: left;        /* ← текст слогана прижат влево */   
-    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    width: fit-content;      /* ширина под содержимое */
     margin-left: auto;
     margin-right: auto;
+}
+
+.slogan-left {
+    text-align: left;        /* прижато к левому краю (под I) */
+    width: 100%;
+}
+
+.slogan-right {
+    text-align: right;       /* прижато к правому краю (под D) */
+    width: 100%;
 }
 
         /* СИНЯЯ 3D КНОПКА С БЛИКАМИ */
@@ -377,7 +383,10 @@
     <!-- ШАПКА НА ГЛАВНОМ ЭКРАНЕ -->
     <div class="hero-header" id="heroHeader">
         <div class="hero-title">INNER WORLD</div>
-        <div class="hero-slogan">Овладей миром причин —<br>и мир результатов станет твоим</div>
+        <div class="hero-slogan">
+            <div class="slogan-left">Овладей миром причин —</div>
+            <div class="slogan-right">и мир результатов станет твоим</div>
+        </div>
     </div>
 
     <!-- СИНЯЯ 3D КНОПКА -->
