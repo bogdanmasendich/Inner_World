@@ -262,8 +262,7 @@
     color: #c5e0ff;
     font-weight: 500;
     text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-    text-align: left;        /* ← текст слогана прижат влево */
-    width: 300px;      /* ← ширина только под текст */
+    text-align: left;        /* ← текст слогана прижат влево */   
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
@@ -533,6 +532,22 @@
     });
 
     updateSlider();
+</script>
+    <script>
+    // Автоматически подгоняем ширину слогана под ширину тайтла
+    function adjustSloganWidth() {
+        const title = document.querySelector('.hero-title');
+        const slogan = document.querySelector('.hero-slogan');
+        
+        if (title && slogan) {
+            const titleWidth = title.offsetWidth;
+            slogan.style.width = titleWidth + 'px';
+        }
+    }
+    
+    // Запускаем после загрузки и при изменении размера экрана
+    window.addEventListener('load', adjustSloganWidth);
+    window.addEventListener('resize', adjustSloganWidth);
 </script>
 </body>
 </html>
