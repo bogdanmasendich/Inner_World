@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>Inner World</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Montserrat', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            overflow: hidden;
+            color: white;
+        }
+
+        /* Основной контейнер с фиксированным фоном */
+        .app {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ФОН — ваше изображение на весь экран */
+        .app::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('image.png'); /* ← ваше изображение */
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+        /* Полупрозрачный слой для читаемости слайдов (но первый экран остаётся ярким) */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 15, 42, 0);
+            transition: background 0.5s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* Затемнение появляется только после перехода к слайдам */
+        .app.dimmed .overlay {
+            background: rgba(10, 15, 42, 0.85);
+            pointer-events: auto;
+        }
+
+        /* Слайдер — поверх фона */
+        .slider-container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slides-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            padding: 32px 24px 100px 24px;
+            scrollbar-width: thin;
+            scrollbar-color: #cc3300 #1e2a4a;
+        }
+
+        .slide::-webkit-scrollbar {
+            width: 4px;
+        }
+        .slide::-webkit-scrollbar-track {
+            background: #1e2a4a;
+            border-radius: 10px;
+        }
+        .slide::-webkit-scrollbar-thumb {
+            background: #cc3300;
+            border-radius: 10px;
+        }
+
+        .slide-content {
+            max-width: 500px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+        }
+
+        /* Стили текста внутри слайдов */
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 24px;
+            letter-spacing: -0.01em;
+            border-left: 4px solid #cc3300;
+            padding-left: 16px;
+        }
+
+        .lead-text {
+            font-size: 18px;
+            line-height: 1.5;
+            color: #e0e8ff;
+            margin-bottom: 24px;
+            font-weight: 400;
+        }
+
+        .description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #d0d8ff;
+            margin-bottom: 20px;
+        }
+
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .step-item {
+            background: rgba(30, 42, 74, 0.7);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 20px;
+            border: 1px solid rgba(204, 51, 0, 0.3);
+        }
+
+        .step-number {
+            font-size: 28px;
+            font-weight: 800;
+            color: #cc3300;
+            margin-bottom: 8px;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .step-desc {
+            font-size: 14px;
+            color: #c0c8f0;
+            line-height: 1.5;
+        }
+
+        .class-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .class-card {
+            background: rgba(20, 30, 60, 0.8);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 18px;
+            border-left: 3px solid #cc3300;
+        }
+
+        .class-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        /* Кнопки навигации */
+        .nav-buttons {
+            position: fixed;
+            bottom: 24px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 0 20px;
+            z-index: 10;
+        }
+
+        .nav-btn {
+            background: rgba(10, 15, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(204, 51, 0, 0.5);
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+            font-family: inherit;
+        }
+
+        .nav-btn-primary {
+            background: #cc3300;
+            border: none;
+            box-shadow: 0 4px 20px rgba(204, 51, 0, 0.4);
+        }
+
+        .nav-btn-primary:active {
+            transform: scale(0.96);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.96);
+        }
+
+        /* Первый экран — кнопка поверх вашего фона */
+        .hero-btn {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(145deg, #cc3300, #991f00);
+            border: none;
+            padding: 16px 48px;
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 60px;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 10px 0 0 #4a0f00, 0 5px 25px rgba(204, 51, 0, 0.6);
+            transition: 0.07s linear;
+            font-family: inherit;
+            z-index: 10;
+            letter-spacing: 2px;
+        }
+
+        .hero-btn:active {
+            transform: translateX(-50%) translateY(4px);
+            box-shadow: 0 6px 0 0 #4a0f00, 0 5px 20px rgba(204, 51, 0, 0.6);
+        }
+
+        .slide-indicator {
+            position: fixed;
+            bottom: 100px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-size: 12px;
+            color: #aaa;
+            z-index: 10;
+        }
+
+        .telegram-link {
+            display: inline-block;
+            background: #1e2a4a;
+            padding: 14px 28px;
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            border: 1px solid #cc3300;
+        }
+
+        .telegram-link:active {
+            background: #cc3300;
+        }
+
+        /* Скрытые элементы */
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 500px) {
+            .slide {
+                padding: 20px 20px 100px 20px;
+            }
+            h2 {
+                font-size: 24px;
+            }
+            .hero-btn {
+                font-size: 20px;
+                padding: 14px 40px;
+                bottom: 60px;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="app" id="app">
+    <div class="overlay"></div>
+    
+    <!-- Кнопка на первом экране (поверх вашей картинки) -->
+    <button class="hero-btn" id="heroOpenBtn">ОТКРЫТЬ</button>
+
+    <div class="slider-container hidden" id="sliderContainer">
+        <div class="slides-wrapper" id="slidesWrapper">
+            <!-- СЛАЙД 1 - Мысли как виртуоз -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2>Мысли как виртуоз</h2>
+                    <div class="lead-text">Большинство пытаются изменить жизнь через действия. Цели, мотивация, информация — но результат не держится.</div>
+                    <div class="description">Потому что проблема не в действиях. И даже не в мышлении.</div>
+                    <div class="description">Проблема в том, что создаёт их.</div>
+                    <div class="description"><strong style="color:#cc3300">Есть уровень глубже</strong> — уровень внутренних программ. Именно он определяет твои решения, реакции и поведение.</div>
+                    <div class="description">Виртуоз — это не тот, кто делает больше. Это тот, кто работает на уровне <strong style="color:#cc3300">причины</strong>. Он управляет механизмом, который создаёт жизнь.</div>
+                </div>
+            </div>
+
+            <!-- СЛАЙД 2 - Уровень причин -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2>Уровень причин</h2>
+                    <div class="description">Ты устал от практик, психологов, книг? Читал десятки методик, но внутри ничего не меняется?</div>
+                    <div class="description"><strong style="color:#cc3300">Inner World</strong> — это не очередная теория. Это навык работы с подсознанием.</div>
+                    <div class="description">Гибко решай задачи: от глубоких проблем до достижения целей. Без борьбы с собой.</div>
+                    <div style="margin-top: 30px; background: rgba(204,51,0,0.2); border-radius: 20px; padding: 20px;">
+                        <div style="font-weight:700">Обрети мастерство:</div>
+                        <div style="margin-top: 12px;">✔ Власть над внутренним миром<br>✔ Сила влиять на причины<br>✔ Чёткое разделение: внутреннее → внешнее</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- СЛАЙД 3 - Как это работает (4 шага) -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2>Как это работает</h2>
+                    <div class="lead-text">Это не гипноз. Не внушение. И не попытка заставить себя измениться.</div>
+                    <div class="description">Работа с тем, что уже есть внутри — с механизмами, формирующими жизнь.</div>
+                    <div class="steps-list">
+                        <div class="step-item"><div class="step-number">01</div><div class="step-title">Выявление</div><div class="step-desc">Находим конкретный внутренний механизм, влияющий на решения и поведение.</div></div>
+                        <div class="step-item"><div class="step-number">02</div><div class="step-title">Контакт</div><div class="step-desc">Прямое взаимодействие с этим состоянием, а не разговор о нём.</div></div>
+                        <div class="step-item"><div class="step-number">03</div><div class="step-title">Изменение</div><div class="step-desc">Меняется структура восприятия внутри состояния.</div></div>
+                        <div class="step-item"><div class="step-number">04</div><div class="step-title">Закрепление</div><div class="step-desc">Новое состояние фиксируется и проявляется в жизни.</div></div>
+                    </div>
+                    <div class="description">Результат: меняются действия, решения и события.</div>
+                </div>
+            </div>
+
+            <!-- СЛАЙД 4 - Больше, чем обучение -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2>Больше, чем обучение</h2>
+                    <div class="lead-text">Inner World — это не курс. Это пространство, где ты становишься частью системы развития.</div>
+                    <div class="class-grid">
+                        <div class="class-card"><div class="class-title">🎭 Прямое взаимодействие</div><div>Работа с состояниями, навык входа в глубину</div></div>
+                        <div class="class-card"><div class="class-title">🔍 Поиск и выявление</div><div>Понимание внутренних механизмов и сценариев</div></div>
+                        <div class="class-card"><div class="class-title">⚙️ Самопрограммирование</div><div>Изменение структур и закрепление состояний</div></div>
+                    </div>
+                    <div class="description"><strong style="color:#cc3300">Живая среда:</strong> общие встречи, разборы, открытые взаимодействия.</div>
+                    <div class="description"><strong style="color:#cc3300">Рост:</strong> участник → результат → углубление → проводник.</div>
+                </div>
+            </div>
+
+            <!-- СЛАЙД 5 - Финальный призыв -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2>Твой следующий шаг</h2>
+                    <div class="lead-text">Ты уже на уровне причины. Осталось сделать одно действие.</div>
+                    <div class="description">Напиши мне в Telegram. Расскажу, как войти в Inner World и начать управлять внутренним механизмом.</div>
+                    <a href="https://t.me/ваш_логин" class="telegram-link" id="telegramLink" target="_blank">✧ Написать в Telegram ✧</a>
+                    <div style="margin-top: 40px; font-size: 12px; color: #aaa;">После перехода ты вернёшься сюда</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-buttons" id="navButtons">
+            <button class="nav-btn" id="prevBtn" style="display: none;">← Назад</button>
+            <button class="nav-btn nav-btn-primary" id="nextBtn">Вперёд →</button>
+        </div>
+        <div class="slide-indicator" id="slideIndicator">1 / 5</div>
+    </div>
+</div>
+
+<script>
+    const tg = window.Telegram.WebApp;
+    tg.ready();
+    tg.expand();
+
+    const app = document.getElementById('app');
+    const heroBtn = document.getElementById('heroOpenBtn');
+    const sliderContainer = document.getElementById('sliderContainer');
+    const slidesWrapper = document.getElementById('slidesWrapper');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const slideIndicator = document.getElementById('slideIndicator');
+    const slides = document.querySelectorAll('.slide');
+    const telegramLink = document.getElementById('telegramLink');
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    // Замените на свой Telegram username
+    if (telegramLink) {
+        telegramLink.href = 'https://t.me/balashova_ekaterina';
+    }
+
+    function updateSlider() {
+        slidesWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+        slideIndicator.innerText = `${currentIndex + 1} / ${totalSlides}`;
+        
+        if (currentIndex === 0) {
+            prevBtn.style.display = 'none';
+        } else {
+            prevBtn.style.display = 'block';
+        }
+        
+        if (currentIndex === totalSlides - 1) {
+            nextBtn.innerText = 'Завершить';
+        } else {
+            nextBtn.innerText = 'Вперёд →';
+        }
+        
+        slides[currentIndex].scrollTop = 0;
+    }
+
+    function nextSlide() {
+        if (currentIndex < totalSlides - 1) {
+            currentIndex++;
+            updateSlider();
+        }
+    }
+
+    function prevSlide() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            updateSlider();
+        }
+    }
+
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    // Переход от первого экрана к слайдам
+    heroBtn.addEventListener('click', () => {
+        heroBtn.classList.add('hidden');
+        sliderContainer.classList.remove('hidden');
+        app.classList.add('dimmed'); // затемняем фон
+        updateSlider();
+    });
+
+    updateSlider();
+</script>
+</body>
+</html>
