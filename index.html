@@ -374,6 +374,30 @@
                 bottom: 145px;
             }
         }
+        /* Анимация для строк слогана */
+.slogan-left, .slogan-right {
+    opacity: 0;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.slogan-left {
+    animation-delay: 0.3s;  /* появляется первой */
+}
+
+.slogan-right {
+    animation-delay: 0.6s;  /* появляется второй */
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
     </style>
 </head>
 <body>
