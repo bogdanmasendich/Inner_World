@@ -18,7 +18,6 @@
             color: white;
         }
 
-        /* Основной контейнер */
         .app {
             width: 100%;
             height: 100vh;
@@ -26,7 +25,7 @@
             overflow: hidden;
         }
 
-        /* ФОН — ваше изображение */
+        /* ФОН на весь экран */
         .app::before {
             content: '';
             position: fixed;
@@ -36,7 +35,7 @@
             height: 100%;
             background-image: url('image.png');
             background-position: center center;
-            background-size: 110% auto;
+            background-size: cover;
             background-repeat: no-repeat;
             z-index: 0;
             animation: slowZoom 30s ease-in forwards;
@@ -48,7 +47,6 @@
             100% { transform: scale(1.1); }
         }
 
-        /* Затемнение */
         .overlay {
             position: fixed;
             top: 0;
@@ -66,7 +64,7 @@
             pointer-events: auto;
         }
 
-        /* ========== ПЕРВЫЙ ЭКРАН (HERO) ========== */
+        /* ========== ПЕРВЫЙ ЭКРАН ========== */
         .hero-header {
             position: fixed;
             top: 50px;
@@ -104,6 +102,7 @@
             margin-right: auto;
         }
 
+        /* Слоган с привязкой к краям тайтла (как было) + новый шрифт */
         .slogan-left, .slogan-right {
             font-family: 'Georgia', 'Times New Roman', serif;
             font-style: italic;
@@ -145,7 +144,6 @@
             letter-spacing: 2px;
             z-index: 10;
             text-transform: uppercase;
-            overflow: hidden;
             animation: btnFadeIn 0.6s ease forwards;
             opacity: 0;
             animation-delay: 4.2s;
@@ -172,7 +170,7 @@
             100% { opacity: 1; transform: translateX(-50%) scale(1); }
         }
 
-        /* ========== ОСНОВНОЕ ПРИЛОЖЕНИЕ (ПОСЛЕ ОТКРЫТЬ) ========== */
+        /* ========== ОСНОВНОЕ ПРИЛОЖЕНИЕ ========== */
         .main-app {
             position: relative;
             z-index: 2;
@@ -188,7 +186,7 @@
             opacity: 1;
         }
 
-        /* ШАПКА */
+        /* ШАПКА С ПАРЕНИЕМ */
         .app-header {
             position: fixed;
             top: 20px;
@@ -196,11 +194,21 @@
             right: 0;
             text-align: center;
             z-index: 20;
-            padding: 0 20px;
+            padding: 12px 20px;
+            background: rgba(0, 20, 50, 0.6);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(58, 134, 255, 0.3);
+            animation: headerFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes headerFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+            100% { transform: translateY(0px); }
         }
 
         .app-logo {
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 700;
             background: linear-gradient(135deg, #ffffff, #7ab8ff);
             -webkit-background-clip: text;
@@ -214,16 +222,17 @@
             color: #8a9acc;
             margin-top: 6px;
             font-style: italic;
-            opacity: 0.7;
+            opacity: 0.8;
         }
 
-        /* КОНТЕНТ (скроллится) */
+        /* КОНТЕНТ — теперь не залазит на шапку */
         .content-area {
             flex: 1;
             overflow-y: auto;
             padding: 100px 24px 120px 24px;
             scrollbar-width: thin;
             scrollbar-color: #3a86ff #1a2a4a;
+            margin-top: 60px;
         }
 
         .content-area::-webkit-scrollbar {
@@ -250,14 +259,8 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Стили контента */
@@ -267,13 +270,6 @@
             margin-bottom: 20px;
             border-left: 4px solid #3a86ff;
             padding-left: 16px;
-        }
-
-        .section h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin: 24px 0 12px 0;
-            color: #7ab8ff;
         }
 
         .section p {
@@ -292,27 +288,7 @@
             border: 1px solid rgba(58, 134, 255, 0.3);
         }
 
-        .step-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            margin: 20px 0;
-        }
-
-        .step-item {
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-
-        .step-num {
-            font-size: 24px;
-            font-weight: 800;
-            color: #3a86ff;
-            min-width: 40px;
-        }
-
-        /* НАВИГАЦИЯ (пар ящие кнопки дугой) */
+        /* ========== 5 КНОПОК ПОЛУКРУГОМ С ХАОТИЧНЫМ ПАРЕНИЕМ ========== */
         .nav-container {
             position: fixed;
             bottom: 20px;
@@ -321,60 +297,93 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            gap: 20px;
+            gap: 12px;
             z-index: 20;
-            padding: 0 20px;
+            padding: 0 16px;
         }
 
         .nav-btn {
-            width: 64px;
-            height: 64px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
-            background: linear-gradient(145deg, rgba(58, 134, 255, 0.25), rgba(20, 40, 80, 0.5));
+            background: linear-gradient(145deg, rgba(58, 134, 255, 0.3), rgba(20, 40, 80, 0.6));
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(58, 134, 255, 0.4);
+            border: 1px solid rgba(58, 134, 255, 0.5);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 28px;
+            font-size: 24px;
             cursor: pointer;
             transition: all 0.2s ease;
-            animation: float 3s ease-in-out infinite;
+            /* Разные анимации для хаотичного парения */
         }
 
-        .nav-btn:nth-child(1) { animation-delay: 0s; }
-        .nav-btn:nth-child(2) { animation-delay: 0.4s; }
-        .nav-btn:nth-child(3) { animation-delay: 0.8s; }
-        .nav-btn:nth-child(4) { animation-delay: 1.2s; }
+        /* Хаотичное парение — каждая кнопка двигается по-своему */
+        .nav-btn:nth-child(1) { animation: floatChaotic1 3.2s ease-in-out infinite; }
+        .nav-btn:nth-child(2) { animation: floatChaotic2 2.8s ease-in-out infinite; }
+        .nav-btn:nth-child(3) { animation: floatChaotic3 3.6s ease-in-out infinite; }
+        .nav-btn:nth-child(4) { animation: floatChaotic4 3.0s ease-in-out infinite; }
+        .nav-btn:nth-child(5) { animation: floatChaotic5 3.4s ease-in-out infinite; }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-6px); }
-            100% { transform: translateY(0px); }
+        /* Разные направления и амплитуды */
+        @keyframes floatChaotic1 {
+            0% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-8px) translateX(2px); }
+            100% { transform: translateY(0px) translateX(0px); }
         }
+        @keyframes floatChaotic2 {
+            0% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-5px) translateX(-3px); }
+            100% { transform: translateY(0px) translateX(0px); }
+        }
+        @keyframes floatChaotic3 {
+            0% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-10px) translateX(0px); }
+            100% { transform: translateY(0px) translateX(0px); }
+        }
+        @keyframes floatChaotic4 {
+            0% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-6px) translateX(4px); }
+            100% { transform: translateY(0px) translateX(0px); }
+        }
+        @keyframes floatChaotic5 {
+            0% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-7px) translateX(-2px); }
+            100% { transform: translateY(0px) translateX(0px); }
+        }
+
+        /* Расположение полукругом (крайние выше) */
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 14px;
+        }
+        .nav-btn:nth-child(1) { transform: translateY(-18px); }
+        .nav-btn:nth-child(2) { transform: translateY(-8px); }
+        .nav-btn:nth-child(3) { transform: translateY(0px); }
+        .nav-btn:nth-child(4) { transform: translateY(-8px); }
+        .nav-btn:nth-child(5) { transform: translateY(-18px); }
 
         .nav-btn.active {
-            background: linear-gradient(145deg, rgba(58, 134, 255, 0.6), rgba(30, 60, 120, 0.8));
-            box-shadow: 0 0 20px rgba(58, 134, 255, 0.7), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            border-color: rgba(58, 134, 255, 0.9);
-            transform: scale(1.05);
+            background: linear-gradient(145deg, rgba(58, 134, 255, 0.7), rgba(30, 60, 120, 0.9));
+            box-shadow: 0 0 20px rgba(58, 134, 255, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(58, 134, 255, 1);
+            transform: scale(1.08);
         }
 
         .nav-btn:active {
             transform: scale(0.95);
         }
 
-        /* Адаптив */
         @media (max-width: 500px) {
             .hero-title { font-size: 48px; }
             .slogan-left, .slogan-right { font-size: 13px; }
             .hero-btn { font-size: 20px; padding: 12px 36px; bottom: 30px; }
-            .nav-btn { width: 56px; height: 56px; font-size: 24px; }
-            .app-logo { font-size: 20px; }
-            .quote { font-size: 10px; }
-            .content-area { padding: 90px 20px 100px 20px; }
-            .section h2 { font-size: 24px; }
+            .nav-btn { width: 50px; height: 50px; font-size: 22px; }
+            .app-logo { font-size: 18px; }
+            .content-area { padding: 90px 20px 100px 20px; margin-top: 70px; }
         }
 
         .hidden {
@@ -386,7 +395,7 @@
 <div class="app" id="app">
     <div class="overlay"></div>
     
-    <!-- ПЕРВЫЙ ЭКРАН (HERO) -->
+    <!-- ПЕРВЫЙ ЭКРАН -->
     <div id="heroScreen">
         <div class="hero-header">
             <div class="hero-title">INNER WORLD</div>
@@ -406,70 +415,35 @@
         </div>
 
         <div class="content-area" id="contentArea">
-            <!-- РАЗДЕЛ 1: О проекте -->
             <div class="section active-section" id="sectionAbout">
                 <h2>О проекте</h2>
-                <p><strong>Inner World</strong> — это пространство, где ты овладеваешь <strong style="color:#3a86ff">миром причин</strong>. Внешний мир — лишь результат внутренних программ.</p>
-                <div class="card">
-                    <p>✨ <strong>Мысли как виртуоз</strong><br>Большинство пытаются изменить жизнь через действия. Но проблема глубже — в невидимых механизмах, которые создают эти действия.</p>
-                </div>
-                <div class="card">
-                    <p>🎯 <strong>Миссия</strong><br>Дать навык работы с подсознанием. Не теорию, а практическое управление внутренними сценариями.</p>
-                </div>
-                <p>Виртуоз — не тот, кто старается больше. А тот, кто работает на уровне <strong>причины</strong>.</p>
+                <p><strong>Inner World</strong> — это пространство, где ты овладеваешь <strong style="color:#3a86ff">миром причин</strong>.</p>
+                <div class="card"><p>✨ <strong>Мысли как виртуоз</strong><br>Большинство пытаются изменить жизнь через действия. Но проблема глубже.</p></div>
+                <div class="card"><p>🎯 <strong>Миссия</strong><br>Дать навык работы с подсознанием.</p></div>
             </div>
-
-            <!-- РАЗДЕЛ 2: Ученикам -->
             <div class="section" id="sectionStudents">
                 <h2>Ученикам</h2>
-                <p><strong>Программа и формат обучения</strong></p>
-                <div class="card">
-                    <p>🎭 <strong>Прямое взаимодействие</strong><br>Работа с состояниями, навык входа в глубину.</p>
-                </div>
-                <div class="card">
-                    <p>🔍 <strong>Поиск и выявление</strong><br>Понимание внутренних механизмов и сценариев.</p>
-                </div>
-                <div class="card">
-                    <p>⚙️ <strong>Самопрограммирование</strong><br>Изменение структур и закрепление состояний.</p>
-                </div>
-                <p>Групповые встречи, разборы, живая среда. Ты не просто учишься — ты растешь.</p>
+                <div class="card"><p>🎭 Прямое взаимодействие</p></div>
+                <div class="card"><p>🔍 Поиск и выявление</p></div>
+                <div class="card"><p>⚙️ Самопрограммирование</p></div>
             </div>
-
-            <!-- РАЗДЕЛ 3: Дорожная карта -->
             <div class="section" id="sectionRoadmap">
                 <h2>Дорожная карта</h2>
-                <div class="step-list">
-                    <div class="step-item"><div class="step-num">01</div><div>Участник — погружение в навык</div></div>
-                    <div class="step-item"><div class="step-num">02</div><div>Результат — первые изменения в жизни</div></div>
-                    <div class="step-item"><div class="step-num">03</div><div>Углубление — мастерство управления причинами</div></div>
-                    <div class="step-item"><div class="step-num">04</div><div>Проводник — передача навыка другим</div></div>
-                    <div class="step-item"><div class="step-num">05</div><div>Партнёр — часть экосистемы Inner World</div></div>
-                </div>
-                <div class="card">
-                    <p>🌟 Каждый уровень открывает новые возможности и глубину. Путь строится вокруг твоего темпа.</p>
-                </div>
+                <div class="card"><p>01 Участник</p><p>02 Результат</p><p>03 Углубление</p><p>04 Проводник</p><p>05 Партнёр</p></div>
             </div>
-
-            <!-- РАЗДЕЛ 4: Личная работа -->
             <div class="section" id="sectionPersonal">
                 <h2>Личная работа</h2>
-                <p><strong>Индивидуальный формат «Hel‑с»</strong> — глубокая работа с тобой лично.</p>
-                <div class="card">
-                    <p>🧠 <strong>Что даёт:</strong><br>Разбор внутренних механизмов, убирание корневых сценариев, точечная настройка подсознания.</p>
-                </div>
-                <div class="card">
-                    <p>📅 <strong>Формат:</strong><br>Онлайн-встречи, глубокая диагностика, авторские протоколы.</p>
-                </div>
-                <p>👉 <strong>Запись:</strong> Напиши мне в Telegram — <a href="https://t.me/bogdans_network" target="_blank" style="color:#3a86ff">@bogdans_network</a></p>
+                <div class="card"><p>Индивидуальный формат. Запись — <a href="https://t.me/bogdans_network" target="_blank" style="color:#3a86ff">@bogdans_network</a></p></div>
             </div>
         </div>
 
-        <!-- НАВИГАЦИЯ (4 парящие кнопки) -->
+        <!-- 5 КНОПОК ПОЛУКРУГОМ -->
         <div class="nav-container">
             <div class="nav-btn active" data-section="about">🏠</div>
             <div class="nav-btn" data-section="students">📖</div>
             <div class="nav-btn" data-section="roadmap">🧭</div>
             <div class="nav-btn" data-section="personal">⚡</div>
+            <div class="nav-btn" data-section="about">🌟</div>
         </div>
     </div>
 </div>
@@ -479,7 +453,6 @@
     tg.ready();
     tg.expand();
 
-    // Элементы
     const heroScreen = document.getElementById('heroScreen');
     const mainApp = document.getElementById('mainApp');
     const openBtn = document.getElementById('openBtn');
@@ -492,59 +465,27 @@
         personal: document.getElementById('sectionPersonal')
     };
 
-    // Переход от первого экрана к приложению
     openBtn.addEventListener('click', () => {
         heroScreen.classList.add('hidden');
         mainApp.classList.remove('hidden');
-        setTimeout(() => {
-            mainApp.classList.add('visible');
-        }, 50);
+        setTimeout(() => mainApp.classList.add('visible'), 50);
         appContainer.classList.add('dimmed');
     });
 
-    // Функция переключения разделов
     function switchSection(sectionId) {
-        // Скрыть все секции
-        Object.values(sections).forEach(section => {
-            section.classList.remove('active-section');
-        });
-        // Показать нужную
-        sections[sectionId].classList.add('active-section');
-        
-        // Обновить активную кнопку
+        Object.values(sections).forEach(s => s.classList.remove('active-section'));
+        if (sections[sectionId]) sections[sectionId].classList.add('active-section');
         navBtns.forEach(btn => {
             btn.classList.remove('active');
-            if (btn.getAttribute('data-section') === sectionId) {
-                btn.classList.add('active');
-            }
+            if (btn.getAttribute('data-section') === sectionId) btn.classList.add('active');
         });
     }
 
-    // Назначить обработчики кнопкам
     navBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const sectionId = btn.getAttribute('data-section');
-            switchSection(sectionId);
-        });
+        btn.addEventListener('click', () => switchSection(btn.getAttribute('data-section')));
     });
 
-    // Устанавливаем стартовый раздел (О проекте)
     switchSection('about');
-
-    // Сохраняем активный раздел при обновлении (опционально)
-    window.addEventListener('load', () => {
-        // Можно добавить сохранение в localStorage
-        const saved = localStorage.getItem('innerworld_section');
-        if (saved && sections[saved]) {
-            switchSection(saved);
-        }
-    });
-    window.addEventListener('beforeunload', () => {
-        const active = document.querySelector('.nav-btn.active');
-        if (active) {
-            localStorage.setItem('innerworld_section', active.getAttribute('data-section'));
-        }
-    });
 </script>
 </body>
 </html>
