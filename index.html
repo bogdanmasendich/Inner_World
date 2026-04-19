@@ -25,7 +25,7 @@
             overflow: hidden;
         }
 
-        /* ФОН */
+        /* ФОН на весь экран */
         .app::before {
             content: '';
             position: fixed;
@@ -151,6 +151,23 @@
             transform: translateX(-50%) translateY(4px);
             box-shadow: 0 6px 0 0 #0d2a5a, 0 8px 20px rgba(0, 0, 0, 0.4);
         }
+        
+        @media (max-width: 500px) {
+        .hero-header {
+        top: 20px;
+        }
+        .hero-title {
+        font-size: 48px;
+        }
+        .slogan-left, .slogan-right {
+        font-size: 13px;
+        }
+        .hero-btn {
+        bottom: 60px;
+        font-size: 20px;
+        padding: 12px 36px;
+        }
+    }
 
         @keyframes titleSlowReveal {
             0% { opacity: 0; transform: translateY(-15px); filter: blur(3px); }
@@ -184,128 +201,172 @@
             opacity: 1;
         }
 
-        /* ШАПКА */
-        .app-header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 20;
-            padding: 12px 16px;
-            background: rgba(0, 20, 50, 0.7);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(58, 134, 255, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        /* ШАПКА — элементы парят внутри */
+      /* ШАПКА — новая версия */
+.app-header {
+    position: fixed;
+    top: 0px;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    padding: 12px 16px;
+    background: rgba(0, 20, 50, 0.7);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(58, 134, 255, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex: 1;
-        }
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+}
 
-        .logo-icon {
-            font-size: 32px;
-            filter: drop-shadow(0 0 4px rgba(58,134,255,0.5));
-            animation: floatLogo 3.5s ease-in-out infinite;
-            cursor: pointer;
-        }
+.logo-icon {
+    font-size: 32px;
+    filter: drop-shadow(0 0 4px rgba(58,134,255,0.5));
+    animation: floatLogo 3.5s ease-in-out infinite;
+    cursor: pointer;
+}
 
-        .header-text {
-            display: flex;
-            flex-direction: column;
-        }
+.header-text {
+    display: flex;
+    flex-direction: column;
+}
 
-        .app-logo {
-            font-size: 18px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #ffffff, #7ab8ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: 1px;
-            animation: floatLogoText 3.8s ease-in-out infinite;
-            text-align: left;
-        }
+.app-logo {
+    font-size: 18px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff, #7ab8ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 1px;
+    animation: floatLogoText 3.8s ease-in-out infinite;
+    text-align: left;
+}
 
-        .quote {
-            font-size: 10px;
-            color: #8a9acc;
-            margin-top: 2px;
-            font-style: italic;
-            opacity: 0.8;
-            animation: floatQuote 4.2s ease-in-out infinite;
-            text-align: left;
-        }
+.quote {
+    font-size: 10px;
+    color: #8a9acc;
+    margin-top: 2px;
+    font-style: italic;
+    opacity: 0.8;
+    animation: floatQuote 4.2s ease-in-out infinite;
+    text-align: left;
+}
 
-        .header-right {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-        }
+.header-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
 
-        .social-btn {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: linear-gradient(145deg, rgba(58, 134, 255, 0.35), rgba(20, 40, 80, 0.65));
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(58, 134, 255, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            animation: floatSocial 3.6s ease-in-out infinite;
-        }
+.social-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, rgba(58, 134, 255, 0.35), rgba(20, 40, 80, 0.65));
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(58, 134, 255, 0.5);
+    /*box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: white;
+    animation: floatSocial 3.6s ease-in-out infinite;
+}
 
-        .social-icon {
-            width: 22px;
-            height: 22px;
-            display: block;
-            object-fit: contain;
-        }
+.social-btn:nth-child(1) { animation-delay: 0s; }
+.social-btn:nth-child(2) { animation-delay: 0.3s; }
+.social-btn:nth-child(3) { animation-delay: 0.6s; }
 
-        @keyframes floatLogo {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-3px) rotate(3deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
-        }
+.social-btn:hover {
+    transform: scale(1.08);
+    background: rgba(58, 134, 255, 0.6);
+    border-color: rgba(58, 134, 255, 0.9);
+}
 
-        @keyframes floatLogoText {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-2px); }
-            100% { transform: translateY(0px); }
-        }
+.social-btn:active {
+    transform: scale(0.95);
+}
 
-        @keyframes floatQuote {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(2px); }
-            100% { transform: translateY(0px); }
-        }
+.social-icon {
+    width: 30px;
+    height: 30px;
+    display: block;
+    object-fit: contain;
+}
 
-        @keyframes floatSocial {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-3px); }
-            100% { transform: translateY(0px); }
-        }
+@media (max-width: 500px) {
+    .social-icon {
+        width: 26px;
+        height: 26px;
+    }
+}
 
-        /* ========== СРЕДНЯЯ СЕКЦИЯ (контент) ========== */
+/* Анимации для элементов шапки */
+@keyframes floatLogo {
+    0% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-3px) rotate(3deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes floatLogoText {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-2px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes floatQuote {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(2px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes floatSocial {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+    100% { transform: translateY(0px); }
+}
+        
+        @media (max-width: 500px) {
+    .app-header {
+        padding: 8px 12px;
+    }
+    .logo-icon {
+        font-size: 26px;
+    }
+    .app-logo {
+        font-size: 14px;
+    }
+    .quote {
+        font-size: 8px;
+    }
+    .social-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+    .content-area {
+        padding: 80px 20px 130px 20px;
+    }
+}
+
+        /* КОНТЕНТ */
         .content-area {
-            position: fixed;
-            top: 70px;
-            bottom: 85px;
-            left: 0;
-            right: 0;
+            flex: 1;
             overflow-y: auto;
-            padding: 16px 20px;
+            padding: 120px 24px 140px 24px;
             scrollbar-width: thin;
             scrollbar-color: #3a86ff #1a2a4a;
-            z-index: 5;
         }
 
         .content-area::-webkit-scrollbar {
@@ -322,6 +383,7 @@
 
         .section {
             display: none;
+            animation: fadeInUp 0.4s ease;
             max-width: 500px;
             margin: 0 auto;
         }
@@ -330,140 +392,25 @@
             display: block;
         }
 
-        /* ========== СТИЛИ ДЛЯ ИСТОРИИ С ПЕРСОНАЖЕМ ========== */
-        .story-container {
-            width: 100%;
-            height: 100%;
-            position: relative;
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .story-slides {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .story-slide {
-            min-height: calc(100vh - 155px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            position: relative;
-        }
-
-        .character {
-            position: relative;
-            margin-bottom: 20px;
-            z-index: 5;
-        }
-
-        .character-left {
-            align-self: flex-start;
-        }
-
-        .character-right {
-            align-self: flex-end;
-        }
-
-        .character-center {
-            align-self: center;
-        }
-
-        .character-img {
-            width: 100px;
-            height: auto;
-            filter: drop-shadow(0 0 10px rgba(58,134,255,0.5));
-        }
-
-        .character-smaller .character-img {
-            width: 80px;
-        }
-
-        .speech-bubble {
-            background: rgba(20, 40, 70, 0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 24px;
-            padding: 18px 22px;
-            max-width: 280px;
-            border: 1px solid rgba(58, 134, 255, 0.5);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            margin-top: 10px;
-        }
-
-        .speech-bubble p {
-            font-size: 16px;
-            line-height: 1.5;
-            color: white;
-            margin-bottom: 8px;
-        }
-
-        .speech-bubble .speech-small {
-            font-size: 12px;
-            color: #8a9acc;
-            font-style: italic;
-            margin-bottom: 0;
-        }
-
-        .story-arrows {
-            position: fixed;
-            bottom: 105px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 20px;
-            z-index: 15;
-            background: rgba(0, 20, 50, 0.5);
-            backdrop-filter: blur(8px);
-            padding: 8px 16px;
-            border-radius: 40px;
-        }
-
-        .arrow-up, .arrow-down {
-            font-size: 24px;
-            color: #3a86ff;
-            opacity: 0.7;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .arrow-up:hover, .arrow-down:hover {
-            opacity: 1;
-            transform: scale(1.1);
-        }
-
-        .story-dots {
-            position: fixed;
-            bottom: 165px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 10px;
-            z-index: 15;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(58, 134, 255, 0.4);
-            transition: all 0.2s;
-            cursor: pointer;
-        }
-
-        .dot.active {
-            width: 24px;
-            border-radius: 4px;
-            background: #3a86ff;
-        }
-
-        /* Обычные стили контента для других разделов */
+        /* Стили контента */
         .section h2 {
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 20px;
             border-left: 4px solid #3a86ff;
             padding-left: 16px;
+        }
+
+        .section h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 24px 0 12px 0;
+            color: #7ab8ff;
         }
 
         .section p {
@@ -493,8 +440,9 @@
             transition: all 0.2s;
         }
 
-        .case-card.expanded .case-full {
-            display: block;
+        .case-card:hover {
+            background: rgba(30, 60, 100, 0.7);
+            transform: scale(1.01);
         }
 
         .case-title {
@@ -518,10 +466,14 @@
             padding-top: 12px;
         }
 
-        /* ========== НИЖНИЕ КНОПКИ ========== */
+        .case-card.expanded .case-full {
+            display: block;
+        }
+
+        /* ========== 5 КНОПОК ПОЛУКРУГОМ С ХАОТИЧНЫМ ПАРЕНИЕМ ========== */
         .nav-container {
             position: fixed;
-            bottom: 0;
+            bottom: 20px;
             left: 0;
             right: 0;
             display: flex;
@@ -529,10 +481,10 @@
             align-items: flex-end;
             gap: 10px;
             z-index: 20;
-            padding: 12px 16px 20px 16px;
-            background: linear-gradient(to top, rgba(0, 20, 50, 0.95), rgba(0, 20, 50, 0.7));
-            backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(58, 134, 255, 0.2);
+            padding: 0 16px;
+            background: linear-gradient(to top, rgba(0,20,50,0.9), rgba(0,20,50,0));
+            backdrop-filter: blur(8px);
+            padding-top: 20px;
         }
 
         .nav-btn {
@@ -551,12 +503,14 @@
             transition: all 0.2s ease;
         }
 
+        /* Положение полукругом — крайние выше */
         .nav-btn:nth-child(1) { transform: translateY(-24px); }
         .nav-btn:nth-child(2) { transform: translateY(-12px); }
         .nav-btn:nth-child(3) { transform: translateY(0px); }
         .nav-btn:nth-child(4) { transform: translateY(-12px); }
         .nav-btn:nth-child(5) { transform: translateY(-24px); }
 
+        /* Хаотичное парение каждой кнопки */
         .nav-btn:nth-child(1) { animation: float1 3.2s ease-in-out infinite; }
         .nav-btn:nth-child(2) { animation: float2 2.8s ease-in-out infinite; }
         .nav-btn:nth-child(3) { animation: float3 3.6s ease-in-out infinite; }
@@ -600,7 +554,6 @@
             transform: scale(0.95);
         }
 
-        /* Адаптив */
         @media (max-width: 500px) {
             .hero-title { font-size: 48px; }
             .slogan-left, .slogan-right { font-size: 13px; }
@@ -611,43 +564,22 @@
             .nav-btn:nth-child(3) { transform: translateY(0px); }
             .nav-btn:nth-child(4) { transform: translateY(-8px); }
             .nav-btn:nth-child(5) { transform: translateY(-18px); }
-            .content-area {
-                top: 65px;
-                bottom: 80px;
-                padding: 12px 16px;
-            }
-            .story-slide {
-                min-height: calc(100vh - 145px);
-            }
-            .character-img {
-                width: 70px;
-            }
-            .speech-bubble {
-                max-width: 240px;
-                padding: 14px 18px;
-            }
-            .speech-bubble p {
-                font-size: 14px;
-            }
-            .story-arrows {
-                bottom: 100px;
-            }
-            .story-dots {
-                bottom: 155px;
-            }
+            .app-logo { font-size: 18px; }
+            .content-area { padding: 110px 20px 130px 20px; }
         }
 
         .hidden {
             display: none;
         }
+        
     </style>
 </head>
 <body>
 <div class="app" id="app">
     <div class="overlay"></div>
-
+    
     <!-- ПЕРВЫЙ ЭКРАН -->
-    <div id="heroScreen">
+    <div id="heroScreen" class="hero-screen">
         <div class="hero-header">
             <div class="hero-title">INNER WORLD</div>
             <div class="hero-slogan" id="heroSlogan">
@@ -661,121 +593,118 @@
     <!-- ОСНОВНОЕ ПРИЛОЖЕНИЕ -->
     <div class="main-app hidden" id="mainApp">
         <div class="app-header">
-            <div class="header-left">
-                <div class="logo-icon">👁️</div>
-                <div class="header-text">
-                    <div class="app-logo">INNER WORLD</div>
-                    <div class="quote">Цитата дня: «Ты не можешь изменить результат, не изменив причину»</div>
-                </div>
-            </div>
-            <div class="header-right">
-                <a href="https://t.me/bogdans_network" target="_blank" class="social-btn">
-                    <img src="R.png" alt="R" class="social-icon">
-                </a>
-                <a href="https://t.me/bogdans_network" target="_blank" class="social-btn">
-                    <img src="R.png" alt="R" class="social-icon">
-                </a>
-                <a href="https://t.me/bogdans_network" target="_blank" class="social-btn">
-                    <img src="R.png" alt="R" class="social-icon">
-                </a>
-            </div>
+    <div class="header-left">
+        <div class="logo-icon">👁️</div>
+        <div class="header-text">
+            <div class="app-logo">INNER WORLD</div>
+            <div class="quote">Цитата дня: «Ты не можешь изменить результат, не изменив причину»</div>
         </div>
+    </div>
+    <div class="header-right">
+        <a href="https://t.me/bogdans_network" target="_blank" class="social-btn" id="socialTelegram">
+             <img src="R.png" alt="R" class="social-icon">   
+        </a>
+        <a href="https://t.me/bogdans_network" target="_blank" class="social-btn" id="socialEmail">
+            <img src="R.png" alt="R" class="social-icon"> 
+        </a>
+        <a href="https://t.me/bogdans_network" target="_blank" class="social-btn" id="socialInstagram">
+            <img src="R.png" alt="R" class="social-icon">     
+        </a>
+    </div>
+</div>
 
         <div class="content-area" id="contentArea">
-            <!-- РАЗДЕЛ 1: ИСТОРИЯ С ПЕРСОНАЖЕМ -->
+            <!-- РАЗДЕЛ 1: ГЛАВНАЯ / О ПРОЕКТЕ -->
             <div class="section active-section" id="sectionHome">
-                <div class="story-container" id="storyContainer">
-                    <div class="story-slides" id="storySlides">
-                        <div class="story-slide">
-                            <div class="character character-left">
-                                <img src="character1.png" alt="Мудрец" class="character-img">
-                            </div>
-                            <div class="speech-bubble">
-                                <p>Приветствую тебя, искатель истины...</p>
-                                <p class="speech-small">Добро пожаловать в Inner World</p>
-                            </div>
-                        </div>
-                        <div class="story-slide">
-                            <div class="character character-right">
-                                <img src="character2.png" alt="Мудрец" class="character-img">
-                            </div>
-                            <div class="speech-bubble">
-                                <p>Ты устал от пустых практик и бесконечных теорий?</p>
-                                <p class="speech-small">Психологи, книги, курсы — а результат не держится</p>
-                            </div>
-                        </div>
-                        <div class="story-slide">
-                            <div class="character character-center">
-                                <img src="character3.png" alt="Ключ" class="character-img">
-                            </div>
-                            <div class="speech-bubble">
-                                <p>Внутренний мир — это не метафора. Это реальность, которой можно управлять.</p>
-                                <p class="speech-small">Уровень причин создаёт уровень результатов</p>
-                            </div>
-                        </div>
-                        <div class="story-slide">
-                            <div class="character character-left character-smaller">
-                                <img src="character4.png" alt="Виртуоз" class="character-img">
-                            </div>
-                            <div class="speech-bubble">
-                                <p>Виртуоз — не тот, кто старается больше. А тот, кто работает на уровне причины.</p>
-                                <p class="speech-small">Он управляет механизмом, который создаёт жизнь</p>
-                            </div>
-                        </div>
-                        <div class="story-slide">
-                            <div class="character character-right character-smaller">
-                                <img src="character5.png" alt="Путь" class="character-img">
-                            </div>
-                            <div class="speech-bubble">
-                                <p>Готов сделать первый шаг?</p>
-                                <p class="speech-small">Изучи разделы ниже или напиши мне в Telegram</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="story-arrows">
-                        <div class="arrow-up" id="arrowUp">▲</div>
-                        <div class="arrow-down" id="arrowDown">▼</div>
-                    </div>
-                    <div class="story-dots" id="storyDots"></div>
+                <h2>Добро пожаловать в Inner World</h2>
+                <p><strong>Inner World</strong> — это пространство, где ты овладеваешь <strong style="color:#3a86ff">миром причин</strong>. Внешний мир — лишь результат внутренних программ.</p>
+                <div class="card">
+                    <p>✨ <strong>Мысли как виртуоз</strong><br>Большинство пытаются изменить жизнь через действия. Ставят цели, ищут мотивацию, изучают информацию. Но результат либо не приходит, либо быстро исчезает.</p>
+                    <p>Потому что проблема не в действиях. И даже не в мышлении. Проблема в том, что создаёт их.</p>
                 </div>
+                <div class="card">
+                    <p>🎯 <strong>Миссия проекта</strong><br>Дать навык работы с подсознанием. Не теорию, а практическое управление внутренними сценариями.</p>
+                </div>
+                <p><strong>Виртуоз</strong> — не тот, кто старается больше. А тот, кто работает на уровне <strong>причины</strong>. Он управляет механизмом, который создаёт жизнь.</p>
             </div>
 
             <!-- РАЗДЕЛ 2: ОБУЧЕНИЕ -->
             <div class="section" id="sectionLearning">
                 <h2>Обучение в Inner World</h2>
-                <div class="card"><p>📚 <strong>Формат обучения</strong><br>Групповые встречи, разборы, живая среда. Ты не просто учишься — ты растешь.</p></div>
-                <div class="card"><p>⏱️ <strong>Длительность</strong><br>Базовый курс — 3 месяца. За это время ты осваиваешь навык и начинаешь видеть первые результаты.</p></div>
-                <div class="card"><p>🎭 <strong>Классы и направления</strong><br>• Прямое взаимодействие<br>• Поиск и выявление<br>• Самопрограммирование</p></div>
+                <div class="card">
+                    <p>📚 <strong>Формат обучения</strong><br>Групповые встречи, разборы, живая среда. Ты не просто учишься — ты растешь.</p>
+                </div>
+                <div class="card">
+                    <p>⏱️ <strong>Длительность</strong><br>Базовый курс — 3 месяца. За это время ты осваиваешь навык и начинаешь видеть первые результаты.</p>
+                </div>
+                <div class="card">
+                    <p>🎭 <strong>Классы и направления</strong><br>• Прямое взаимодействие — работа с состояниями, навык входа в глубину<br>• Поиск и выявление — понимание внутренних механизмов<br>• Самопрограммирование — изменение структур и закрепление состояний</p>
+                </div>
+                <p>Участие в проекте — это не просто курсы. Это сообщество, где каждый движется к мастерству.</p>
             </div>
 
-            <!-- РАЗДЕЛ 3: РАЗВИТИЕ -->
+            <!-- РАЗДЕЛ 3: РАЗВИТИЕ / ДОРОЖНАЯ КАРТА -->
             <div class="section" id="sectionRoadmap">
                 <h2>Твой путь в проекте</h2>
-                <div class="card"><p><strong>01. Участник</strong><br>Погружение в навык</p></div>
-                <div class="card"><p><strong>02. Результат</strong><br>Первые изменения в жизни</p></div>
-                <div class="card"><p><strong>03. Углубление</strong><br>Мастерство управления причинами</p></div>
-                <div class="card"><p><strong>04. Проводник</strong><br>Становись ментором</p></div>
-                <div class="card"><p><strong>05. Партнёр</strong><br>Часть экосистемы Inner World</p></div>
+                <div class="card">
+                    <p><strong>01. Участник</strong><br>Погружение в навык. Ты учишься работать с собой и видишь первые изменения.</p>
+                </div>
+                <div class="card">
+                    <p><strong>02. Результат</strong><br>Твоя жизнь начинает меняться. Ты закрепляешь успех и углубляешь практику.</p>
+                </div>
+                <div class="card">
+                    <p><strong>03. Углубление</strong><br>Мастерство управления причинами. Ты можешь работать не только с собой.</p>
+                </div>
+                <div class="card">
+                    <p><strong>04. Проводник</strong><br>Ты становишься ментором в проекте. Передаёшь навык другим.</p>
+                </div>
+                <div class="card">
+                    <p><strong>05. Партнёр</strong><br>Часть экосистемы Inner World. Возможность расти и влиять на развитие проекта.</p>
+                </div>
+                <p>🌟 Мотивация — не просто учиться, а достигать собственных результатов и помогать другим.</p>
             </div>
 
             <!-- РАЗДЕЛ 4: ЛИЧНАЯ РАБОТА -->
             <div class="section" id="sectionPersonal">
                 <h2>Личная работа со мной</h2>
-                <div class="card"><p>🧠 <strong>Индивидуальный формат</strong><br>Глубокая проработка запросов, убеждений, сценариев.</p></div>
-                <div class="card"><p>📅 <strong>Что входит:</strong><br>• Диагностика<br>• Персональные протоколы<br>• Сопровождение</p></div>
-                <p>👉 <strong>Запись:</strong> <a href="https://t.me/bogdans_network" target="_blank" style="color:#3a86ff">@bogdans_network</a></p>
+                <div class="card">
+                    <p>🧠 <strong>Индивидуальный формат «Hel‑с»</strong><br>Глубокая проработка твоих запросов. Работаем с убеждениями, сценариями, внутренними блоками.</p>
+                </div>
+                <div class="card">
+                    <p>📅 <strong>Что входит:</strong><br>• Диагностика ключевых механизмов<br>• Персональные протоколы работы<br>• Сопровождение между встречами</p>
+                </div>
+                <div class="card">
+                    <p>🎯 <strong>Результат:</strong><br>Ты убираешь корневые причины проблем и выходишь на новый уровень жизни.</p>
+                </div>
+                <p>👉 <strong>Запись:</strong> Напиши мне в Telegram — <a href="https://t.me/bogdans_network" target="_blank" style="color:#3a86ff">@bogdans_network</a></p>
             </div>
 
-            <!-- РАЗДЕЛ 5: КЕЙСЫ -->
+            <!-- РАЗДЕЛ 5: НОВОСТИ / КЕЙСЫ -->
             <div class="section" id="sectionNews">
                 <h2>Истории учеников</h2>
-                <div class="case-card"><div class="case-title">🔥 Анна, 34 года</div><div class="case-preview">«Я перестала бояться принимать решения...»</div><div class="case-full">Анна пришла с запросом «не могу выбрать направление». После 2 месяцев работы она запустила свой проект.</div></div>
-                <div class="case-card"><div class="case-title">💼 Михаил, 42 года</div><div class="case-preview">«Доход вырос в 3 раза за полгода»</div><div class="case-full">После работы с установками масштабировал бизнес и увеличил доход.</div></div>
-                <div class="case-card"><div class="case-title">❤️ Екатерина, 28 лет</div><div class="case-preview">«Я вышла из созависимых отношений»</div><div class="case-full">Проработали корневую программу, нашла здоровые отношения.</div></div>
+                
+                <div class="case-card" data-case="1">
+                    <div class="case-title">🔥 Кейс 1: Анна, 34 года</div>
+                    <div class="case-preview">«Я перестала бояться принимать решения...»</div>
+                    <div class="case-full">Анна пришла с запросом «не могу выбрать направление в жизни». После 2 месяцев работы она не только выбрала, но и запустила свой проект. «Раньше я думала, что просто нерешительная. Оказалось, это был внутренний сценарий, который мы нашли и изменили».</div>
+                </div>
+
+                <div class="case-card" data-case="2">
+                    <div class="case-title">💼 Кейс 2: Михаил, 42 года</div>
+                    <div class="case-preview">«Доход вырос в 3 раза за полгода»</div>
+                    <div class="case-full">Михаил — предприниматель с 15-летним стажем. Не мог пройти «потолок» в доходах. После работы с внутренними установками и сценариями денежного мышления за 6 месяцев масштабировал бизнес и увеличил доход в 3 раза. «Я перестал сам себе ставить преграды».</div>
+                </div>
+
+                <div class="case-card" data-case="3">
+                    <div class="case-title">❤️ Кейс 3: Екатерина, 28 лет</div>
+                    <div class="case-preview">«Я вышла из созависимых отношений и начала новую жизнь»</div>
+                    <div class="case-full">Екатерина долгое время находилась в токсичных отношениях и не могла их разорвать. Мы нашли корневую программу «я должна спасать», проработали её. Через 3 месяца она не только ушла из тех отношений, но и встретила партнёра, с которым строит здоровую семью.</div>
+                </div>
+                <p style="margin-top: 16px;">👉 Хочешь попасть в следующую историю успеха? <a href="https://t.me/bogdans_network" target="_blank" style="color:#3a86ff">Напиши мне</a></p>
             </div>
         </div>
 
-        <!-- НИЖНИЕ КНОПКИ -->
+        <!-- 5 КНОПОК ПОЛУКРУГОМ -->
         <div class="nav-container">
             <div class="nav-btn active" data-section="home">🏠</div>
             <div class="nav-btn" data-section="learning">📚</div>
@@ -785,25 +714,29 @@
         </div>
     </div>
 </div>
-
 <script>
     const tg = window.Telegram.WebApp;
     tg.ready();
     tg.expand();
 
+    // Подгонка ширины слогана под тайтл
     function alignSlogan() {
         const title = document.querySelector('.hero-title');
         const slogan = document.getElementById('heroSlogan');
-        if (title && slogan) slogan.style.width = title.offsetWidth + 'px';
+        if (title && slogan) {
+            slogan.style.width = title.offsetWidth + 'px';
+        }
     }
     window.addEventListener('load', alignSlogan);
     window.addEventListener('resize', alignSlogan);
 
+    // Элементы
     const heroScreen = document.getElementById('heroScreen');
     const mainApp = document.getElementById('mainApp');
     const openBtn = document.getElementById('openBtn');
     const appContainer = document.getElementById('app');
     const navBtns = document.querySelectorAll('.nav-btn');
+    
     const sections = {
         home: document.getElementById('sectionHome'),
         learning: document.getElementById('sectionLearning'),
@@ -812,26 +745,38 @@
         news: document.getElementById('sectionNews')
     };
 
-    openBtn.addEventListener('click', () => {
+    // Переход
+   openBtn.addEventListener('click', () => {
         heroScreen.classList.add('hidden');
         mainApp.classList.remove('hidden');
         setTimeout(() => mainApp.classList.add('visible'), 50);
         appContainer.classList.add('dimmed');
-    });
-
+    });   
+    
+    
+    // Переключение разделов
     function switchSection(sectionId) {
-        Object.values(sections).forEach(s => { if (s) s.classList.remove('active-section'); });
-        if (sections[sectionId]) sections[sectionId].classList.add('active-section');
+        Object.values(sections).forEach(s => {
+            if (s) s.classList.remove('active-section');
+        });
+        if (sections[sectionId]) {
+            sections[sectionId].classList.add('active-section');
+        }
         navBtns.forEach(btn => {
             btn.classList.remove('active');
-            if (btn.getAttribute('data-section') === sectionId) btn.classList.add('active');
+            if (btn.getAttribute('data-section') === sectionId) {
+                btn.classList.add('active');
+            }
         });
     }
 
     navBtns.forEach(btn => {
-        btn.addEventListener('click', () => switchSection(btn.getAttribute('data-section')));
+        btn.addEventListener('click', () => {
+            switchSection(btn.getAttribute('data-section'));
+        });
     });
 
+    // Логика раскрытия кейсов
     document.querySelectorAll('.case-card').forEach(card => {
         card.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -839,69 +784,7 @@
         });
     });
 
-    // Логика истории с персонажем
-    const storyContainer = document.getElementById('storyContainer');
-    const slides = document.querySelectorAll('.story-slide');
-    const arrowUp = document.getElementById('arrowUp');
-    const arrowDown = document.getElementById('arrowDown');
-    const dotsContainer = document.getElementById('storyDots');
-    let currentSlideIndex = 0;
-    const totalSlides = slides.length;
-
-    function createDots() {
-        if (!dotsContainer) return;
-        dotsContainer.innerHTML = '';
-        for (let i = 0; i < totalSlides; i++) {
-            const dot = document.createElement('div');
-            dot.classList.add('dot');
-            if (i === currentSlideIndex) dot.classList.add('active');
-            dot.addEventListener('click', () => goToSlide(i));
-            dotsContainer.appendChild(dot);
-        }
-    }
-
-    function updateDots() {
-        const dots = document.querySelectorAll('.dot');
-        dots.forEach((dot, idx) => {
-            if (idx === currentSlideIndex) dot.classList.add('active');
-            else dot.classList.remove('active');
-        });
-    }
-
-    function goToSlide(index) {
-        if (index < 0) index = 0;
-        if (index >= totalSlides) index = totalSlides - 1;
-        currentSlideIndex = index;
-        const slide = slides[currentSlideIndex];
-        if (slide) slide.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        updateDots();
-        if (arrowUp) arrowUp.style.opacity = currentSlideIndex === 0 ? '0.3' : '0.7';
-        if (arrowDown) arrowDown.style.opacity = currentSlideIndex === totalSlides - 1 ? '0.3' : '0.7';
-    }
-
-    function onScroll() {
-        const scrollTop = storyContainer ? storyContainer.scrollTop : 0;
-        const slideHeight = slides[0] ? slides[0].offsetHeight : 0;
-        if (slideHeight === 0) return;
-        const newIndex = Math.round(scrollTop / slideHeight);
-        if (newIndex !== currentSlideIndex && newIndex >= 0 && newIndex < totalSlides) {
-            currentSlideIndex = newIndex;
-            updateDots();
-            if (arrowUp) arrowUp.style.opacity = currentSlideIndex === 0 ? '0.3' : '0.7';
-            if (arrowDown) arrowDown.style.opacity = currentSlideIndex === totalSlides - 1 ? '0.3' : '0.7';
-        }
-    }
-
-    if (storyContainer && slides.length) {
-        storyContainer.addEventListener('scroll', onScroll);
-        createDots();
-        goToSlide(0);
-    }
-
-    if (arrowUp) arrowUp.addEventListener('click', () => goToSlide(currentSlideIndex - 1));
-    if (arrowDown) arrowDown.addEventListener('click', () => goToSlide(currentSlideIndex + 1));
-
-    window.addEventListener('resize', () => goToSlide(currentSlideIndex));
+    // Стартовый раздел
     switchSection('home');
 </script>
 </body>
