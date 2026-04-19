@@ -565,53 +565,6 @@
             .content-area { padding: 110px 20px 130px 20px; }
         }
 
-        /* Анимация приближения первого экрана */
-.hero-screen {
-    transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1), opacity 0.4s ease;
-    transform-origin: center center;
-}
-
-.hero-screen.zoom-out {
-    transform: scale(3);
-    opacity: 0;
-}
-
-/* Вспышка */
-.flash-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: white;
-    z-index: 200;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.15s ease;
-}
-
-.flash-overlay.active {
-    opacity: 1;
-}
-
-/* Появление основного приложения */
-.main-app.fade-in {
-    animation: appFadeIn 0.5s ease-out forwards;
-}
-
-@keyframes appFadeIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.98);
-        filter: blur(3px);
-    }
-    100% {
-        opacity: 1;
-        transform: scale(1);
-        filter: blur(0);
-    }
-}
-
         .hidden {
             display: none;
         }
@@ -758,8 +711,6 @@
         </div>
     </div>
 </div>
-    <!-- Вспышка -->
-<div class="flash-overlay" id="flashOverlay"></div>
 <script>
     const tg = window.Telegram.WebApp;
     tg.ready();
@@ -792,48 +743,13 @@
     };
 
     // Переход
-   /*
    openBtn.addEventListener('click', () => {
         heroScreen.classList.add('hidden');
         mainApp.classList.remove('hidden');
         setTimeout(() => mainApp.classList.add('visible'), 50);
         appContainer.classList.add('dimmed');
     });   
-    */
-    openBtn.addEventListener('click', () => {
-    const heroScreenElem = document.getElementById('heroScreen');
-    const flashOverlay = document.getElementById('flashOverlay');
     
-    // 1. Приближаем первый экран в центр
-    heroScreenElem.classList.add('zoom-out');
-    
-    setTimeout(() => {
-        // 2. Вспышка
-        flashOverlay.classList.add('active');
-        
-        setTimeout(() => {
-            // 3. Убираем вспышку
-            flashOverlay.classList.remove('active');
-            
-            // 4. Прячем первый экран
-            heroScreenElem.classList.add('hidden');
-            
-            // 5. Показываем основное приложение
-            mainApp.classList.remove('hidden');
-            mainApp.classList.add('fade-in');
-            
-            setTimeout(() => {
-                mainApp.classList.remove('fade-in');
-            }, 500);
-            
-            // 6. Затемняем фон
-            appContainer.classList.add('dimmed');
-            
-            // 7. Сбрасываем классы на первом экране (на случай возврата)
-            heroScreenElem.classList.remove('zoom-out');
-        }, 150);
-    }, 500);
-});
     
     // Переключение разделов
     function switchSection(sectionId) {
