@@ -356,8 +356,12 @@
         font-size: 16px;
     }
     .content-area {
-        padding: 80px 20px 130px 20px;
-    }
+    flex: 1;
+    overflow-y: auto;
+    padding: 120px 24px 100px 24px;
+    scrollbar-width: thin;
+    scrollbar-color: #3a86ff #1a2a4a;
+}
 }
 
         /* КОНТЕНТ */
@@ -473,7 +477,7 @@
         /* ========== 5 КНОПОК ПОЛУКРУГОМ С ХАОТИЧНЫМ ПАРЕНИЕМ ========== */
         .nav-container {
             position: fixed;
-            bottom: 20px;
+            bottom: 0;
             left: 0;
             right: 0;
             display: flex;
@@ -481,10 +485,10 @@
             align-items: flex-end;
             gap: 10px;
             z-index: 20;
-            padding: 0 16px;
-            background: linear-gradient(to top, rgba(0,20,50,0.9), rgba(0,20,50,0));
-            backdrop-filter: blur(8px);
-            padding-top: 20px;
+            padding: 16px 16px 24px 16px;
+            background: linear-gradient(to top, rgba(0, 20, 50, 0.95), rgba(0, 20, 50, 0.8), transparent);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(58, 134, 255, 0.2);
         }
 
         .nav-btn {
