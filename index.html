@@ -567,6 +567,211 @@
             .app-logo { font-size: 18px; }
             .content-area { padding: 110px 20px 130px 20px; }
         }
+        /* ========== СТИЛИ ДЛЯ ИСТОРИИ С ПЕРСОНАЖЕМ ========== */
+.story-container {
+    position: relative;
+    height: calc(100vh - 140px);
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.story-container::-webkit-scrollbar {
+    display: none;
+}
+
+.story-slides {
+    display: flex;
+    flex-direction: column;
+}
+
+.story-slide {
+    height: calc(100vh - 140px);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+/* Персонаж */
+.character {
+    position: absolute;
+    z-index: 5;
+}
+
+.character-left {
+    left: 20px;
+    top: 30%;
+    transform: translateY(-50%);
+}
+
+.character-right {
+    right: 20px;
+    top: 40%;
+    transform: translateY(-50%);
+}
+
+.character-center {
+    left: 50%;
+    top: 25%;
+    transform: translateX(-50%);
+}
+
+.character-smaller .character-img {
+    width: 80px;
+    height: auto;
+}
+
+.character-img {
+    width: 100px;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(58,134,255,0.5));
+    transition: all 0.3s ease;
+}
+
+/* Речевой пузырь */
+.speech-bubble {
+    background: rgba(20, 40, 70, 0.85);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 20px 24px;
+    max-width: 280px;
+    border: 1px solid rgba(58, 134, 255, 0.5);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    animation: bubbleAppear 0.4s ease-out;
+}
+
+.speech-bubble p {
+    font-size: 18px;
+    line-height: 1.5;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.speech-bubble .speech-small {
+    font-size: 13px;
+    color: #8a9acc;
+    font-style: italic;
+    margin-bottom: 0;
+}
+
+@keyframes bubbleAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Стрелки */
+.story-arrows {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    z-index: 10;
+}
+
+.arrow-up, .arrow-down {
+    font-size: 28px;
+    color: #3a86ff;
+    opacity: 0.7;
+    animation: arrowBlink 1.5s infinite;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.arrow-up {
+    animation-delay: 0s;
+}
+
+.arrow-down {
+    animation-delay: 0.75s;
+}
+
+.arrow-up:hover, .arrow-down:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+@keyframes arrowBlink {
+    0%, 100% { opacity: 0.3; transform: translateY(0); }
+    50% { opacity: 1; transform: translateY(5px); }
+}
+
+/* Индикаторы слайдов (точки) */
+.story-dots {
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(58, 134, 255, 0.4);
+    transition: all 0.2s;
+}
+
+.dot.active {
+    width: 24px;
+    border-radius: 4px;
+    background: #3a86ff;
+}
+
+/* Адаптив для телефонов */
+@media (max-width: 500px) {
+    .story-container {
+        height: calc(100vh - 130px);
+    }
+    .story-slide {
+        height: calc(100vh - 130px);
+        padding: 15px;
+    }
+    .character-img {
+        width: 70px;
+    }
+    .character-smaller .character-img {
+        width: 55px;
+    }
+    .speech-bubble {
+        max-width: 220px;
+        padding: 14px 18px;
+    }
+    .speech-bubble p {
+        font-size: 15px;
+    }
+    .speech-bubble .speech-small {
+        font-size: 11px;
+    }
+    .character-left {
+        left: 10px;
+        top: 25%;
+    }
+    .character-right {
+        right: 10px;
+        top: 35%;
+    }
+    .story-dots {
+        bottom: 80px;
+    }
+}
 
         .hidden {
             display: none;
@@ -614,8 +819,80 @@
 </div>
 
         <div class="content-area" id="contentArea">
+            <!-- РАЗДЕЛ 1: ГЛАВНАЯ / ИСТОРИЯ С ПЕРСОНАЖЕМ -->
+<div class="section active-section" id="sectionHome">
+    <div class="story-container" id="storyContainer">
+        <div class="story-slides" id="storySlides">
+            <!-- Слайд 1 -->
+            <div class="story-slide">
+                <div class="character character-left">
+                    <img src="character1.png" alt="Мудрец" class="character-img">
+                </div>
+                <div class="speech-bubble">
+                    <p>Приветствую тебя, искатель истины...</p>
+                    <p class="speech-small">Добро пожаловать в Inner World</p>
+                </div>
+            </div>
+            
+            <!-- Слайд 2 -->
+            <div class="story-slide">
+                <div class="character character-right">
+                    <img src="character2.png" alt="Мудрец" class="character-img">
+                </div>
+                <div class="speech-bubble">
+                    <p>Ты устал от пустых практик и бесконечных теорий?</p>
+                    <p class="speech-small">Психологи, книги, курсы — а результат не держится</p>
+                </div>
+            </div>
+            
+            <!-- Слайд 3 -->
+            <div class="story-slide">
+                <div class="character character-center">
+                    <img src="character3.png" alt="Ключ" class="character-img">
+                </div>
+                <div class="speech-bubble">
+                    <p>Внутренний мир — это не метафора. Это реальность, которой можно управлять.</p>
+                    <p class="speech-small">Уровень причин создаёт уровень результатов</p>
+                </div>
+            </div>
+            
+            <!-- Слайд 4 -->
+            <div class="story-slide">
+                <div class="character character-left character-smaller">
+                    <img src="character4.png" alt="Виртуоз" class="character-img">
+                </div>
+                <div class="speech-bubble">
+                    <p>Виртуоз — не тот, кто старается больше. А тот, кто работает на уровне причины.</p>
+                    <p class="speech-small">Он управляет механизмом, который создаёт жизнь</p>
+                </div>
+            </div>
+            
+            <!-- Слайд 5 -->
+            <div class="story-slide">
+                <div class="character character-right character-smaller">
+                    <img src="character5.png" alt="Путь" class="character-img">
+                </div>
+                <div class="speech-bubble">
+                    <p>Готов сделать первый шаг?</p>
+                    <p class="speech-small">Изучи разделы ниже или напиши мне в Telegram</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Стрелки навигации -->
+        <div class="story-arrows">
+            <div class="arrow-up" id="arrowUp">▲</div>
+            <div class="arrow-down" id="arrowDown">▼</div>
+        </div>
+        
+        <!-- Индикатор слайда -->
+        <div class="story-dots" id="storyDots"></div>
+    </div>
+</div>
+            
             <!-- РАЗДЕЛ 1: ГЛАВНАЯ / О ПРОЕКТЕ -->
-            <div class="section active-section" id="sectionHome">
+            
+            <!-- <div class="section active-section" id="sectionHome">
                 <h2>Добро пожаловать в Inner World</h2>
                 <p><strong>Inner World</strong> — это пространство, где ты овладеваешь <strong style="color:#3a86ff">миром причин</strong>. Внешний мир — лишь результат внутренних программ.</p>
                 <div class="card">
@@ -626,8 +903,8 @@
                     <p>🎯 <strong>Миссия проекта</strong><br>Дать навык работы с подсознанием. Не теорию, а практическое управление внутренними сценариями.</p>
                 </div>
                 <p><strong>Виртуоз</strong> — не тот, кто старается больше. А тот, кто работает на уровне <strong>причины</strong>. Он управляет механизмом, который создаёт жизнь.</p>
-            </div>
-
+            </div> -->
+            
             <!-- РАЗДЕЛ 2: ОБУЧЕНИЕ -->
             <div class="section" id="sectionLearning">
                 <h2>Обучение в Inner World</h2>
@@ -786,6 +1063,124 @@
 
     // Стартовый раздел
     switchSection('home');
+    
+    // ========== ЛОГИКА ИСТОРИИ С ПЕРСОНАЖЕМ ==========
+const storyContainer = document.getElementById('storyContainer');
+const storySlides = document.getElementById('storySlides');
+const slides = document.querySelectorAll('.story-slide');
+const arrowUp = document.getElementById('arrowUp');
+const arrowDown = document.getElementById('arrowDown');
+const dotsContainer = document.getElementById('storyDots');
+let currentSlideIndex = 0;
+const totalSlides = slides.length;
+
+// Создаём точки-индикаторы
+function createDots() {
+    dotsContainer.innerHTML = '';
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.classList.add('dot');
+        if (i === currentSlideIndex) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            goToSlide(i);
+        });
+        dotsContainer.appendChild(dot);
+    }
+}
+
+// Обновляем активную точку
+function updateDots() {
+    const dots = document.querySelectorAll('.dot');
+    dots.forEach((dot, idx) => {
+        if (idx === currentSlideIndex) {
+            dot.classList.add('active');
+        } else {
+            dot.classList.remove('active');
+        }
+    });
+}
+
+// Переход к слайду
+function goToSlide(index) {
+    if (index < 0) index = 0;
+    if (index >= totalSlides) index = totalSlides - 1;
+    currentSlideIndex = index;
+    const slideHeight = slides[0].offsetHeight;
+    storyContainer.scrollTo({
+        top: slideHeight * currentSlideIndex,
+        behavior: 'smooth'
+    });
+    updateDots();
+    
+    // Показываем/скрываем стрелку вверх в зависимости от позиции
+    if (arrowUp) {
+        if (currentSlideIndex === 0) {
+            arrowUp.style.opacity = '0.3';
+            arrowUp.style.pointerEvents = 'none';
+        } else {
+            arrowUp.style.opacity = '0.7';
+            arrowUp.style.pointerEvents = 'auto';
+        }
+    }
+    if (arrowDown) {
+        if (currentSlideIndex === totalSlides - 1) {
+            arrowDown.style.opacity = '0.3';
+            arrowDown.style.pointerEvents = 'none';
+        } else {
+            arrowDown.style.opacity = '0.7';
+            arrowDown.style.pointerEvents = 'auto';
+        }
+    }
+}
+
+// Отслеживаем скролл
+function onScroll() {
+    const scrollTop = storyContainer.scrollTop;
+    const slideHeight = slides[0].offsetHeight;
+    const newIndex = Math.round(scrollTop / slideHeight);
+    if (newIndex !== currentSlideIndex && newIndex >= 0 && newIndex < totalSlides) {
+        currentSlideIndex = newIndex;
+        updateDots();
+        
+        // Обновляем видимость стрелок
+        if (arrowUp) {
+            arrowUp.style.opacity = currentSlideIndex === 0 ? '0.3' : '0.7';
+            arrowUp.style.pointerEvents = currentSlideIndex === 0 ? 'none' : 'auto';
+        }
+        if (arrowDown) {
+            arrowDown.style.opacity = currentSlideIndex === totalSlides - 1 ? '0.3' : '0.7';
+            arrowDown.style.pointerEvents = currentSlideIndex === totalSlides - 1 ? 'none' : 'auto';
+        }
+    }
+}
+
+// Обработчики стрелок
+if (arrowUp) {
+    arrowUp.addEventListener('click', () => {
+        if (currentSlideIndex > 0) {
+            goToSlide(currentSlideIndex - 1);
+        }
+    });
+}
+if (arrowDown) {
+    arrowDown.addEventListener('click', () => {
+        if (currentSlideIndex < totalSlides - 1) {
+            goToSlide(currentSlideIndex + 1);
+        }
+    });
+}
+
+// Инициализация
+if (storyContainer && slides.length) {
+    storyContainer.addEventListener('scroll', onScroll);
+    createDots();
+    goToSlide(0);
+    
+    // Пересчитываем высоту при изменении ориентации
+    window.addEventListener('resize', () => {
+        goToSlide(currentSlideIndex);
+    });
+}
 </script>
 </body>
 </html>
