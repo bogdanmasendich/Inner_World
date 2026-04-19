@@ -151,6 +151,23 @@
             transform: translateX(-50%) translateY(4px);
             box-shadow: 0 6px 0 0 #0d2a5a, 0 8px 20px rgba(0, 0, 0, 0.4);
         }
+        
+        @media (max-width: 500px) {
+        .hero-header {
+        top: 15px;
+        }
+        .hero-title {
+        font-size: 48px;
+        }
+        .slogan-left, .slogan-right {
+        font-size: 13px;
+        }
+        .hero-btn {
+        bottom: 60px;
+        font-size: 20px;
+        padding: 12px 36px;
+        }
+    }
 
         @keyframes titleSlowReveal {
             0% { opacity: 0; transform: translateY(-15px); filter: blur(3px); }
@@ -292,19 +309,6 @@
     .social-icon {
         width: 26px;
         height: 26px;
-    }
-        top: 15px;
-    }
-    .hero-title {
-        font-size: 48px;
-    }
-    .slogan-left, .slogan-right {
-        font-size: 13px;
-    }
-    .hero-btn {
-        bottom: 60px;
-        font-size: 20px;
-        padding: 12px 36px;
     }
 }
 
