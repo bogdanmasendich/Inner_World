@@ -97,12 +97,10 @@
         .hero-slogan {
             display: flex;
             flex-direction: column;
-            width: fit-content;
             margin-left: auto;
             margin-right: auto;
         }
 
-        /* Слоган с привязкой к краям тайтла (как было) + новый шрифт */
         .slogan-left, .slogan-right {
             font-family: 'Georgia', 'Times New Roman', serif;
             font-style: italic;
@@ -186,7 +184,7 @@
             opacity: 1;
         }
 
-        /* ШАПКА С ПАРЕНИЕМ */
+        /* ШАПКА — элементы парят внутри */
         .app-header {
             position: fixed;
             top: 20px;
@@ -198,13 +196,6 @@
             background: rgba(0, 20, 50, 0.6);
             backdrop-filter: blur(10px);
             border-bottom: 1px solid rgba(58, 134, 255, 0.3);
-            animation: headerFloat 4s ease-in-out infinite;
-        }
-
-        @keyframes headerFloat {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-4px); }
-            100% { transform: translateY(0px); }
         }
 
         .app-logo {
@@ -215,6 +206,8 @@
             background-clip: text;
             color: transparent;
             letter-spacing: 1px;
+            display: inline-block;
+            animation: floatLogo 3.5s ease-in-out infinite;
         }
 
         .quote {
@@ -223,16 +216,29 @@
             margin-top: 6px;
             font-style: italic;
             opacity: 0.8;
+            display: inline-block;
+            animation: floatQuote 4.2s ease-in-out infinite;
         }
 
-        /* КОНТЕНТ — теперь не залазит на шапку */
+        @keyframes floatLogo {
+            0% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-3px) translateX(1px); }
+            100% { transform: translateY(0px) translateX(0px); }
+        }
+
+        @keyframes floatQuote {
+            0% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(2px) translateX(-1px); }
+            100% { transform: translateY(0px) translateX(0px); }
+        }
+
+        /* КОНТЕНТ */
         .content-area {
             flex: 1;
             overflow-y: auto;
-            padding: 100px 24px 120px 24px;
+            padding: 120px 24px 140px 24px;
             scrollbar-width: thin;
             scrollbar-color: #3a86ff #1a2a4a;
-            margin-top: 60px;
         }
 
         .content-area::-webkit-scrollbar {
@@ -272,6 +278,13 @@
             padding-left: 16px;
         }
 
+        .section h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 24px 0 12px 0;
+            color: #7ab8ff;
+        }
+
         .section p {
             font-size: 16px;
             line-height: 1.6;
@@ -288,6 +301,47 @@
             border: 1px solid rgba(58, 134, 255, 0.3);
         }
 
+        .case-card {
+            background: rgba(20, 40, 70, 0.6);
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            padding: 20px;
+            margin: 16px 0;
+            border: 1px solid rgba(58, 134, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .case-card:hover {
+            background: rgba(30, 60, 100, 0.7);
+            transform: scale(1.01);
+        }
+
+        .case-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #7ab8ff;
+            margin-bottom: 8px;
+        }
+
+        .case-preview {
+            font-size: 14px;
+            color: #b0c8f0;
+        }
+
+        .case-full {
+            display: none;
+            margin-top: 12px;
+            font-size: 14px;
+            color: #d0d8ff;
+            border-top: 1px solid rgba(58,134,255,0.3);
+            padding-top: 12px;
+        }
+
+        .case-card.expanded .case-full {
+            display: block;
+        }
+
         /* ========== 5 КНОПОК ПОЛУКРУГОМ С ХАОТИЧНЫМ ПАРЕНИЕМ ========== */
         .nav-container {
             position: fixed;
@@ -297,7 +351,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            gap: 12px;
+            gap: 10px;
             z-index: 20;
             padding: 0 16px;
         }
@@ -316,55 +370,47 @@
             font-size: 24px;
             cursor: pointer;
             transition: all 0.2s ease;
-            /* Разные анимации для хаотичного парения */
         }
 
-        /* Хаотичное парение — каждая кнопка двигается по-своему */
-        .nav-btn:nth-child(1) { animation: floatChaotic1 3.2s ease-in-out infinite; }
-        .nav-btn:nth-child(2) { animation: floatChaotic2 2.8s ease-in-out infinite; }
-        .nav-btn:nth-child(3) { animation: floatChaotic3 3.6s ease-in-out infinite; }
-        .nav-btn:nth-child(4) { animation: floatChaotic4 3.0s ease-in-out infinite; }
-        .nav-btn:nth-child(5) { animation: floatChaotic5 3.4s ease-in-out infinite; }
-
-        /* Разные направления и амплитуды */
-        @keyframes floatChaotic1 {
-            0% { transform: translateY(0px) translateX(0px); }
-            50% { transform: translateY(-8px) translateX(2px); }
-            100% { transform: translateY(0px) translateX(0px); }
-        }
-        @keyframes floatChaotic2 {
-            0% { transform: translateY(0px) translateX(0px); }
-            50% { transform: translateY(-5px) translateX(-3px); }
-            100% { transform: translateY(0px) translateX(0px); }
-        }
-        @keyframes floatChaotic3 {
-            0% { transform: translateY(0px) translateX(0px); }
-            50% { transform: translateY(-10px) translateX(0px); }
-            100% { transform: translateY(0px) translateX(0px); }
-        }
-        @keyframes floatChaotic4 {
-            0% { transform: translateY(0px) translateX(0px); }
-            50% { transform: translateY(-6px) translateX(4px); }
-            100% { transform: translateY(0px) translateX(0px); }
-        }
-        @keyframes floatChaotic5 {
-            0% { transform: translateY(0px) translateX(0px); }
-            50% { transform: translateY(-7px) translateX(-2px); }
-            100% { transform: translateY(0px) translateX(0px); }
-        }
-
-        /* Расположение полукругом (крайние выше) */
-        .nav-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
-            gap: 14px;
-        }
-        .nav-btn:nth-child(1) { transform: translateY(-18px); }
-        .nav-btn:nth-child(2) { transform: translateY(-8px); }
+        /* Положение полукругом — крайние выше */
+        .nav-btn:nth-child(1) { transform: translateY(-24px); }
+        .nav-btn:nth-child(2) { transform: translateY(-12px); }
         .nav-btn:nth-child(3) { transform: translateY(0px); }
-        .nav-btn:nth-child(4) { transform: translateY(-8px); }
-        .nav-btn:nth-child(5) { transform: translateY(-18px); }
+        .nav-btn:nth-child(4) { transform: translateY(-12px); }
+        .nav-btn:nth-child(5) { transform: translateY(-24px); }
+
+        /* Хаотичное парение каждой кнопки */
+        .nav-btn:nth-child(1) { animation: float1 3.2s ease-in-out infinite; }
+        .nav-btn:nth-child(2) { animation: float2 2.8s ease-in-out infinite; }
+        .nav-btn:nth-child(3) { animation: float3 3.6s ease-in-out infinite; }
+        .nav-btn:nth-child(4) { animation: float4 3.0s ease-in-out infinite; }
+        .nav-btn:nth-child(5) { animation: float5 3.4s ease-in-out infinite; }
+
+        @keyframes float1 {
+            0% { transform: translateY(-24px) translateX(0); }
+            50% { transform: translateY(-30px) translateX(3px); }
+            100% { transform: translateY(-24px) translateX(0); }
+        }
+        @keyframes float2 {
+            0% { transform: translateY(-12px) translateX(0); }
+            50% { transform: translateY(-16px) translateX(-2px); }
+            100% { transform: translateY(-12px) translateX(0); }
+        }
+        @keyframes float3 {
+            0% { transform: translateY(0px) translateX(0); }
+            50% { transform: translateY(-6px) translateX(0); }
+            100% { transform: translateY(0px) translateX(0); }
+        }
+        @keyframes float4 {
+            0% { transform: translateY(-12px) translateX(0); }
+            50% { transform: translateY(-18px) translateX(4px); }
+            100% { transform: translateY(-12px) translateX(0); }
+        }
+        @keyframes float5 {
+            0% { transform: translateY(-24px) translateX(0); }
+            50% { transform: translateY(-28px) translateX(-3px); }
+            100% { transform: translateY(-24px) translateX(0); }
+        }
 
         .nav-btn.active {
             background: linear-gradient(145deg, rgba(58, 134, 255, 0.7), rgba(30, 60, 120, 0.9));
@@ -382,8 +428,13 @@
             .slogan-left, .slogan-right { font-size: 13px; }
             .hero-btn { font-size: 20px; padding: 12px 36px; bottom: 30px; }
             .nav-btn { width: 50px; height: 50px; font-size: 22px; }
+            .nav-btn:nth-child(1) { transform: translateY(-18px); }
+            .nav-btn:nth-child(2) { transform: translateY(-8px); }
+            .nav-btn:nth-child(3) { transform: translateY(0px); }
+            .nav-btn:nth-child(4) { transform: translateY(-8px); }
+            .nav-btn:nth-child(5) { transform: translateY(-18px); }
             .app-logo { font-size: 18px; }
-            .content-area { padding: 90px 20px 100px 20px; margin-top: 70px; }
+            .content-area { padding: 110px 20px 130px 20px; }
         }
 
         .hidden {
@@ -399,7 +450,7 @@
     <div id="heroScreen">
         <div class="hero-header">
             <div class="hero-title">INNER WORLD</div>
-            <div class="hero-slogan">
+            <div class="hero-slogan" id="heroSlogan">
                 <div class="slogan-left">Овладей миром причин —</div>
                 <div class="slogan-right">и мир результатов станет твоим</div>
             </div>
@@ -415,35 +466,103 @@
         </div>
 
         <div class="content-area" id="contentArea">
-            <div class="section active-section" id="sectionAbout">
-                <h2>О проекте</h2>
-                <p><strong>Inner World</strong> — это пространство, где ты овладеваешь <strong style="color:#3a86ff">миром причин</strong>.</p>
-                <div class="card"><p>✨ <strong>Мысли как виртуоз</strong><br>Большинство пытаются изменить жизнь через действия. Но проблема глубже.</p></div>
-                <div class="card"><p>🎯 <strong>Миссия</strong><br>Дать навык работы с подсознанием.</p></div>
+            <!-- РАЗДЕЛ 1: ГЛАВНАЯ / О ПРОЕКТЕ -->
+            <div class="section active-section" id="sectionHome">
+                <h2>Добро пожаловать в Inner World</h2>
+                <p><strong>Inner World</strong> — это пространство, где ты овладеваешь <strong style="color:#3a86ff">миром причин</strong>. Внешний мир — лишь результат внутренних программ.</p>
+                <div class="card">
+                    <p>✨ <strong>Мысли как виртуоз</strong><br>Большинство пытаются изменить жизнь через действия. Ставят цели, ищут мотивацию, изучают информацию. Но результат либо не приходит, либо быстро исчезает.</p>
+                    <p>Потому что проблема не в действиях. И даже не в мышлении. Проблема в том, что создаёт их.</p>
+                </div>
+                <div class="card">
+                    <p>🎯 <strong>Миссия проекта</strong><br>Дать навык работы с подсознанием. Не теорию, а практическое управление внутренними сценариями.</p>
+                </div>
+                <p><strong>Виртуоз</strong> — не тот, кто старается больше. А тот, кто работает на уровне <strong>причины</strong>. Он управляет механизмом, который создаёт жизнь.</p>
             </div>
-            <div class="section" id="sectionStudents">
-                <h2>Ученикам</h2>
-                <div class="card"><p>🎭 Прямое взаимодействие</p></div>
-                <div class="card"><p>🔍 Поиск и выявление</p></div>
-                <div class="card"><p>⚙️ Самопрограммирование</p></div>
+
+            <!-- РАЗДЕЛ 2: ОБУЧЕНИЕ -->
+            <div class="section" id="sectionLearning">
+                <h2>Обучение в Inner World</h2>
+                <div class="card">
+                    <p>📚 <strong>Формат обучения</strong><br>Групповые встречи, разборы, живая среда. Ты не просто учишься — ты растешь.</p>
+                </div>
+                <div class="card">
+                    <p>⏱️ <strong>Длительность</strong><br>Базовый курс — 3 месяца. За это время ты осваиваешь навык и начинаешь видеть первые результаты.</p>
+                </div>
+                <div class="card">
+                    <p>🎭 <strong>Классы и направления</strong><br>• Прямое взаимодействие — работа с состояниями, навык входа в глубину<br>• Поиск и выявление — понимание внутренних механизмов<br>• Самопрограммирование — изменение структур и закрепление состояний</p>
+                </div>
+                <p>Участие в проекте — это не просто курсы. Это сообщество, где каждый движется к мастерству.</p>
             </div>
+
+            <!-- РАЗДЕЛ 3: РАЗВИТИЕ / ДОРОЖНАЯ КАРТА -->
             <div class="section" id="sectionRoadmap">
-                <h2>Дорожная карта</h2>
-                <div class="card"><p>01 Участник</p><p>02 Результат</p><p>03 Углубление</p><p>04 Проводник</p><p>05 Партнёр</p></div>
+                <h2>Твой путь в проекте</h2>
+                <div class="card">
+                    <p><strong>01. Участник</strong><br>Погружение в навык. Ты учишься работать с собой и видишь первые изменения.</p>
+                </div>
+                <div class="card">
+                    <p><strong>02. Результат</strong><br>Твоя жизнь начинает меняться. Ты закрепляешь успех и углубляешь практику.</p>
+                </div>
+                <div class="card">
+                    <p><strong>03. Углубление</strong><br>Мастерство управления причинами. Ты можешь работать не только с собой.</p>
+                </div>
+                <div class="card">
+                    <p><strong>04. Проводник</strong><br>Ты становишься ментором в проекте. Передаёшь навык другим.</p>
+                </div>
+                <div class="card">
+                    <p><strong>05. Партнёр</strong><br>Часть экосистемы Inner World. Возможность расти и влиять на развитие проекта.</p>
+                </div>
+                <p>🌟 Мотивация — не просто учиться, а достигать собственных результатов и помогать другим.</p>
             </div>
+
+            <!-- РАЗДЕЛ 4: ЛИЧНАЯ РАБОТА -->
             <div class="section" id="sectionPersonal">
-                <h2>Личная работа</h2>
-                <div class="card"><p>Индивидуальный формат. Запись — <a href="https://t.me/bogdans_network" target="_blank" style="color:#3a86ff">@bogdans_network</a></p></div>
+                <h2>Личная работа со мной</h2>
+                <div class="card">
+                    <p>🧠 <strong>Индивидуальный формат «Hel‑с»</strong><br>Глубокая проработка твоих запросов. Работаем с убеждениями, сценариями, внутренними блоками.</p>
+                </div>
+                <div class="card">
+                    <p>📅 <strong>Что входит:</strong><br>• Диагностика ключевых механизмов<br>• Персональные протоколы работы<br>• Сопровождение между встречами</p>
+                </div>
+                <div class="card">
+                    <p>🎯 <strong>Результат:</strong><br>Ты убираешь корневые причины проблем и выходишь на новый уровень жизни.</p>
+                </div>
+                <p>👉 <strong>Запись:</strong> Напиши мне в Telegram — <a href="https://t.me/bogdans_network" target="_blank" style="color:#3a86ff">@bogdans_network</a></p>
+            </div>
+
+            <!-- РАЗДЕЛ 5: НОВОСТИ / КЕЙСЫ -->
+            <div class="section" id="sectionNews">
+                <h2>Истории учеников</h2>
+                
+                <div class="case-card" data-case="1">
+                    <div class="case-title">🔥 Кейс 1: Анна, 34 года</div>
+                    <div class="case-preview">«Я перестала бояться принимать решения...»</div>
+                    <div class="case-full">Анна пришла с запросом «не могу выбрать направление в жизни». После 2 месяцев работы она не только выбрала, но и запустила свой проект. «Раньше я думала, что просто нерешительная. Оказалось, это был внутренний сценарий, который мы нашли и изменили».</div>
+                </div>
+
+                <div class="case-card" data-case="2">
+                    <div class="case-title">💼 Кейс 2: Михаил, 42 года</div>
+                    <div class="case-preview">«Доход вырос в 3 раза за полгода»</div>
+                    <div class="case-full">Михаил — предприниматель с 15-летним стажем. Не мог пройти «потолок» в доходах. После работы с внутренними установками и сценариями денежного мышления за 6 месяцев масштабировал бизнес и увеличил доход в 3 раза. «Я перестал сам себе ставить преграды».</div>
+                </div>
+
+                <div class="case-card" data-case="3">
+                    <div class="case-title">❤️ Кейс 3: Екатерина, 28 лет</div>
+                    <div class="case-preview">«Я вышла из созависимых отношений и начала новую жизнь»</div>
+                    <div class="case-full">Екатерина долгое время находилась в токсичных отношениях и не могла их разорвать. Мы нашли корневую программу «я должна спасать», проработали её. Через 3 месяца она не только ушла из тех отношений, но и встретила партнёра, с которым строит здоровую семью.</div>
+                </div>
+                <p style="margin-top: 16px;">👉 Хочешь попасть в следующую историю успеха? <a href="https://t.me/bogdans_network" target="_blank" style="color:#3a86ff">Напиши мне</a></p>
             </div>
         </div>
 
         <!-- 5 КНОПОК ПОЛУКРУГОМ -->
         <div class="nav-container">
-            <div class="nav-btn active" data-section="about">🏠</div>
-            <div class="nav-btn" data-section="students">📖</div>
+            <div class="nav-btn active" data-section="home">🏠</div>
+            <div class="nav-btn" data-section="learning">📚</div>
             <div class="nav-btn" data-section="roadmap">🧭</div>
             <div class="nav-btn" data-section="personal">⚡</div>
-            <div class="nav-btn" data-section="about">🌟</div>
+            <div class="nav-btn" data-section="news">📰</div>
         </div>
     </div>
 </div>
@@ -453,18 +572,33 @@
     tg.ready();
     tg.expand();
 
+    // Подгонка ширины слогана под тайтл
+    function alignSlogan() {
+        const title = document.querySelector('.hero-title');
+        const slogan = document.getElementById('heroSlogan');
+        if (title && slogan) {
+            slogan.style.width = title.offsetWidth + 'px';
+        }
+    }
+    window.addEventListener('load', alignSlogan);
+    window.addEventListener('resize', alignSlogan);
+
+    // Элементы
     const heroScreen = document.getElementById('heroScreen');
     const mainApp = document.getElementById('mainApp');
     const openBtn = document.getElementById('openBtn');
     const appContainer = document.getElementById('app');
     const navBtns = document.querySelectorAll('.nav-btn');
+    
     const sections = {
-        about: document.getElementById('sectionAbout'),
-        students: document.getElementById('sectionStudents'),
+        home: document.getElementById('sectionHome'),
+        learning: document.getElementById('sectionLearning'),
         roadmap: document.getElementById('sectionRoadmap'),
-        personal: document.getElementById('sectionPersonal')
+        personal: document.getElementById('sectionPersonal'),
+        news: document.getElementById('sectionNews')
     };
 
+    // Переход
     openBtn.addEventListener('click', () => {
         heroScreen.classList.add('hidden');
         mainApp.classList.remove('hidden');
@@ -472,20 +606,38 @@
         appContainer.classList.add('dimmed');
     });
 
+    // Переключение разделов
     function switchSection(sectionId) {
-        Object.values(sections).forEach(s => s.classList.remove('active-section'));
-        if (sections[sectionId]) sections[sectionId].classList.add('active-section');
+        Object.values(sections).forEach(s => {
+            if (s) s.classList.remove('active-section');
+        });
+        if (sections[sectionId]) {
+            sections[sectionId].classList.add('active-section');
+        }
         navBtns.forEach(btn => {
             btn.classList.remove('active');
-            if (btn.getAttribute('data-section') === sectionId) btn.classList.add('active');
+            if (btn.getAttribute('data-section') === sectionId) {
+                btn.classList.add('active');
+            }
         });
     }
 
     navBtns.forEach(btn => {
-        btn.addEventListener('click', () => switchSection(btn.getAttribute('data-section')));
+        btn.addEventListener('click', () => {
+            switchSection(btn.getAttribute('data-section'));
+        });
     });
 
-    switchSection('about');
+    // Логика раскрытия кейсов
+    document.querySelectorAll('.case-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+            e.stopPropagation();
+            card.classList.toggle('expanded');
+        });
+    });
+
+    // Стартовый раздел
+    switchSection('home');
 </script>
 </body>
 </html>
