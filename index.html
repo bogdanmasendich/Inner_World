@@ -281,6 +281,20 @@
     transform: scale(0.95);
 }
 
+.social-icon {
+    width: 20px;
+    height: 20px;
+    display: block;
+    object-fit: contain;
+}
+
+@media (max-width: 500px) {
+    .social-icon {
+        width: 18px;
+        height: 18px;
+    }
+}
+
 /* Анимации для элементов шапки */
 @keyframes floatLogo {
     0% { transform: translateY(0px) rotate(0deg); }
