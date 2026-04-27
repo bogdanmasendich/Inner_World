@@ -6,6 +6,20 @@
     <title>Inner World</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
+        /* ----- ГОЛОВНЫЕ СТИЛИ (тёмная тема, градиенты, стекло) ----- */
+        :root {
+            --bg-dark: #0a0f2a;
+            --bg-card: rgba(20, 40, 70, 0.7);
+            --border-glow: rgba(58, 134, 255, 0.5);
+            --text-white: #ffffff;
+            --text-light: #d0d8ff;
+            --text-dim: #8a9acc;
+            --accent-blue: #3a86ff;
+            --accent-glow: rgba(58, 134, 255, 0.3);
+            --gradient-btn: linear-gradient(135deg, #2a6ad4, #1a4a9e);
+            --gradient-border: linear-gradient(135deg, #2a6ad4, #7ab8ff);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,11 +27,13 @@
         }
 
         body {
-            font-family: 'Segoe UI', 'Montserrat', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+            font-family: 'Segoe UI', 'Montserrat', system-ui, -apple-system, sans-serif;
             overflow: hidden;
-            color: white;
+            color: var(--text-white);
+            background: var(--bg-dark);
         }
 
+        /* ----- ПРИЛОЖЕНИЕ ----- */
         .app {
             width: 100%;
             height: 100vh;
@@ -25,7 +41,7 @@
             overflow: hidden;
         }
 
-        /* ФОН на весь экран */
+        /* ФОН (твоя картинка) */
         .app::before {
             content: '';
             position: fixed;
@@ -38,187 +54,100 @@
             background-size: cover;
             background-repeat: no-repeat;
             z-index: 0;
-            animation: none;
-            transform-origin: center center;
         }
 
-
-        /* Эффект погружения через тень */
-.app::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: transparent;
-    box-shadow: inset 0 0 0px rgba(0, 20, 50, 0);
-    animation: vacuum 10s ease-in-out forwards;
-    pointer-events: none;
-    z-index: 5;
-}
-
-@keyframes vacuum {
-    0% {
-        box-shadow: inset 0 0 0px rgba(0, 20, 50, 0);
-    }
-    100% {
-        box-shadow: inset 0 0 80px rgba(0, 20, 50, 0.9);
-    }
-}
-
+        /* Затемнение для перехода (не используется на первом экране) */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 20, 50, 0);
-            transition: background 0.5s ease;
-            z-index: 1;
+            background: rgba(0, 0, 0, 0);
+            transition: background 0.3s ease;
+            z-index: 5;
             pointer-events: none;
         }
 
         .app.dimmed .overlay {
-            background: rgba(0, 20, 50, 0.85);
+            background: rgba(0, 0, 0, 0.6);
             pointer-events: auto;
         }
 
-        /* ========== ПЕРВЫЙ ЭКРАН ========== */
-        .hero-header {
-            position: fixed;
-            top: 25px;
-            left: 0;
-            right: 0;
-            text-align: center;
+        /* ----- ПЕРВЫЙ ЭКРАН (HERO) ----- */
+        #heroScreen {
+            position: relative;
             z-index: 10;
-            padding: 0 20px;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
+            padding-top: 40px;
+        }
+
+        .hero-header {
+            text-align: center;
+            padding: 0 20px;
         }
 
         .hero-title {
-            font-size: 72px;
+            font-size: clamp(42px, 12vw, 72px);
             font-weight: 800;
             letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #ffffff, #7ab8ff);
+            background: linear-gradient(135deg, #ffffff, var(--accent-blue));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 2px 10px rgba(58, 134, 255, 0.3);
-            margin-bottom: 8px;
-            text-align: center;
-            animation: titleSlowReveal 1.2s ease forwards;
-            opacity: 0;
-            transform: translateY(-8px);
+            text-shadow: 0 2px 10px var(--accent-glow);
+            margin-bottom: 16px;
         }
 
         .hero-slogan {
             display: flex;
             flex-direction: column;
-            margin-left: auto;
-            margin-right: auto;
+            align-items: center;
+            gap: 6px;
         }
 
-        .slogan-left, .slogan-right {
-            font-family: 'Georgia', 'Times New Roman', serif;
-            font-style: italic;
-            letter-spacing: 0.5px;
-            font-weight: 400;
-            text-shadow: 0 0 8px rgba(58, 134, 255, 0.3);
-            opacity: 0;
-            animation: sloganReveal 0.8s ease forwards;
-        }
-
-        .slogan-left {
-            text-align: left;
-            width: 100%;
-            animation-delay: 1.0s;
-        }
-
+        .slogan-left,
         .slogan-right {
-            text-align: right;
-            width: 100%;
-            animation-delay: 2.5s;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            font-size: clamp(14px, 4vw, 18px);
+            color: var(--text-light);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+            letter-spacing: 0.5px;
         }
 
+        /* Кнопка "ОТКРЫТЬ" */
         .hero-btn {
-    position: fixed;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: auto;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(8px);
-    padding: 16px 48px;
-    font-size: 24px;
-    font-weight: bold;
-    border-radius: 60px;
-    color: white;
-    cursor: pointer;
-    font-family: inherit;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    animation: btnFadeIn 0.6s ease forwards;
-    opacity: 0;
-    animation-delay: 3.8s;
-    box-shadow: 0 10px 0 0 rgba(13, 42, 90, 0.5), 0 8px 25px rgba(0, 0, 0, 0.4);
-    border: none;
-    z-index: 100;
-}
-
-/* Градиентная рамка */
-.hero-btn::before {
-    content: '';
-    position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
-    background: linear-gradient(135deg, #2a6ad4, #7ab8ff, #2a6ad4);
-    border-radius: 62px;
-    z-index: -1;
-}
-
-/* Внутренняя подложка, чтобы скрыть градиент под кнопкой */
-.hero-btn::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(8px);
-    border-radius: 60px;
-    z-index: -1;
-}
-
-.hero-btn:active {
-    transform: translateX(-50%) translateY(4px);
-    box-shadow: 0 6px 0 0 rgba(13, 42, 90, 0.5), 0 8px 20px rgba(0, 0, 0, 0.4);
-}
-
-
-
-        @keyframes titleSlowReveal {
-            0% { opacity: 0; transform: translateY(-15px); filter: blur(3px); }
-            40% { opacity: 0.5; filter: blur(1px); }
-            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(90, 160, 255, 0.6);
+            border-radius: 60px;
+            padding: 14px 40px;
+            font-size: clamp(18px, 5vw, 24px);
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: var(--text-white);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            z-index: 20;
         }
 
-        @keyframes sloganReveal {
-            0% { opacity: 0; transform: translateY(12px); }
-            100% { opacity: 1; transform: translateY(0); }
+        .hero-btn:active {
+            transform: translateX(-50%) scale(0.96);
+            background: rgba(0, 0, 0, 0.8);
         }
 
-        @keyframes btnFadeIn {
-            0% { opacity: 0; transform: translateX(-50%) scale(0.95); }
-            100% { opacity: 1; transform: translateX(-50%) scale(1); }
-        }
-
-        /* ========== ОСНОВНОЕ ПРИЛОЖЕНИЕ ========== */
+        /* ----- ОСНОВНОЕ ПРИЛОЖЕНИЕ ----- */
         .main-app {
             position: relative;
             z-index: 10;
@@ -234,46 +163,45 @@
             opacity: 1;
         }
 
-        /* ШАПКА — элементы парят внутри */
-      /* ШАПКА — новая версия */
+        /* ----- ШАПКА (фиксированная) ----- */
         .app-header {
             position: fixed;
-            top: 0px;
+            top: 0;
             left: 0;
             right: 0;
             z-index: 20;
             padding: 12px 16px;
-            background: rgba(0, 20, 50, 0.7);
+            background: rgba(10, 15, 42, 0.7);
             backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(58, 134, 255, 0.3);
+            border-bottom: 1px solid var(--border-glow);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .header-left {
             display: flex;
             align-items: center;
             gap: 12px;
             flex: 1;
         }
-        
+
         .logo-icon {
             font-size: 32px;
-            filter: drop-shadow(0 0 4px rgba(58,134,255,0.5));
+            filter: drop-shadow(0 0 4px var(--accent-glow));
             animation: floatLogo 3.5s ease-in-out infinite;
             cursor: pointer;
         }
-        
+
         .header-text {
             display: flex;
             flex-direction: column;
         }
-        
+
         .app-logo {
             font-size: 18px;
             font-weight: 700;
-            background: linear-gradient(135deg, #ffffff, #7ab8ff);
+            background: linear-gradient(135deg, #ffffff, var(--accent-blue));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -281,31 +209,30 @@
             animation: floatLogoText 3.8s ease-in-out infinite;
             text-align: left;
         }
-        
+
         .quote {
             font-size: 10px;
-            color: #8a9acc;
+            color: var(--text-dim);
             margin-top: 2px;
             font-style: italic;
             opacity: 0.8;
             animation: floatQuote 4.2s ease-in-out infinite;
             text-align: left;
         }
-        
+
         .header-right {
             display: flex;
             gap: 10px;
             align-items: center;
         }
-        
+
         .social-btn {
             width: 36px;
             height: 36px;
             border-radius: 50%;
             background: linear-gradient(145deg, rgba(58, 134, 255, 0.35), rgba(20, 40, 80, 0.65));
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(58, 134, 255, 0.5);
-            /*box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);*/
+            border: 1px solid var(--border-glow);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -313,81 +240,65 @@
             cursor: pointer;
             transition: all 0.2s ease;
             text-decoration: none;
-            color: white;
+            color: var(--text-white);
             animation: floatSocial 3.6s ease-in-out infinite;
         }
-        
+
         .social-btn:nth-child(1) { animation-delay: 0s; }
         .social-btn:nth-child(2) { animation-delay: 0.3s; }
         .social-btn:nth-child(3) { animation-delay: 0.6s; }
-        
-        .social-btn:hover {
-            transform: scale(1.08);
-            background: rgba(58, 134, 255, 0.6);
-            border-color: rgba(58, 134, 255, 0.9);
-        }
-        
+
         .social-btn:active {
             transform: scale(0.95);
         }
-        
-        .social-icon {
-            width: 30px;
-            height: 30px;
-            display: block;
-            object-fit: contain;
-        }
-        
-        
-        /* Анимации для элементов шапки */
+
         @keyframes floatLogo {
             0% { transform: translateY(0px) rotate(0deg); }
             50% { transform: translateY(-3px) rotate(3deg); }
             100% { transform: translateY(0px) rotate(0deg); }
         }
-        
         @keyframes floatLogoText {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-2px); }
             100% { transform: translateY(0px); }
         }
-        
         @keyframes floatQuote {
             0% { transform: translateY(0px); }
             50% { transform: translateY(2px); }
             100% { transform: translateY(0px); }
         }
-        
         @keyframes floatSocial {
             0% { transform: translateY(0px); }
             50% { transform: translateY(-3px); }
             100% { transform: translateY(0px); }
         }
 
-        /* КОНТЕНТ */
+        /* ----- ЦЕНТРАЛЬНАЯ ОБЛАСТЬ ----- */
         .content-area {
             flex: 1;
             overflow-y: auto;
-            padding: 90px 24px 140px 24px;
+            padding: 80px 20px 90px 20px;
             scrollbar-width: thin;
-            scrollbar-color: #3a86ff #1a2a4a;
+            scrollbar-color: var(--accent-blue) var(--bg-dark);
+            margin-top: 58px;
         }
 
         .content-area::-webkit-scrollbar {
             width: 4px;
         }
         .content-area::-webkit-scrollbar-track {
-            background: #1a2a4a;
+            background: var(--bg-dark);
             border-radius: 10px;
         }
         .content-area::-webkit-scrollbar-thumb {
-            background: #3a86ff;
+            background: var(--accent-blue);
             border-radius: 10px;
         }
 
+        /* ----- СЕКЦИИ (переключение) ----- */
         .section {
             display: none;
-            animation: fadeInUp 0.8s ease;
+            animation: fadeInUp 0.4s ease;
             max-width: 500px;
             margin: 0 auto;
         }
@@ -401,80 +312,116 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Стили контента */
-        .section h2 {
-            font-size: 28px;
-            font-weight: 700;
+        /* ----- СТИЛИ ДЛЯ РАЗДЕЛА "О ПРОЕКТЕ" (карточки) ----- */
+        .story-container {
+            width: 100%;
+        }
+
+        .cards-header {
+            text-align: center;
             margin-bottom: 20px;
-            border-left: 4px solid #3a86ff;
-            padding-left: 16px;
         }
 
-        .section h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin: 24px 0 12px 0;
-            color: #7ab8ff;
-        }
-
-        .section p {
-            font-size: 16px;
-            line-height: 1.6;
-            color: #d0d8ff;
-            margin-bottom: 16px;
-        }
-
-        .card {
-            background: rgba(20, 40, 70, 0.6);
-            backdrop-filter: blur(8px);
-            border-radius: 20px;
-            padding: 20px;
-            margin: 16px 0;
-            border: 1px solid rgba(58, 134, 255, 0.3);
-        }
-
-        .case-card {
-            background: rgba(20, 40, 70, 0.6);
-            backdrop-filter: blur(8px);
-            border-radius: 20px;
-            padding: 20px;
-            margin: 16px 0;
-            border: 1px solid rgba(58, 134, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .case-card:hover {
-            background: rgba(30, 60, 100, 0.7);
-            transform: scale(1.01);
-        }
-
-        .case-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #7ab8ff;
+        .cards-title {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff, var(--accent-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
             margin-bottom: 8px;
         }
 
-        .case-preview {
-            font-size: 14px;
-            color: #b0c8f0;
+        .cards-ps {
+            font-size: 13px;
+            color: var(--text-light);
+            font-style: italic;
         }
 
-        .case-full {
-            display: none;
-            margin-top: 12px;
-            font-size: 14px;
-            color: #d0d8ff;
-            border-top: 1px solid rgba(58,134,255,0.3);
-            padding-top: 12px;
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            width: 100%;
+            margin-bottom: 24px;
         }
 
-        .case-card.expanded .case-full {
-            display: block;
+        /* Карточка */
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 18px 20px;
+            border: 1px solid var(--border-glow);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
         }
 
-        /* ========== 5 КНОПОК ПОЛУКРУГОМ С ХАОТИЧНЫМ ПАРЕНИЕМ ========== */
+        .card-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 10px;
+        }
+
+        .card-short {
+            font-size: 13px;
+            line-height: 1.45;
+            color: var(--text-light);
+            margin-bottom: 28px;
+        }
+
+        .card-hint {
+            position: absolute;
+            bottom: 12px;
+            right: 16px;
+            font-size: 12px;
+            color: var(--accent-blue);
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4px 12px;
+            border-radius: 30px;
+            backdrop-filter: blur(4px);
+            animation: pulseHint 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulseHint {
+            0% { opacity: 0.6; transform: scale(0.95); text-shadow: 0 0 0 var(--accent-blue); }
+            50% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 6px var(--accent-blue); }
+            100% { opacity: 0.6; transform: scale(0.95); text-shadow: 0 0 0 var(--accent-blue); }
+        }
+
+        /* Футер раздела */
+        .cards-footer {
+            text-align: center;
+            width: 100%;
+        }
+
+        .footer-invite {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+
+        /* Кнопка "Узнать подробнее" */
+        .btn-more {
+            background: var(--gradient-btn);
+            border: none;
+            padding: 12px 20px;
+            border-radius: 40px;
+            color: var(--text-white);
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s;
+        }
+
+        .btn-more:active {
+            transform: scale(0.97);
+        }
+
+        /* ----- НИЖНЯЯ НАВИГАЦИЯ (5 кнопок полукругом) ----- */
         .nav-container {
             position: fixed;
             bottom: 0;
@@ -486,9 +433,9 @@
             gap: 10px;
             z-index: 20;
             padding: 36px 16px 20px 16px;
-            background: linear-gradient(to top, rgba(0, 20, 50, 0.95), rgba(0, 20, 50, 0.8), transparent);
+            background: linear-gradient(to top, rgba(10, 15, 42, 0.95), rgba(10, 15, 42, 0.8), transparent);
             backdrop-filter: blur(12px);
-            border-top: 1px solid rgba(58, 134, 255, 0.2);
+            border-top: 1px solid var(--border-glow);
         }
 
         .nav-btn {
@@ -497,7 +444,7 @@
             border-radius: 50%;
             background: linear-gradient(145deg, rgba(58, 134, 255, 0.3), rgba(20, 40, 80, 0.6));
             backdrop-filter: blur(8px);
-            border: 1px solid rgba(58, 134, 255, 0.5);
+            border: 1px solid var(--border-glow);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
@@ -507,14 +454,14 @@
             transition: all 0.2s ease;
         }
 
-        /* Положение полукругом — крайние выше */
+        /* Положение полукругом */
         .nav-btn:nth-child(1) { transform: translateY(-24px); }
         .nav-btn:nth-child(2) { transform: translateY(-12px); }
         .nav-btn:nth-child(3) { transform: translateY(0px); }
         .nav-btn:nth-child(4) { transform: translateY(-12px); }
         .nav-btn:nth-child(5) { transform: translateY(-24px); }
 
-        /* Хаотичное парение каждой кнопки */
+        /* Хаотичное парение */
         .nav-btn:nth-child(1) { animation: float1 3.2s ease-in-out infinite; }
         .nav-btn:nth-child(2) { animation: float2 2.8s ease-in-out infinite; }
         .nav-btn:nth-child(3) { animation: float3 3.6s ease-in-out infinite; }
@@ -549,8 +496,8 @@
 
         .nav-btn.active {
             background: linear-gradient(145deg, rgba(58, 134, 255, 0.7), rgba(30, 60, 120, 0.9));
-            box-shadow: 0 0 20px rgba(58, 134, 255, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            border-color: rgba(58, 134, 255, 1);
+            box-shadow: 0 0 20px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: var(--accent-blue);
             transform: scale(1.08);
         }
 
@@ -558,343 +505,238 @@
             transform: scale(0.95);
         }
 
-
-        /* ========== КОНТЕЙНЕР ИСТОРИИ ========== */
-        #sectionHome {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .story-container {
+        /* ----- МОДАЛЬНОЕ ОКНО ----- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            flex: 1;  /* занимает всё доступное пространство */
-            overflow-y: hidden;
-            scrollbar-width: none;
-        }
-
-        .story-container::-webkit-scrollbar {
-            display: none;
-        }
-
-        /* ========== СЛАЙДЫ ========== */
-        .story-slide {
             height: 100%;
+            background: rgba(0, 0, 0, 0);
+            backdrop-filter: blur(0);
+            z-index: 100;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;  /* распределяет пространство между элементами */
             align-items: center;
-            padding: 20px 0;
-            box-sizing: border-box;
-        }
-        
-        /* Анимация для слайда */
-            .story-slide {
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-
-            .story-slide.slide-out-up {
-                opacity: 0;
-                transform: translateY(-80px);
-            }
-
-            .story-slide.slide-out-down {
-                opacity: 0;
-                transform: translateY(80px);
-            }
-
-        /* ========== БЛОК УПРАВЛЕНИЯ ========== */
-        .story-controls {
-            display: flex;
             justify-content: center;
-            align-items: center;
-            gap: 20px;
-            margin: 10px 0 0px 0;
-            padding: 8px 16px;
-            flex-shrink: 0;  /* чтобы стрелки не сжимались */
+            transition: all 0.3s ease;
+            pointer-events: none;
         }
 
-    
+        .modal-overlay.active {
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
+            pointer-events: auto;
+        }
 
-        /* ========== СТРЕЛКИ ========== */
-        .story-arrow {
+        .modal-window {
+            background: rgba(20, 40, 70, 0.95);
+            backdrop-filter: blur(16px);
+            border-radius: 32px;
+            padding: 24px;
+            width: 85%;
+            max-width: 360px;
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.2s ease;
+        }
+
+        .modal-overlay.active .modal-window {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 20px;
             background: none;
             border: none;
-            font-size: 28px;
-            color: #3a86ff;
+            font-size: 24px;
+            color: var(--text-dim);
             cursor: pointer;
             padding: 8px;
-            min-width: 44px;
-            min-height: 44px;
+            line-height: 1;
         }
 
-        .story-arrow-up {
-            transform: rotate(-90deg);
-        }
-
-        .story-arrow-down {
-            transform: rotate(90deg);
-        }
-
-        /* ========== СЧЁТЧИК ========== */
-        .story-counter {
-            font-size: 14px;
-            color: #8a9acc;
-            font-weight: 500;
-        }
-
-        /* ========== КОНТЕНТ СЛАЙДА ========== */
-        /* Персонаж (эмодзи) */
-        .character-emoji {
-            font-size: 80px;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 0 10px rgba(58,134,255,0.5));
-            animation: floatCharacter 3s ease-in-out infinite;
-            flex-shrink: 0;  /* не сжимается */
-        }
-
-        @keyframes floatCharacter {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-5px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* Речевой пузырь */
-        .speech-bubble {
-            width: 100%;
-            max-width: 360px;
-            margin-left: auto;
-            margin-right: auto;
-            background: rgba(20, 40, 70, 0.85);
-            backdrop-filter: blur(12px);
-            border-radius: 24px;
-            padding: 20px 24px;
-            border: 1px solid rgba(58, 134, 255, 0.5);
-            text-align: center;
-            flex-shrink: 0;  /* не сжимается */
-        }   
-
-        .speech-title {
-            font-size: 18px;
+        .modal-title {
+            font-size: 22px;
             font-weight: 700;
-            color: #7ab8ff;
-            margin-bottom: 10px;
+            color: var(--accent-blue);
+            margin-bottom: 16px;
+            padding-right: 24px;
         }
 
-        .speech-text {
-            font-size: 16px;
+        .modal-body {
+            font-size: 15px;
             line-height: 1.5;
-            color: white;
-        }   
-
-        .section {
-            transition: opacity 0.2s ease;
+            color: var(--text-light);
+            max-height: 60vh;
+            overflow-y: auto;
+            padding-right: 8px;
         }
 
-        .section:not(.active-section) {
-            display: none !important;
+        .modal-body::-webkit-scrollbar {
+            width: 3px;
+        }
+        .modal-body::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        .modal-body::-webkit-scrollbar-thumb {
+            background: var(--accent-blue);
         }
 
-        
-
-
-        
-        /* МЕДИА ЗАПРОС*/
-        
+        /* ----- АДАПТИВ ДЛЯ ТЕЛЕФОНОВ ----- */
         @media (max-width: 500px) {
-            .hero-header {
-                top: 25px;
-            }
             .hero-title {
                 font-size: 48px;
             }
             .slogan-left, .slogan-right {
-                font-size: 16px;
-            }
-            .hero-btn {
-                bottom: 60px;
-                font-size: 20px;
-                padding: 12px 36px;
-            }
-            .social-icon {
-                width: 26px;
-                height: 26px;
-            }
-            .app-header {
-                padding: 8px 12px;
-            }
-            .logo-icon {
-                font-size: 26px;
-            }
-            .app-logo {
                 font-size: 14px;
             }
-            .quote {
-                font-size: 8px;
-            }
-            .social-btn {
-                width: 32px;
-                height: 32px;
-                font-size: 16px;
+            .hero-btn {
+                bottom: 40px;
+                font-size: 18px;
+                padding: 10px 32px;
             }
             .content-area {
-                padding: 90px 24px 100px 24px;
+                padding: 70px 16px 80px 16px;
             }
-           
-
-            .nav-btn { width: 50px; height: 50px; font-size: 22px; }
+            .cards-title {
+                font-size: 24px;
+            }
+            .card-title {
+                font-size: 16px;
+            }
+            .card-short {
+                font-size: 12px;
+            }
+            .nav-btn {
+                width: 48px;
+                height: 48px;
+                font-size: 22px;
+            }
             .nav-btn:nth-child(1) { transform: translateY(-18px); }
             .nav-btn:nth-child(2) { transform: translateY(-8px); }
             .nav-btn:nth-child(3) { transform: translateY(0px); }
             .nav-btn:nth-child(4) { transform: translateY(-8px); }
             .nav-btn:nth-child(5) { transform: translateY(-18px); }
-            .app-logo { font-size: 18px; }
-
+            .modal-window {
+                width: 90%;
+                padding: 20px;
+            }
+            .modal-title {
+                font-size: 18px;
+            }
+            .modal-body {
+                font-size: 14px;
+            }
         }
 
-
+        /* ----- ВСПОМОГАТЕЛЬНЫЕ КЛАССЫ ----- */
         .hidden {
-            display: none;
+            display: none !important;
         }
-        
     </style>
 </head>
 <body>
 <div class="app" id="app">
+    <!-- Затемнение (для модалки и перехода) -->
     <div class="overlay"></div>
-    
-    <!-- ПЕРВЫЙ ЭКРАН -->
-    <div id="heroScreen" class="hero-screen">
+
+    <!-- ПЕРВЫЙ ЭКРАН (ПРИВЕТСТВИЕ) -->
+    <div id="heroScreen">
         <div class="hero-header">
             <div class="hero-title">INNER WORLD</div>
-            <div class="hero-slogan" id="heroSlogan">
+            <div class="hero-slogan">
                 <div class="slogan-left">Овладей миром причин —</div>
                 <div class="slogan-right">и мир результатов станет твоим</div>
             </div>
         </div>
-        <button class="hero-btn" id="openBtn">
-            ОТКРЫТЬ
-        </button>
+        <button class="hero-btn" id="openBtn">ОТКРЫТЬ</button>
     </div>
 
-    <!-- ОСНОВНОЕ ПРИЛОЖЕНИЕ -->
+    <!-- ОСНОВНОЕ ПРИЛОЖЕНИЕ (скрыто изначально) -->
     <div class="main-app hidden" id="mainApp">
+        <!-- ШАПКА -->
         <div class="app-header">
-    <div class="header-left">
-        <div class="logo-icon">👁️</div>
-        <div class="header-text">
-            <div class="app-logo">INNER WORLD</div>
-            <div class="quote">Цитата дня: «Ты не можешь изменить результат, не изменив причину»</div>
-        </div>
-    </div>
-    <div class="header-right">
-        <a href="https://t.me/bogdans_network" target="_blank" class="social-btn" id="socialTelegram">
-             <img src="R.png" alt="R" class="social-icon">   
-        </a>
-        <a href="https://t.me/bogdans_network" target="_blank" class="social-btn" id="socialEmail">
-            <img src="R.png" alt="R" class="social-icon"> 
-        </a>
-        <a href="https://t.me/bogdans_network" target="_blank" class="social-btn" id="socialInstagram">
-            <img src="R.png" alt="R" class="social-icon">     
-        </a>
-    </div>
-</div>
-
-        <div class="content-area" id="contentArea">
-
-            <!-- РАЗДЕЛ 1: ГЛАВНАЯ / О ПРОЕКТЕ -->
-            <div class="section active-section" id="sectionHome">
-                <div class="story-container" id="storyContainer">
-                    <div class="story-slides" id="storySlides">
-                        <!-- Сюда будем добавлять слайды -->
-                    </div>                  
+            <div class="header-left">
+                <div class="logo-icon">👁️</div>
+                <div class="header-text">
+                    <div class="app-logo">INNER WORLD</div>
+                    <div class="quote">Цитата дня: «Ты не можешь изменить результат, не изменив причину»</div>
                 </div>
-                        <!-- Стрелки и счётчик -->
-                    <div class="story-controls">
-                        <button class="story-arrow story-arrow-up" id="storyArrowUp" style="opacity: 0.3; pointer-events: none;">❯❯</button>
-                        <span class="story-counter" id="storyCounter">1 / 1</span>
-                        <button class="story-arrow story-arrow-down" id="storyArrowDown">❯❯</button>
-                    </div>
             </div>
-                      
+            <div class="header-right">
+                <a href="https://t.me/bogdans_network" target="_blank" class="social-btn">📩</a>
+                <a href="https://t.me/bogdans_network" target="_blank" class="social-btn">✉️</a>
+                <a href="https://t.me/bogdans_network" target="_blank" class="social-btn">📷</a>
+            </div>
+        </div>
 
-            <!-- РАЗДЕЛ 2: ОБУЧЕНИЕ -->
+        <!-- ЦЕНТРАЛЬНАЯ ОБЛАСТЬ (секции) -->
+        <div class="content-area" id="contentArea">
+            <!-- РАЗДЕЛ 1: О ПРОЕКТЕ (карточки + модалки) -->
+            <div class="section active-section" id="sectionHome">
+                <div class="story-container">
+                    <div class="cards-header">
+                        <div class="cards-title">INNER WORLD</div>
+                        <div class="cards-ps">Ни одной готовой практики. Только твой навык разбираться в себе самостоятельно.</div>
+                    </div>
+                    <div class="cards-container">
+                        <!-- Карточка 1 -->
+                        <div class="card" data-card="0">
+                            <div class="card-title">Подсознание: причина и следствие</div>
+                            <div class="card-short">Твои проблемы и амбиции — не случайность. Здесь нет психологии или эзотерики. Только механика: логика программ и их эмпирическая суть.</div>
+                            <div class="card-hint">Открыть ⓘ</div>
+                        </div>
+                        <!-- Карточка 2 -->
+                        <div class="card" data-card="1">
+                            <div class="card-title">Навык: Основа выживания</div>
+                            <div class="card-short">Ты сотни раз пробовал чужие «решения» — результат неуверенный. Можно выучить одно стихотворение. А можно научиться читать.</div>
+                            <div class="card-hint">Открыть ⓘ</div>
+                        </div>
+                        <!-- Карточка 3 -->
+                        <div class="card" data-card="2">
+                            <div class="card-title">Результат: Ты сам себе решение</div>
+                            <div class="card-short">Ты перестаёшь быть заложником обстоятельств, экспертов и своих старых программ. Любая проблема встречает твой внутренний механизм разбора.</div>
+                            <div class="card-hint">Открыть ⓘ</div>
+                        </div>
+                    </div>
+                    <div class="cards-footer">
+                        <div class="footer-invite">Хочешь развивать свой навык понятно и эффективно?<br>Узнай, что ждёт тебя внутри проекта Inner World.</div>
+                        <button class="btn-more" id="btnMore">Узнать подробнее →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- РАЗДЕЛ 2: ОБУЧЕНИЕ (заглушка) -->
             <div class="section" id="sectionLearning">
                 <h2>Обучение в Inner World</h2>
-                <div class="card">
-                    <p>📚 <strong>Формат обучения</strong><br>Групповые встречи, разборы, живая среда. Ты не просто учишься — ты растешь.</p>
-                </div>
-                <div class="card">
-                    <p>⏱️ <strong>Длительность</strong><br>Базовый курс — 3 месяца. За это время ты осваиваешь навык и начинаешь видеть первые результаты.</p>
-                </div>
-                <div class="card">
-                    <p>🎭 <strong>Классы и направления</strong><br>• Прямое взаимодействие — работа с состояниями, навык входа в глубину<br>• Поиск и выявление — понимание внутренних механизмов<br>• Самопрограммирование — изменение структур и закрепление состояний</p>
-                </div>
-                <p>Участие в проекте — это не просто курсы. Это сообщество, где каждый движется к мастерству.</p>
+                <p>Здесь будет информация об обучении...</p>
             </div>
 
-            <!-- РАЗДЕЛ 3: РАЗВИТИЕ / ДОРОЖНАЯ КАРТА -->
+            <!-- РАЗДЕЛ 3: РАЗВИТИЕ (заглушка) -->
             <div class="section" id="sectionRoadmap">
                 <h2>Твой путь в проекте</h2>
-                <div class="card">
-                    <p><strong>01. Участник</strong><br>Погружение в навык. Ты учишься работать с собой и видишь первые изменения.</p>
-                </div>
-                <div class="card">
-                    <p><strong>02. Результат</strong><br>Твоя жизнь начинает меняться. Ты закрепляешь успех и углубляешь практику.</p>
-                </div>
-                <div class="card">
-                    <p><strong>03. Углубление</strong><br>Мастерство управления причинами. Ты можешь работать не только с собой.</p>
-                </div>
-                <div class="card">
-                    <p><strong>04. Проводник</strong><br>Ты становишься ментором в проекте. Передаёшь навык другим.</p>
-                </div>
-                <div class="card">
-                    <p><strong>05. Партнёр</strong><br>Часть экосистемы Inner World. Возможность расти и влиять на развитие проекта.</p>
-                </div>
-                <p>🌟 Мотивация — не просто учиться, а достигать собственных результатов и помогать другим.</p>
+                <p>Здесь будет дорожная карта...</p>
             </div>
 
-            <!-- РАЗДЕЛ 4: ЛИЧНАЯ РАБОТА -->
+            <!-- РАЗДЕЛ 4: ЛИЧНАЯ РАБОТА (заглушка) -->
             <div class="section" id="sectionPersonal">
                 <h2>Личная работа со мной</h2>
-                <div class="card">
-                    <p>🧠 <strong>Индивидуальный формат «Hel‑с»</strong><br>Глубокая проработка твоих запросов. Работаем с убеждениями, сценариями, внутренними блоками.</p>
-                </div>
-                <div class="card">
-                    <p>📅 <strong>Что входит:</strong><br>• Диагностика ключевых механизмов<br>• Персональные протоколы работы<br>• Сопровождение между встречами</p>
-                </div>
-                <div class="card">
-                    <p>🎯 <strong>Результат:</strong><br>Ты убираешь корневые причины проблем и выходишь на новый уровень жизни.</p>
-                </div>
-                <p>👉 <strong>Запись:</strong> Напиши мне в Telegram — <a href="https://t.me/bogdans_network" target="_blank" style="color:#3a86ff">@bogdans_network</a></p>
+                <p>Здесь будет описание индивидуальной работы...</p>
             </div>
 
-            <!-- РАЗДЕЛ 5: НОВОСТИ / КЕЙСЫ -->
+            <!-- РАЗДЕЛ 5: НОВОСТИ / КЕЙСЫ (заглушка) -->
             <div class="section" id="sectionNews">
                 <h2>Истории учеников</h2>
-                
-                <div class="case-card" data-case="1">
-                    <div class="case-title">🔥 Кейс 1: Анна, 34 года</div>
-                    <div class="case-preview">«Я перестала бояться принимать решения...»</div>
-                    <div class="case-full">Анна пришла с запросом «не могу выбрать направление в жизни». После 2 месяцев работы она не только выбрала, но и запустила свой проект. «Раньше я думала, что просто нерешительная. Оказалось, это был внутренний сценарий, который мы нашли и изменили».</div>
-                </div>
-
-                <div class="case-card" data-case="2">
-                    <div class="case-title">💼 Кейс 2: Михаил, 42 года</div>
-                    <div class="case-preview">«Доход вырос в 3 раза за полгода»</div>
-                    <div class="case-full">Михаил — предприниматель с 15-летним стажем. Не мог пройти «потолок» в доходах. После работы с внутренними установками и сценариями денежного мышления за 6 месяцев масштабировал бизнес и увеличил доход в 3 раза. «Я перестал сам себе ставить преграды».</div>
-                </div>
-
-                <div class="case-card" data-case="3">
-                    <div class="case-title">❤️ Кейс 3: Екатерина, 28 лет</div>
-                    <div class="case-preview">«Я вышла из созависимых отношений и начала новую жизнь»</div>
-                    <div class="case-full">Екатерина долгое время находилась в токсичных отношениях и не могла их разорвать. Мы нашли корневую программу «я должна спасать», проработали её. Через 3 месяца она не только ушла из тех отношений, но и встретила партнёра, с которым строит здоровую семью.</div>
-                </div>
-                <p style="margin-top: 16px;">👉 Хочешь попасть в следующую историю успеха? <a href="https://t.me/bogdans_network" target="_blank" style="color:#3a86ff">Напиши мне</a></p>
+                <p>Здесь будут кейсы...</p>
             </div>
         </div>
 
-        <!-- 5 КНОПОК ПОЛУКРУГОМ -->
+        <!-- НИЖНЯЯ НАВИГАЦИЯ -->
         <div class="nav-container">
             <div class="nav-btn active" data-section="home">🏠</div>
             <div class="nav-btn" data-section="learning">📚</div>
@@ -903,32 +745,31 @@
             <div class="nav-btn" data-section="news">📰</div>
         </div>
     </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-window">
+            <button class="modal-close" id="modalClose">✕</button>
+            <div class="modal-title" id="modalTitle"></div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
 </div>
+
 <script>
-    // ========== ИНИЦИАЛИЗАЦИЯ TELEGRAM WEBAPP ==========
+    // ========== ИНИЦИАЛИЗАЦИЯ TELEGRAM ==========
 const tg = window.Telegram.WebApp;
 tg.ready();
 tg.expand();
 
-// ========== ПОДГОНКА ШИРИНЫ СЛОГАНА ПОД ТАЙТЛ ==========
-function alignSlogan() {
-    const title = document.querySelector('.hero-title');
-    const slogan = document.getElementById('heroSlogan');
-    if (title && slogan) {
-        slogan.style.width = title.offsetWidth + 'px';
-    }
-}
-window.addEventListener('load', alignSlogan);
-window.addEventListener('resize', alignSlogan);
-
-// ========== ОСНОВНЫЕ ЭЛЕМЕНТЫ ПРИЛОЖЕНИЯ ==========
+// ========== ЭЛЕМЕНТЫ ==========
 const heroScreen = document.getElementById('heroScreen');
 const mainApp = document.getElementById('mainApp');
 const openBtn = document.getElementById('openBtn');
 const appContainer = document.getElementById('app');
 const navBtns = document.querySelectorAll('.nav-btn');
 
-// ========== СЕКЦИИ (РАЗДЕЛЫ) ==========
+// ========== СЕКЦИИ ==========
 const sections = {
     home: document.getElementById('sectionHome'),
     learning: document.getElementById('sectionLearning'),
@@ -937,7 +778,7 @@ const sections = {
     news: document.getElementById('sectionNews')
 };
 
-// ========== ПЕРЕХОД С ПЕРВОГО ЭКРАНА В ПРИЛОЖЕНИЕ ==========
+// ========== ПЕРЕХОД С ПЕРВОГО ЭКРАНА ==========
 openBtn.addEventListener('click', () => {
     heroScreen.classList.add('hidden');
     mainApp.classList.remove('hidden');
@@ -947,194 +788,78 @@ openBtn.addEventListener('click', () => {
 
 // ========== ПЕРЕКЛЮЧЕНИЕ МЕЖДУ РАЗДЕЛАМИ ==========
 function switchSection(sectionId) {
-    // Скрываем все секции
     Object.values(sections).forEach(s => {
         if (s) s.classList.remove('active-section');
     });
-    // Показываем выбранную
     if (sections[sectionId]) {
         sections[sectionId].classList.add('active-section');
     }
-    // Обновляем активную кнопку навигации
     navBtns.forEach(btn => {
         btn.classList.remove('active');
         if (btn.getAttribute('data-section') === sectionId) {
             btn.classList.add('active');
         }
     });
-    // Сбрасываем скролл контента в начало
-    const contentArea = document.getElementById('contentArea');
-    if (contentArea) {
-        contentArea.scrollTop = 0;
-    }
 }
 
-// ========== ЛОГИКА РАСКРЫТИЯ КЕЙСОВ (аккордеон) ==========
-document.querySelectorAll('.case-card').forEach(card => {
-    card.addEventListener('click', (e) => {
-        e.stopPropagation();
-        card.classList.toggle('expanded');
-    });
-});
-
-// ========== НАЗНАЧАЕМ ОБРАБОТЧИКИ НА КНОПКИ НАВИГАЦИИ ==========
 navBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         switchSection(btn.getAttribute('data-section'));
     });
 });
 
-
-
-// ========== ДАННЫЕ СЛАЙДОВ (РАЗДЕЛ "О ПРОЕКТЕ") ==========
-const storySlides = document.getElementById('storySlides');
-const storyCounter = document.getElementById('storyCounter');
-const storyContainer = document.getElementById('storyContainer');  // ← добавь эту строку
-
-const slidesData = [
-    {
-        title: 'Добро пожаловать в Inner World',
-        text: 'Приветствую тебя, искатель истины...\n\nЭто пространство, где ты овладеваешь миром причин. Внешний мир — лишь результат внутренних программ.',
-        character: '🧙'
-    },
-    {
-        title: 'Уровень причин',
-        text: 'Ты устал от пустых практик? Психологи, книги — а результат не держится.\n\nПроблема не в действиях. И даже не в мышлении. Проблема в том, что создаёт их.',
-        character: '🔑'
-    },
-    {
-        title: 'Виртуоз',
-        text: 'Виртуоз — не тот, кто старается больше. А тот, кто работает на уровне причины.\n\nОн управляет механизмом, который создаёт жизнь.',
-        character: '⚡'
-    }
-];
-
-let currentSlide = 0;
-let totalSlides = slidesData.length;
-
-// ========== ОБРАБОТКА СТРЕЛОК (объявляем ДО renderSlide) ==========
-const arrowUp = document.getElementById('storyArrowUp');
-const arrowDown = document.getElementById('storyArrowDown');
-
-// Функция отображения одного слайда
-function renderSlide(index) {
-    storySlides.innerHTML = '';
-    
-    const slide = document.createElement('div');
-    slide.className = 'story-slide';
-    
-    const data = slidesData[index];
-    
-    // Если есть character, title, text — показываем красиво
-    if (data.title && data.text) {
-        slide.innerHTML = `
-            <div class="character-area">
-                <div class="character-emoji">${data.character || '🧙'}</div>
-            </div>
-            <div class="speech-bubble">
-                <div class="speech-title">${data.title}</div>
-                <div class="speech-text">${data.text.replace(/\n/g, '<br>')}</div>
-            </div>
-        `;
-    } else {
-        // Заглушка для остальных слайдов
-        slide.innerHTML = `<div style="text-align: center; color: white; font-size: 24px;">${data.content}</div>`;
-    }
-    
-    storySlides.appendChild(slide);
-    storyCounter.textContent = `${index + 1} / ${totalSlides}`;
-    
-    // Обновляем состояние стрелок
-    if (arrowUp) {
-        arrowUp.style.opacity = index === 0 ? '0.3' : '0.7';
-        arrowUp.style.pointerEvents = index === 0 ? 'none' : 'auto';
-    }
-    if (arrowDown) {
-        arrowDown.style.opacity = index === totalSlides - 1 ? '0.3' : '0.7';
-        arrowDown.style.pointerEvents = index === totalSlides - 1 ? 'none' : 'auto';
-    }
-}
-
-// Показываем первый слайд
-renderSlide(currentSlide);
-
-
-
-
-// ========== ПЕРЕКЛЮЧЕНИЕ СЛАЙДОВ ==========
-let isAnimating = false;
-
-function goToSlide(newIndex, direction = 'up') {
-    // Если анимация уже идёт или слайд тот же — выходим
-    if (isAnimating) return;
-    if (newIndex < 0 || newIndex >= totalSlides) return;
-    if (newIndex === currentSlide) return;
-    
-    isAnimating = true;
-    
-    // Находим текущий слайд
-    const currentSlideElement = document.querySelector('.story-slide');
-    
-    // Добавляем анимацию в зависимости от направления
-    if (currentSlideElement) {
-        if (direction === 'up') {
-            currentSlideElement.classList.add('slide-out-up');
-        } else {
-            currentSlideElement.classList.add('slide-out-down');
-        }
-    }
-    
-    // Ждём окончания анимации
-    setTimeout(() => {
-        // Меняем слайд
-        currentSlide = newIndex;
-        renderSlide(currentSlide);
-        console.log('Переход на слайд:', currentSlide + 1);
-        
-        // Снимаем блокировку
-        setTimeout(() => {
-            isAnimating = false;
-        }, 50);
-    }, 300);
-}
-
-// ========== ОБРАБОТКА СТРЕЛОК ==========
-arrowUp.addEventListener('click', () => {
-    console.log('Стрелка вверх → предыдущий слайд');
-    goToSlide(currentSlide - 1, 'down');
-});
-
-arrowDown.addEventListener('click', () => {
-    console.log('Стрелка вниз → следующий слайд');
-    goToSlide(currentSlide + 1, 'up');
-});
-
-// ========== ОБРАБОТКА СВАЙПА ==========
-let touchStartY = 0;
-
-storyContainer.addEventListener('touchstart', (e) => {
-    touchStartY = e.touches[0].clientY;
-});
-
-storyContainer.addEventListener('touchend', (e) => {
-    const touchEndY = e.changedTouches[0].clientY;
-    const diffY = touchEndY - touchStartY;
-    
-    if (diffY > 30) {
-        // Свайп вниз → предыдущий слайд
-        goToSlide(currentSlide - 1, 'down');
-    } else if (diffY < -30) {
-        // Свайп вверх → следующий слайд
-        goToSlide(currentSlide + 1, 'up');
-    }
-});
-
-console.log(document.getElementById('sectionHome').style.display);
-console.log(document.getElementById('sectionLearning').style.display);
-
 // Стартовый раздел
 switchSection('home');
 
+// ========== МОДАЛЬНЫЕ ОКНА ==========
+const cardsData = [
+    {
+        title: 'Подсознание: причина и следствие',
+        full: 'Твои проблемы и амбиции — не случайность. Здесь нет психологии или эзотерики. Только механика: логика программ и их эмпирическая суть.\n\nКак устроены программы подсознания?\n\nТвоё подсознание — это не «что-то мистическое». Это работающий механизм. В него когда-то были записаны программы: одни создают проблемы (страх, прокрастинация, сценарии бедности), другие блокируют амбиции (чувство недостойности, страх успеха).\n\nТы не выбирал эти программы. Их установили родители, школа, среда, травмы.\n\nДве стороны одной механики:\n\nЛогика программ — как именно устроено убеждение, откуда оно взялось, по каким триггерам включается. Это можно разобрать как код.\n\nЭмпирическая суть — как программа ощущается в теле, какие образы всплывают, где живёт это чувство. Потому что подсознание говорит на языке ощущений, а не только слов.\n\nПочему это важно?\n\nБольшинство проектов работают только с логикой (психология) или только с энергией/ощущениями (эзотерика). INNER WORLD даёт и то, и другое. Ты осваиваешь логику программ + их эмпирическую природу. Только так можно реально изменить программу, а не «понять её головой» или «почувствовать временное облегчение».'
+    },
+    {
+        title: 'Навык: Основа выживания',
+        full: 'Ты сотни раз пробовал чужие «решения» или «практики» — результат неуверенный. Можно выучить одно стихотворение (практика). А можно научиться читать (навык).\n\nПочему «навык» — это вопрос выживания?\n\nПотому что жизнь не даёт тебе второй, третий, десятый дубль. Каждый раз, когда ты сталкиваешься с проблемой — прокрастинацией, страхом, финансовым блоком, кризисом в отношениях — у тебя есть выбор:\n\nСнова искать внешнее решение (книгу, медитацию, эксперта, практику) и надеяться, что «на этот раз сработает».\n\nИли включить свой собственный механизм разбора и решения.\n\nПервый путь — это лотерея. Второй — это навык, который даёт тебе устойчивость в любой ситуации. Неважно, какая проблема прилетит завтра. У тебя есть инструмент, чтобы с ней справиться.\n\nЧто такое «навык работы с подсознанием» в действии?\n\nЭто алгоритм, который ты запускаешь автоматически, когда чувствуешь, что «что-то пошло не так»:\n\nСтоп-кран — ты замечаешь, что реагируешь не из себя, а из программы.\n\nДиагностика — ты разбираешь: какая именно программа включилась? Какова её логика? Откуда она взялась?\n\nЭмпирический контакт — ты чувствуешь её в теле и образах (потому что программа живёт там).\n\nИзменение — ты переписываешь или отключаешь её.\n\nПрименение — ты действуешь из нового состояния.\n\nЭто не магия. Это технология. Её можно освоить, как любой навык — от вождения до программирования.'
+    },
+    {
+        title: 'Результат: Ты сам себе решение',
+        full: 'Как выглядит жизнь, когда у тебя есть навык?\n\nПредставь: раньше при столкновении с проблемой ты испытывал ступор, тревогу, чувство беспомощности. Ты начинал метаться — искать статью, видео, практику, «специалиста», который скажет, что делать.\n\nТеперь всё иначе. Проблема не пугает. Потому что ты знаешь: у тебя есть пошаговый механизм, который ты запускаешь в любую секунду.\n\nПримеры из реальности:\n\nСитуация: Прокрастинация\n\nБез навыка: ругаешь себя, пытаешься «взять волю в кулак», скачиваешь приложения для продуктивности, срываешься, винишь себя.\n\nС навыком: замечаешь момент, когда задача вызывает отторжение. Останавливаешься. Исследуешь — какая программа включилась? Обнаруживаешь: «Я должен сделать идеально, иначе я никчёмный». Отключаешь автоматизм. Меняешь установку на: «Лучше сделать, чем сделать идеально». Делаешь. Задача решена.\n\nСитуация: Страх публичных выступлений\n\nБез навыка: избегаешь, потеешь, заикаешься, потом прокручиваешь в голове «всё было ужасно».\n\nС навыком: ловишь сигнал тревоги за секунды до. Вспоминаешь — это старая программа «меня осудят, как в детстве». Делаешь эмпирический якорь (дышишь в ощущение). Перепрограммируешь на: «Мне есть что сказать, я ценен». Выходишь и говоришь спокойно.\n\nЧто ты получаешь в итоге:\n\nАвтономию — ты не бежишь к каждому новому «гуру» или практике. Ты справляешься сам.\n\nУстойчивость — любая проблема не выбивает из колеи, а становится задачей для твоего алгоритма.\n\nСвободу — ты перестаёшь быть заложником своих старых программ, навязанных убеждений и чужих решений.'
+    }
+];
+
+const modalOverlay = document.getElementById('modalOverlay');
+const modalTitle = document.getElementById('modalTitle');
+const modalBody = document.getElementById('modalBody');
+const modalClose = document.getElementById('modalClose');
+
+function openModal(cardIndex) {
+    const data = cardsData[cardIndex];
+    if (!data) return;
+    modalTitle.textContent = data.title;
+    modalBody.innerHTML = data.full.replace(/\n/g, '<br>');
+    modalOverlay.classList.add('active');
+}
+
+function closeModal() {
+    modalOverlay.classList.remove('active');
+}
+
+document.querySelectorAll('.card').forEach((card, idx) => {
+    card.addEventListener('click', () => openModal(idx));
+});
+
+modalClose.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+});
+
+// Кнопка "Узнать подробнее" — переход на второй раздел
+const btnMore = document.getElementById('btnMore');
+if (btnMore) {
+    btnMore.addEventListener('click', () => {
+        switchSection('learning');
+    });
+}
 </script>
 </body>
 </html>
