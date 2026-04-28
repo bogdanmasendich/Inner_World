@@ -357,18 +357,19 @@
             justify-content: space-between;
             gap: clamp(8px, 1.5vh, 12px);
             min-height: 0;
+            margin-bottom: 16px;  /* ← от карточек до призыва */
         }
 
         /* Карточка */
        #sectionHome .card {
             flex: 1;
+            min-height: 0;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
             background: rgba(10, 20, 40, 0.4);
             backdrop-filter: blur(12px);
             border-radius: clamp(16px, 4vw, 24px);
-            padding: clamp(10px, 2vh, 16px) clamp(12px, 3vw, 18px);
+            padding: clamp(8px, 1.5vh, 16px) clamp(12px, 3vw, 18px);
             border: 1px solid rgba(90, 160, 255, 0.4);
             cursor: pointer;
             transition: all 0.2s ease;
@@ -382,6 +383,7 @@
 
 
         #sectionHome .card-title {
+            flex-shrink: 0;
             font-size: clamp(14px, 4vw, 18px);
             font-weight: 700;
             color: var(--accent-blue);
@@ -389,22 +391,25 @@
         }
 
         #sectionHome .card-short {
+            flex: 1;
             font-size: clamp(10px, 3vw, 13px);
-            line-height: 1.4;
+            line-height: 1.35;
             color: var(--text-light);
-            margin-bottom: clamp(20px, 5vh, 28px);
+            margin-bottom: clamp(12px, 3vh, 20px);
+            overflow-y: auto;
         }
 
-        #sectionHome .card-hint {
-            position: absolute;
-            bottom: clamp(6px, 1.5vh, 12px);
-            right: clamp(10px, 2vw, 16px);
+       #sectionHome .card-hint {
+            flex-shrink: 0;
+            align-self: flex-end;
+            margin-top: auto;
             font-size: clamp(9px, 2.5vw, 11px);
             color: var(--accent-blue);
-            background: none;              /* убрали подложку */
-            padding: clamp(2px, 1vh, 4px) clamp(6px, 2vw, 10px);
+            background: none;
+            padding: clamp(4px, 1vh, 8px) clamp(6px, 2vw, 12px);
             animation: pulseHint 1.5s ease-in-out infinite;
             text-shadow: 0 0 4px rgba(90, 160, 255, 0.5);
+            cursor: pointer;
         }
 
         @keyframes pulseHint {
@@ -423,7 +428,7 @@
         #sectionHome .footer-invite {
             font-size: clamp(11px, 3vw, 13px);
             color: var(--text-dim);
-            margin-bottom: clamp(6px, 1.5vh, 10px);
+            margin-bottom: clamp(12px, 3vh, 20px);
             line-height: 1.4;
         }
 
@@ -661,6 +666,23 @@
             }
             .modal-body {
                 font-size: 14px;
+            }
+
+            #sectionHome .cards-header {
+                text-align: center;
+                margin-bottom: clamp(16px, 4vh, 24px);  /* увеличили отступ снизу */
+            }
+            #sectionHome .card {
+                padding: 8px 12px;
+            }
+            #sectionHome .card-title {
+                margin-bottom: 2px;
+            }
+            #sectionHome .card-short {
+                margin-bottom: 16px;
+            }
+            #sectionHome .cards-footer {
+                margin-top: 4px;
             }
         }
 
