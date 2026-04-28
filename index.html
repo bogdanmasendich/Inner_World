@@ -286,11 +286,7 @@
             scrollbar-color: var(--accent-blue) var(--bg-dark);
         }
 
-        #sectionHome {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
+        
 
         .content-area::-webkit-scrollbar {
             width: 4px;
@@ -321,140 +317,126 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ----- СТИЛИ ДЛЯ РАЗДЕЛА "О ПРОЕКТЕ" (карточки) ----- */
-        #sectionHome .story-container {
-            flex: 1;
-            min-height: 0;
-            display: flex;
-            flex-direction: column;
-        }
+       /* ===== РАЗДЕЛ "О ПРОЕКТЕ" — ЧИСТАЯ ВЕРСИЯ ===== */
+#sectionHome {
+    padding: 10px 0px 10px;
+}
 
-        #sectionHome .cards-header {
-            text-align: center;
-            margin-bottom: clamp(8px, 2vh, 16px);
-        }
+/* Текст вверху */
+#sectionHome .cards-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
 
-        .cards-title {
-            font-size: 28px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #ffffff, var(--accent-blue));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 8px;
-        }
+#sectionHome .cards-ps {
+    font-size: clamp(13px, 3.5vw, 16px);
+    color: #b0c8f0;
+    font-style: italic;
+    line-height: 1.4;
+    max-width: 100%;
+    margin: 0 auto;
+    white-space: normal;
+    word-break: break-word;
+}
 
-        .cards-ps {
-            font-size: clamp(11px, 3.5vw, 13px);
-            color: var(--text-light);
-            font-style: italic;
-        }
+/* Контейнер карточек */
+#sectionHome .cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 24px;
+}
 
-        #sectionHome .cards-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            gap: clamp(8px, 1.5vh, 12px);
-            min-height: 0;
-            margin-bottom: 16px;  /* ← от карточек до призыва */
-        }
+/* Карточка */
+#sectionHome .card {
+    background: rgba(10, 20, 40, 0.5);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(90, 160, 255, 0.4);
+    border-radius: 24px;
+    padding: 18px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+}
 
-        /* Карточка */
-       #sectionHome .card {
-            flex: 1;
-            min-height: 0;
-            display: flex;
-            flex-direction: column;
-            background: rgba(10, 20, 40, 0.4);
-            backdrop-filter: blur(12px);
-            border-radius: clamp(16px, 4vw, 24px);
-            padding: clamp(8px, 1.5vh, 16px) clamp(12px, 3vw, 18px);
-            border: 1px solid rgba(90, 160, 255, 0.4);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-        }
+#sectionHome .card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(90, 160, 255, 0.7);
+}
 
-        #sectionHome .card:active {
-            transform: scale(0.98);
-            background: rgba(10, 20, 40, 0.6);
-        }
+/* Заголовок карточки */
+#sectionHome .card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #7ab8ff;
+    margin-bottom: 10px;
+}
 
+/* Описание карточки */
+#sectionHome .card-short {
+    font-size: 13px;
+    line-height: 1.45;
+    color: #d0d8ff;
+    
+}
 
-        #sectionHome .card-title {
-            flex-shrink: 0;
-            font-size: clamp(14px, 4vw, 18px);
-            font-weight: 700;
-            color: var(--accent-blue);
-            margin-bottom: clamp(4px, 1vh, 8px);
-        }
+/* Стрелка внизу справа */
+#sectionHome .card-hint {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #3a86ff;
+    cursor: pointer;
+    background: none;
+    border: none;
+    
+    margin-left: auto;      /* прижимает блок справа */
+    width: fit-content;     /* ширина только под стрелку */
+    transform: rotate(90deg);
+    animation: pulseHint 1.5s ease-in-out infinite;
+}
 
-        #sectionHome .card-short {
-            flex: 1;
-            font-size: clamp(10px, 3vw, 13px);
-            line-height: 1.35;
-            color: var(--text-light);
-            margin-bottom: clamp(12px, 3vh, 20px);
-            overflow-y: auto;
-        }
+@keyframes pulseHint {
+    0% { opacity: 0.6; transform: rotate(90deg) scale(0.95); text-shadow: 0 0 0 #3a86ff; }
+    50% { opacity: 1; transform: rotate(90deg) scale(1.05); text-shadow: 0 0 6px #3a86ff; }
+    100% { opacity: 0.6; transform: rotate(90deg) scale(0.95); text-shadow: 0 0 0 #3a86ff; }
+}
+/* Футер */
+#sectionHome .cards-footer {
+    text-align: center;
+    margin-bottom: 20px;  /* ← добавить */
+}
 
-       #sectionHome .card-hint {
-            flex-shrink: 0;
-            align-self: flex-end;
-            margin-top: auto;
-            font-size: clamp(9px, 2.5vw, 11px);
-            color: var(--accent-blue);
-            background: none;
-            padding: clamp(4px, 1vh, 8px) clamp(6px, 2vw, 12px);
-            animation: pulseHint 1.5s ease-in-out infinite;
-            text-shadow: 0 0 4px rgba(90, 160, 255, 0.5);
-            cursor: pointer;
-        }
+#sectionHome .footer-invite {
+    font-size: clamp(10px, 3.8vw, 12px);
+    color: #8a9acc;
+    margin-bottom: 24px;
+    line-height: 1.5;
+    white-space: normal;
+    word-break: break-word;
+}
 
-        @keyframes pulseHint {
-            0% { opacity: 0.6; transform: scale(0.95); text-shadow: 0 0 0 var(--accent-blue); }
-            50% { opacity: 1; transform: scale(1.05); text-shadow: 0 0 6px var(--accent-blue); }
-            100% { opacity: 0.6; transform: scale(0.95); text-shadow: 0 0 0 var(--accent-blue); }
-        }
+/* Кнопка */
+#sectionHome .btn-more {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(90, 160, 255, 0.6);
+    border-radius: 60px;
+    padding: 12px 24px;
+    font-size: clamp(13px, 4vw, 16px);
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    text-align: center;
+}
 
-        /* Футер раздела */
-        #sectionHome .cards-footer {
-            flex-shrink: 0;
-            text-align: center;
-            margin-top: clamp(8px, 2vh, 16px);
-        }
-
-        #sectionHome .footer-invite {
-            font-size: clamp(11px, 3vw, 13px);
-            color: var(--text-dim);
-            margin-bottom: clamp(12px, 3vh, 20px);
-            line-height: 1.4;
-        }
-
-        /* Кнопка "Узнать подробнее" */
-        .btn-more {
-            position: relative;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(90, 160, 255, 0.6);
-            border-radius: 60px;
-            padding: 12px 24px;
-            padding: clamp(8px, 2vh, 12px) clamp(16px, 4vw, 24px);
-            font-size: clamp(13px, 3.5vw, 15px);
-            letter-spacing: 2px;
-            color: white;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            width: 100%;
-            text-align: center;
-        }
-
-        .btn-more:active {
-            transform: scale(0.96);
-            background: rgba(0, 0, 0, 0.8);
-        }
+#sectionHome .btn-more:active {
+    transform: scale(0.98);
+    background: rgba(0, 0, 0, 0.8);
+}
 
         /* ----- НИЖНЯЯ НАВИГАЦИЯ (5 кнопок полукругом) ----- */
         .nav-container {
@@ -670,17 +652,15 @@
 
             #sectionHome .cards-header {
                 text-align: center;
-                margin-bottom: clamp(16px, 4vh, 24px);  /* увеличили отступ снизу */
+                margin-bottom: clamp(12px, 4vh, 24px);  /* увеличили отступ снизу */
             }
             #sectionHome .card {
-                padding: 8px 12px;
+                padding: 10px 14px;
             }
             #sectionHome .card-title {
-                margin-bottom: 2px;
+                margin-bottom: 12px;
             }
-            #sectionHome .card-short {
-                margin-bottom: 16px;
-            }
+           
             #sectionHome .cards-footer {
                 margin-top: 4px;
             }
@@ -743,19 +723,19 @@
                         <div class="card" data-card="0">
                             <div class="card-title">Подсознание: причина и следствие</div>
                             <div class="card-short">Твои проблемы и амбиции — не случайность. Здесь нет психологии или эзотерики. Только механика: логика программ и их эмпирическая суть.</div>
-                            <div class="card-hint">Открыть ⓘ</div>
+                            <div class="card-hint">></div>
                         </div>
                         <!-- Карточка 2 -->
                         <div class="card" data-card="1">
                             <div class="card-title">Навык: Основа выживания</div>
                             <div class="card-short">Ты сотни раз пробовал чужие «решения» — результат неуверенный. Можно выучить одно стихотворение. А можно научиться читать.</div>
-                            <div class="card-hint">Открыть ⓘ</div>
+                            <div class="card-hint">></div>
                         </div>
                         <!-- Карточка 3 -->
                         <div class="card" data-card="2">
                             <div class="card-title">Результат: Ты сам себе решение</div>
                             <div class="card-short">Ты перестаёшь быть заложником обстоятельств, экспертов и своих старых программ. Любая проблема встречает твой внутренний механизм разбора.</div>
-                            <div class="card-hint">Открыть ⓘ</div>
+                            <div class="card-hint">></div>
                         </div>
                     </div>
                     <div class="cards-footer">
