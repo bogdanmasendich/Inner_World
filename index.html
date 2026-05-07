@@ -419,7 +419,7 @@
 /* АДАПТИВ ДЛЯ ТЕЛЕФОНОВ */
 @media (max-width: 500px) {
     #sectionHome {
-        padding: 16px 16px 50px;
+        padding: 0px 16px 50px;
     }
     
     .marquee-text span {
@@ -993,6 +993,657 @@
 
 
 
+/* ===== ТРЕТИЙ РАЗДЕЛ – ДОРОЖНАЯ КАРТА ===== */
+#sectionRoadmap {
+    padding: 24px 16px 60px;
+}
+
+/* Вступление */
+.roadmap-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.roadmap-title {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff, #7ab8ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 12px;
+}
+
+.roadmap-subtitle {
+    font-size: 18px;
+    color: #7ab8ff;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.roadmap-intro p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d0d8ff;
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.roadmap-quote {
+    background: rgba(90, 160, 255, 0.08);
+    border-left: 3px solid #7ab8ff;
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-style: italic;
+    text-align: left;
+}
+
+/* Карта уровней */
+.roadmap-levels {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.level-card {
+    background: rgba(10, 20, 40, 0.55);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(90, 160, 255, 0.3);
+    border-radius: 28px;
+    padding: 20px;
+    transition: all 0.2s;
+}
+
+.level-card:hover {
+    border-color: rgba(90, 160, 255, 0.6);
+    background: rgba(10, 20, 40, 0.7);
+}
+
+.level-invite {
+    background: linear-gradient(135deg, rgba(90, 160, 255, 0.15), rgba(10, 20, 40, 0.6));
+    border-color: rgba(90, 160, 255, 0.5);
+}
+
+.level-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.level-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: #7ab8ff;
+    opacity: 0.8;
+}
+
+.level-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+}
+
+.level-content p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d0d8ff;
+    margin-bottom: 16px;
+}
+
+.level-transition {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: rgba(90, 160, 255, 0.08);
+    padding: 12px 16px;
+    border-radius: 20px;
+    margin-top: 16px;
+}
+
+.transition-icon {
+    font-size: 16px;
+    color: #7ab8ff;
+}
+
+.transition-text {
+    font-size: 13px;
+    color: #b0c8f0;
+    line-height: 1.4;
+}
+
+/* Футер */
+.roadmap-footer {
+    text-align: center;
+    padding: 24px;
+    background: linear-gradient(135deg, rgba(90, 160, 255, 0.1), rgba(10, 20, 40, 0.5));
+    border-radius: 32px;
+    margin-top: 16px;
+}
+
+.roadmap-footer p {
+    font-size: 15px;
+    line-height: 1.5;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Адаптив */
+@media (max-width: 500px) {
+    #sectionRoadmap {
+        padding: 0px 12px 50px;
+    }
+    
+    .roadmap-title {
+        font-size: 24px;
+    }
+    
+    .roadmap-subtitle {
+        font-size: 15px;
+    }
+    
+    .level-num {
+        font-size: 24px;
+    }
+    
+    .level-title {
+        font-size: 18px;
+    }
+    
+    .level-content p {
+        font-size: 13px;
+    }
+}
+
+
+
+
+/* ===== РАЗДЕЛ 4: КОНЦЕПЦИЯ ЛИЧНОСТИ ===== */
+#sectionPersonal {
+    padding: 24px 16px 60px;
+}
+
+/* Заголовок */
+.personal-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.personal-title {
+    font-size: 28px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff, #7ab8ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 12px;
+}
+
+.personal-subtitle {
+    font-size: 16px;
+    color: #7ab8ff;
+    font-style: italic;
+    line-height: 1.4;
+}
+
+/* Вступление */
+.personal-intro {
+    background: linear-gradient(135deg, rgba(90, 160, 255, 0.1), rgba(10, 20, 40, 0.6));
+    border-radius: 28px;
+    padding: 20px;
+    margin-bottom: 32px;
+    border: 1px solid rgba(90, 160, 255, 0.3);
+}
+
+.personal-intro p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #d0d8ff;
+    margin-bottom: 16px;
+}
+
+.personal-intro-highlight {
+    font-weight: 600;
+    color: #7ab8ff;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Блоки программы */
+.personal-block {
+    background: rgba(10, 20, 40, 0.55);
+    backdrop-filter: blur(12px);
+    border-radius: 28px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(90, 160, 255, 0.3);
+    overflow: hidden;
+    transition: all 0.2s;
+}
+
+.personal-block:hover {
+    border-color: rgba(90, 160, 255, 0.6);
+    background: rgba(10, 20, 40, 0.7);
+}
+
+.block-header {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
+}
+
+.block-num {
+    font-size: 24px;
+    font-weight: 800;
+    color: #7ab8ff;
+    opacity: 0.8;
+}
+
+.block-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+}
+
+.block-content {
+    padding: 20px;
+}
+
+.block-content p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d0d8ff;
+    margin-bottom: 16px;
+}
+
+.block-content p:last-of-type {
+    margin-bottom: 20px;
+}
+
+.block-result {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: rgba(90, 160, 255, 0.08);
+    padding: 14px 16px;
+    border-radius: 20px;
+    margin-top: 16px;
+    border-left: 3px solid #7ab8ff;
+}
+
+.result-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.result-text {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #b0c8f0;
+}
+
+/* Финальный блок */
+.personal-footer {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.footer-power {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(90, 160, 255, 0.15), rgba(10, 20, 40, 0.6));
+    border-radius: 32px;
+    border: 1px solid rgba(90, 160, 255, 0.4);
+}
+
+.footer-offer {
+    background: linear-gradient(135deg, #7ab8ff20, #2a4a7a30);
+    padding: 24px;
+    border-radius: 32px;
+    border: 1px solid rgba(90, 160, 255, 0.5);
+}
+
+.footer-offer p {
+    font-size: 16px;
+    font-weight: 600;
+    color: #7ab8ff;
+    letter-spacing: 1px;
+}
+
+/* Адаптив */
+@media (max-width: 500px) {
+    #sectionPersonal {
+        padding: 0px 12px 50px;
+    }
+    
+    .personal-title {
+        font-size: 24px;
+    }
+    
+    .personal-subtitle {
+        font-size: 14px;
+    }
+    
+    .block-num {
+        font-size: 20px;
+    }
+    
+    .block-title {
+        font-size: 16px;
+    }
+    
+    .block-content p {
+        font-size: 13px;
+    }
+    
+    .footer-power {
+        font-size: 16px;
+    }
+    
+    .footer-offer p {
+        font-size: 14px;
+    }
+}
+
+
+
+/* ===== РАЗДЕЛ 5: ПРЕДСТАРТ ===== */
+#sectionNews {
+    padding: 24px 16px 60px;
+}
+
+/* Заголовок */
+.prestart-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.prestart-title {
+    font-size: 32px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff, #7ab8ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 12px;
+}
+
+.prestart-subtitle {
+    font-size: 16px;
+    color: #d0d8ff;
+    line-height: 1.5;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+/* Вступление */
+.prestart-intro {
+    margin-bottom: 32px;
+}
+
+.intro-card {
+    background: linear-gradient(135deg, rgba(90, 160, 255, 0.08), rgba(10, 20, 40, 0.6));
+    border-radius: 28px;
+    padding: 20px;
+    border: 1px solid rgba(90, 160, 255, 0.3);
+}
+
+.intro-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #d0d8ff;
+    font-style: italic;
+}
+
+/* Основные блоки */
+.prestart-block {
+    display: flex;
+    gap: 16px;
+    background: rgba(10, 20, 40, 0.55);
+    backdrop-filter: blur(12px);
+    border-radius: 28px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid rgba(90, 160, 255, 0.3);
+    transition: all 0.2s;
+}
+
+.prestart-block:hover {
+    border-color: rgba(90, 160, 255, 0.6);
+    background: rgba(10, 20, 40, 0.7);
+}
+
+.prestart-block.highlight {
+    background: linear-gradient(135deg, rgba(90, 160, 255, 0.12), rgba(10, 20, 40, 0.6));
+    border-color: rgba(90, 160, 255, 0.5);
+}
+
+.block-icon {
+    font-size: 36px;
+    flex-shrink: 0;
+}
+
+.block-content h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #7ab8ff;
+    margin-bottom: 12px;
+}
+
+.block-content p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d0d8ff;
+    margin-bottom: 12px;
+}
+
+/* Сетка (статус и доступ) */
+.prestart-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.grid-card {
+    display: flex;
+    gap: 14px;
+    background: rgba(10, 20, 40, 0.55);
+    backdrop-filter: blur(12px);
+    border-radius: 24px;
+    padding: 18px;
+    border: 1px solid rgba(90, 160, 255, 0.3);
+}
+
+.grid-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+}
+
+.grid-text strong {
+    display: block;
+    font-size: 16px;
+    color: #7ab8ff;
+    margin-bottom: 6px;
+}
+
+.grid-text p {
+    font-size: 13px;
+    line-height: 1.5;
+    color: #d0d8ff;
+    margin: 0;
+}
+
+/* Список */
+.prestart-list {
+    margin: 8px 0 0 20px;
+    padding: 0;
+}
+
+.prestart-list li {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d0d8ff;
+    margin-bottom: 8px;
+}
+
+/* Блок стоимости */
+.price-block {
+    background: linear-gradient(135deg, rgba(90, 160, 255, 0.15), rgba(10, 20, 40, 0.6));
+    border-radius: 32px;
+    padding: 24px;
+    margin: 28px 0;
+    text-align: center;
+    border: 1px solid rgba(90, 160, 255, 0.5);
+}
+
+.price-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+
+.price-icon {
+    font-size: 32px;
+}
+
+.price-header h3 {
+    font-size: 24px;
+    font-weight: 800;
+    color: #7ab8ff;
+    margin: 0;
+}
+
+.price-range {
+    font-size: 36px;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 16px;
+}
+
+.price-rule p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d0d8ff;
+}
+
+.price-note {
+    font-style: italic;
+    color: #7ab8ff;
+    margin-top: 12px;
+}
+
+/* Футер */
+.prestart-footer {
+    margin-top: 32px;
+}
+
+.footer-card {
+    background: linear-gradient(135deg, rgba(90, 160, 255, 0.12), rgba(10, 20, 40, 0.7));
+    border-radius: 32px;
+    padding: 28px 20px;
+    text-align: center;
+    border: 1px solid rgba(90, 160, 255, 0.5);
+}
+
+.footer-icon {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.footer-card h4 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+
+.footer-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #d0d8ff;
+    margin-bottom: 20px;
+}
+
+.footer-warning {
+    background: rgba(90, 160, 255, 0.15);
+    border-radius: 40px;
+    padding: 10px 16px;
+    font-size: 13px;
+    color: #7ab8ff;
+    font-weight: 600;
+    margin-bottom: 24px;
+    display: inline-block;
+}
+
+.prestart-button {
+    display: inline-block;
+    background: linear-gradient(135deg, #2a6ad4, #1a4a9e);
+    padding: 14px 32px;
+    border-radius: 60px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.2s;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.prestart-button:active {
+    transform: scale(0.97);
+}
+
+/* Адаптив */
+@media (max-width: 500px) {
+    #sectionNews {
+        padding: 0px 12px 50px;
+    }
+    
+    .prestart-title {
+        font-size: 28px;
+    }
+    
+    .prestart-subtitle {
+        font-size: 14px;
+    }
+    
+    .prestart-block {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .block-icon {
+        font-size: 28px;
+    }
+    
+    .price-range {
+        font-size: 28px;
+    }
+    
+    .price-header h3 {
+        font-size: 20px;
+    }
+    
+    .footer-card h4 {
+        font-size: 18px;
+    }
+    
+    .prestart-button {
+        font-size: 14px;
+        padding: 12px 24px;
+    }
+}
 
 
 
@@ -1247,7 +1898,7 @@
             «Преподаватели — это не "эксперты сверху". Это люди, которые недавно были на твоём месте и хорошо помнят, каково это — учиться новому языку, только язык этот называется "подсознание".»
         </div>
 
-        <p class="mentor-outro">Преподаватели — не маги. Они не решают твои проблемы вместо тебя. Их задача — держать фокус и помогать тебе проходить твои собственные слепые зоны. Ты идёшь сам, но не один.</p>
+        <p class="mentor-outro">Ты идёшь сам, но не один.</p>
     </div>
 </div>
 
@@ -1259,21 +1910,310 @@
 
             <!-- РАЗДЕЛ 3: РАЗВИТИЕ (заглушка) -->
             <div class="section" id="sectionRoadmap">
-                <h2>Твой путь в проекте</h2>
-                <p>Здесь будет дорожная карта...</p>
+    <!-- Вступление -->
+    <div class="roadmap-header">
+        <h2 class="roadmap-title">Твоя дорожная карта</h2>
+        <p class="roadmap-subtitle">От первого шага до мастера. Прозрачно, системно, шаг за шагом.</p>
+        <div class="roadmap-intro">
+            <p>P.S. В проекте нет «секретного знания, которое ты получишь после оплаты». Есть путь. И этот путь прозрачный.</p>
+            <p class="roadmap-quote">Ты всегда видишь, где находишься и что нужно сделать дальше. Каждый уровень открывает новые возможности и даёт новый статус. Не хочешь расти дальше — оставайся на том, который тебе комфортен. Захочешь идти глубже — вот тебе карта:</p>
+        </div>
+    </div>
+
+    <!-- Карта уровней -->
+    <div class="roadmap-levels">
+
+        <!-- Уровень 1 -->
+        <div class="level-card">
+            <div class="level-header">
+                <div class="level-num">01</div>
+                <div class="level-title">Исследователь</div>
             </div>
+            <div class="level-content">
+                <p>Ты только зашёл в проект. Смотришь по сторонам, знакомишься с приложением, с людьми, с предметами. Проходишь верификацию — заполняешь профиль, чтобы все понимали, кто ты и с каким запросом пришёл. На этом этапе важно просто начать. Посетить пару встреч, сделать первые заметки, почувствовать атмосферу.</p>
+                <div class="level-transition">
+                    <span class="transition-icon">➡️</span>
+                    <span class="transition-text">Переход: пройти верификацию в личном кабинете.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Уровень 2 -->
+        <div class="level-card">
+            <div class="level-header">
+                <div class="level-num">02</div>
+                <div class="level-title">Погружённый</div>
+            </div>
+            <div class="level-content">
+                <p>Ты уже верифицирован и активно ходишь на предметы. Заметки становятся регулярными, инсайты — частыми. Ты начинаешь задавать вопросы не только себе, но и преподавателям, и другим участникам. Внутри появляется ощущение, что ты не гость, а часть движения.</p>
+                <div class="level-transition">
+                    <span class="transition-icon">➡️</span>
+                    <span class="transition-text">Переход: месяц в проекте + заполнение раздела «Погружение» в личном кабинете.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Уровень 3 -->
+        <div class="level-card">
+            <div class="level-header">
+                <div class="level-num">03</div>
+                <div class="level-title">Практик</div>
+            </div>
+            <div class="level-content">
+                <p>На этом этапе к тебе присоединяется личный преподаватель. Вы вместе формируете запросы, разбираешь твои собственные программы. Преподаватель не решает за тебя, он подсвечивает, где ты застреваешь. Ты проводишь практические сессии, учишься работать с программами не в теории, а на себе. Именно здесь начинается самое интересное — когда ты перестаёшь понимать «как это устроено» и начинаешь это реально делать.</p>
+                <div class="level-transition">
+                    <span class="transition-icon">➡️</span>
+                    <span class="transition-text">Переход: три месяца в проекте + заполнение раздела «Практик» в личном кабинете + пять практических сессий с преподавателем.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Уровень 4 -->
+        <div class="level-card">
+            <div class="level-header">
+                <div class="level-num">04</div>
+                <div class="level-title">Продвинутый</div>
+            </div>
+            <div class="level-content">
+                <p>Теперь ты уже уверенно работаешь с программами. Но уверенность — не значит мастерство. На этом уровне идёт заточка навыка. Ты попадаешь в отдельную группу, где мы проводим закрытые показательные сессии в реальном времени. Никакой теории. Только живая работа с программами, тонкие фишки, моменты, которые видны только тому, кто уже внутри процесса.</p>
+                <p>Ты проводишь сессии с равными себе, оттачиваешь мастерство на реальных кейсах. А ещё — три сессии со мной, где мы разбираем то, что не разобрать в общих группах. И в конце — самостоятельный разбор сложной программы под моим наблюдением.</p>
+                <div class="level-transition">
+                    <span class="transition-icon">➡️</span>
+                    <span class="transition-text">Переход: три месяца на этом ранге + активное участие в мастер-классах + проведение сессий с участниками своего уровня + три сессии со мной + самостоятельный разбор сложной программы под наблюдением.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Уровень 5 -->
+        <div class="level-card">
+            <div class="level-header">
+                <div class="level-num">05</div>
+                <div class="level-title">Личный преподаватель</div>
+            </div>
+            <div class="level-content">
+                <p>Ты сертифицирован. Теперь ты можешь официально вести участников рангов «Исследователь», «Погружённый» и «Практик». Получаешь долю от проекта за свою работу. Твоё имя появляется в приложении как одного из преподавателей. Но главное — ты наконец видишь, как твой собственный навык помогает другим расти. И это, пожалуй, самый сильный способ закрепить мастерство.</p>
+                <div class="level-transition">
+                    <span class="transition-icon">➡️</span>
+                    <span class="transition-text">Переход: сдача выпускной работы + супервизия со мной + пробное ведение новичка под наблюдением.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Уровень 6 -->
+        <div class="level-card level-invite">
+            <div class="level-header">
+                <div class="level-num">✨</div>
+                <div class="level-title">Наставник проекта</div>
+            </div>
+            <div class="level-content">
+                <p>Это не уровень, который можно «взять» по желанию. Это приглашение от меня тем, кто раскрыл свой уникальный потенциал в какой-то узкой сфере: будь то деньги, отношения, тело, творчество или что-то ещё. Ты становишься лидером проекта, светишься как наставник. Получаешь возможность продавать свои сессии и зарабатывать уже под своей личной маркой, но внутри экосистемы Inner World.</p>
+                <div class="level-transition">
+                    <span class="transition-icon">✨</span>
+                    <span class="transition-text">Переход: только личное приглашение от создателя.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Финальный призыв -->
+    <div class="roadmap-footer">
+        <p>Ты видишь путь. А дальше предложение для тех, кто хочет пройти его максимально быстро и глубоко. Два месяца индивидуальной работы</p>
+    </div>
+</div>
 
             <!-- РАЗДЕЛ 4: ЛИЧНАЯ РАБОТА (заглушка) -->
-            <div class="section" id="sectionPersonal">
-                <h2>Личная работа со мной</h2>
-                <p>Здесь будет описание индивидуальной работы...</p>
+           <!-- РАЗДЕЛ 4: КОНЦЕПЦИЯ ЛИЧНОСТИ -->
+<div class="section" id="sectionPersonal">
+    <div class="personal-header">
+        <h2 class="personal-title">Концепция личности</h2>
+        <p class="personal-subtitle">Два месяца индивидуальной работы. С нуля до устойчивого навыка и решённого запроса.</p>
+    </div>
+
+    <div class="personal-intro">
+        <p>Концепция личности — это не курс из девяти сессий. Это два месяца, в течение которых ты самостоятельно разбираешь себя на части и собираешь заново опираясь на самое главное - практика находить, узнавать и менять свои программы.</p>
+        <p class="personal-intro-highlight">Каждый блок — это законченный этап. И каждый заканчивается результатом, который ты можешь ощутить.</p>
+    </div>
+
+    <!-- Блок 1 -->
+    <div class="personal-block">
+        <div class="block-header">
+            <div class="block-num">01</div>
+            <div class="block-title">Блок первый. Знакомство и персонализация</div>
+        </div>
+        <div class="block-content">
+            <p>Всё начинается с тебя. Первая сессия — это оцифровка твоей личности. Мы собираем базу: какие идеи сформировали твою реальность, какие программы работают в фоновом режиме, что ты уже пробовал, а что нет.</p>
+            <p>Никакой магии. Просто честный разговор, где мы вытаскиваем на свет то, что обычно скрыто.</p>
+            <div class="block-result">
+                <span class="result-icon">🎯</span>
+                <span class="result-text">Результат блока: сформированная цель и чёткая траектория её достижения. Ты знаешь, куда идёшь и зачем.</span>
             </div>
+        </div>
+    </div>
+
+    <!-- Блок 2 -->
+    <div class="personal-block">
+        <div class="block-header">
+            <div class="block-num">02</div>
+            <div class="block-title">Блок второй. Устройство внутренних программ: распознавание и анализ</div>
+        </div>
+        <div class="block-content">
+            <p>На второй сессии мы вводим понятие программы. Не как абстракции, а как конкретного механизма. Разбираем логику и механику — как устроено убеждение, откуда оно взялось, как его распознать в себе.</p>
+            <p>Третья сессия — это уже практика на твоих собственных программах. Берём реальные ситуации из жизни, ищем установки, анализируем их работу со стороны.</p>
+            <div class="block-result">
+                <span class="result-icon">🔍</span>
+                <span class="result-text">Результат блока: мы нашли общий язык с твоим подсознанием. Ты начинаешь понимать свои программы не умозрительно, а аналитически.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Блок 3 -->
+    <div class="personal-block">
+        <div class="block-header">
+            <div class="block-num">03</div>
+            <div class="block-title">Блок третий. Эмпирическое устройство программ: вход в подсознание</div>
+        </div>
+        <div class="block-content">
+            <p>Понимать программу — это ещё не всё. Нужно её ощутить. На четвёртой сессии мы выходим на уровень эмпирики — работаем с телесными ощущениями, учимся слышать то, что не выражается словами.</p>
+            <p>Пятая сессия — тренировка образного мышления. Программа не всегда говорит логикой, часто она говорит картинками, метафорами, ощущениями. Мы учимся интерпретировать то, что не поддаётся логике.</p>
+            <p>Шестая сессия — ты создаёшь свою собственную мини-практику с нуля. Не берёшь чужую, а создаёшь ту, которая работает именно для тебя.</p>
+            <div class="block-result">
+                <span class="result-icon">💫</span>
+                <span class="result-text">Результат блока: ты не просто понимаешь программу, ты её ощущаешь. И у тебя есть опыт создания собственного инструмента.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Блок 4 -->
+    <div class="personal-block">
+        <div class="block-header">
+            <div class="block-num">04</div>
+            <div class="block-title">Блок четвёртый. Вскрытие личности</div>
+        </div>
+        <div class="block-content">
+            <p>Седьмая сессия — это полноценная мастер-сессия. Мы раскрываем основные платформы твоей личности. То, что обычно скрыто за повседневной суетой, выходит на поверхность.</p>
+            <p>Восьмая сессия — анализ. Смотрим, что произошло, разбираем твои ощущения, прокручиваем мысли за прошедшую неделю. Изучаем навигацию — как ты можешь взаимодействовать со своим подсознанием дальше, уже без меня.</p>
+            <div class="block-result">
+                <span class="result-icon">🧭</span>
+                <span class="result-text">Результат блока: ты нашёл себя. Не в пафосном смысле, а в практическом — понимаешь, куда заходить, какие зоны подсознания открывать, как с ними работать.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Блок 5 -->
+    <div class="personal-block">
+        <div class="block-header">
+            <div class="block-num">05</div>
+            <div class="block-title">Блок пятый. Сам решу</div>
+        </div>
+        <div class="block-content">
+            <p>Финальная, девятая сессия. Ты решаешь свой запрос самостоятельно. Я рядом, страхую, подсвечиваю, но не веду за руку. Ты сам находишь программу, сам её разбираешь, сам меняешь.</p>
+            <p>После сессии — презентация своих заметок. Не для оценки, а для фиксации. Чтобы у тебя остался материальный след этого пути.</p>
+            <div class="block-result">
+                <span class="result-icon">🏆</span>
+                <span class="result-text">Результат блока: ты имеешь опыт изменения своей сложной программы полностью самостоятельно. От начала до конца.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Финальный блок -->
+    <div class="personal-footer">
+        <p class="footer-power">Это максимальный формат. Два месяца, девять сессий, навык на всю жизнь.</p>
+        <div class="footer-offer">
+            <p>Сейчас — предстарт. Особые условия для первых десяти человек.</p>
+        </div>
+    </div>
+</div>
 
             <!-- РАЗДЕЛ 5: НОВОСТИ / КЕЙСЫ (заглушка) -->
-            <div class="section" id="sectionNews">
-                <h2>Истории учеников</h2>
-                <p>Здесь будут кейсы...</p>
+            <!-- РАЗДЕЛ 5: ПРЕДСТАРТ -->
+<div class="section" id="sectionNews">
+    <div class="prestart-header">
+        <h2 class="prestart-title">Предстарт</h2>
+        <p class="prestart-subtitle">До полноценного запуска Inner World осталось пара месяцев. Проект уже живёт, но на всю свою силу он заработает чуть позже. Именно сейчас я открываю предстарт для первых десяти человек.</p>
+    </div>
+
+    <div class="prestart-intro">
+        <div class="intro-card">
+            <p>Зачем я это делаю? Потому что первые — это всегда не просто участники. Это те, кто задаёт тон. Те, кто получает максимум, потому что идёт первым. И те, кто потом, когда проект разрастётся, будут смотреть на этот момент и понимать, что они были здесь с самого начала.</p>
+        </div>
+    </div>
+
+    <!-- Первая десятка -->
+    <div class="prestart-block">
+        <div class="block-icon">🔥</div>
+        <div class="block-content">
+            <h3>Первая десятка — это первая стратегическая группа Inner World</h3>
+            <p>Не «сооснователи» в пафосном смысле, а реальные люди, которые влияют на то, каким проект вырастет. Как будет выглядеть приложение, какие фишки появятся первыми, что стоит менять, а что оставить как есть. Я спрашиваю вас, мы обсуждаем, и мы делаем. Потому что ваш голос — самый важный на старте.</p>
+            <p><strong>И это не просто слова.</strong> У вас будет прямая связь со мной. Не «написать в поддержку», а личный чат, где мы обсуждаем ваши идеи, амбиции, планы. Как партнёры, а не как «эксперт и клиент».</p>
+        </div>
+    </div>
+
+    <!-- Статус и доступ -->
+    <div class="prestart-grid">
+        <div class="grid-card">
+            <div class="grid-icon">⚡</div>
+            <div class="grid-text">
+                <strong>Стартовый статус «Продвинутый»</strong>
+                <p>Без необходимости проходить нижние ступени. А после прохождения программы — полный доступ к уровню «Личный преподаватель», если захотите вести других и зарабатывать.</p>
             </div>
+        </div>
+        <div class="grid-card">
+            <div class="grid-icon">🔓</div>
+            <div class="grid-text">
+                <strong>Доступ к проекту навсегда</strong>
+                <p>Вы не покупаете двухмесячный курс. Вы входите в экосистему, которая будет с вами столько, сколько вы сами захотите в ней оставаться.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Что получаете -->
+    <div class="prestart-block highlight">
+        <div class="block-icon">✨</div>
+        <div class="block-content">
+            <h3>Что конкретно вы получаете</h3>
+            <p><strong>Два месяца индивидуальной работы со мной по программе «Концепция личности».</strong> Девять сессий, где мы проходим весь путь — от первого знакомства до того момента, когда вы самостоятельно решаете свой сложный запрос. Без магии, без «волшебных таблеток». Только механика, логика, эмпирика, навигация и инсайт. На выходе — устойчивый навык работы с подсознанием, который остаётся с вами на всю жизнь.</p>
+            <p>Плюс статус «Продвинутый» в проекте, закрытый чат со мной и остальными из десятки, приоритет ваших идей в доработке приложения и право стать личным преподавателем, когда захотите.</p>
+        </div>
+    </div>
+
+    <!-- Что даёте взамен -->
+    <div class="prestart-block">
+        <div class="block-icon">🤝</div>
+        <div class="block-content">
+            <h3>Что вы даёте взамен</h3>
+            <ul class="prestart-list">
+                <li>Вы проходите программу до конца.</li>
+                <li>Ведёте заметки — потому что без фиксации навык не закрепляется.</li>
+                <li>После старта проводите одного новичка бесплатно под моей супервизией — чтобы отточить кураторство перед тем, как вести платно.</li>
+                <li>Честность. Проект строится на доверии, и это не просто слова.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Стоимость -->
+    <div class="price-block">
+        <div class="price-header">
+            <div class="price-icon">💰</div>
+            <h3>Стоимость</h3>
+        </div>
+        <p class="price-range">От 1000 до 1900 долларов</p>
+        <div class="price-rule">
+            <p>Правило простое: каждый следующий участник повышает планку на 100 долларов. Первый заходит за 1000, второй — за 1100, третий — за 1200, и так до десятого, который платит 1900.</p>
+            <p class="price-note">Чем дольше вы думаете, тем выше цена. Не как наказание, а как справедливость для тех, кто принимает решение первым. Потому что ценность очевидна, и дальше она будет только расти.</p>
+        </div>
+    </div>
+
+    <!-- Финальный призыв -->
+    <div class="prestart-footer">
+        <div class="footer-card">
+            <span class="footer-icon">📩</span>
+            <h4>Как войти в десятку</h4>
+            <p>Напишите мне в Telegram. Проведём короткое собеседование — не «отбор», а просто убедимся, что мы на одной волне и вы понимаете, на что идёте.</p>
+            <div class="footer-warning">Мест десять. Как только наберётся группа — предстарт закрывается.</div>
+            <a href="https://t.me/bogdans_network" target="_blank" class="prestart-button">Написать в Telegram →</a>
+        </div>
+    </div>
+</div>
         </div>
 
         <!-- НИЖНЯЯ НАВИГАЦИЯ -->
@@ -1342,11 +2282,40 @@ function switchSection(sectionId) {
             btn.classList.add('active');
         }
     });
+    const contentArea = document.getElementById('contentArea');
+if (contentArea) {
+    contentArea.scrollTop = 0;
+}
 }
 
 navBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         switchSection(btn.getAttribute('data-section'));
+    });
+});
+
+// ===== ПРИ ОТКРЫТИИ ПЛАШКИ ВО ВТОРОМ РАЗДЕЛЕ - ПРОКРУТКА К ВЕРХУ =====
+function scrollToSecondSectionTop() {
+    const learningSection = document.getElementById('sectionLearning');
+    if (learningSection && getComputedStyle(learningSection).display !== 'none') {
+        const contentArea = document.getElementById('contentArea');
+        if (contentArea) {
+            contentArea.scrollTo({
+                top: learningSection.offsetTop - 80, // отступ под шапку
+                behavior: 'smooth'
+            });
+        }
+    }
+}
+
+// Вешаем обработчик на каждую плашку
+document.querySelectorAll('.pillar').forEach(pillar => {
+    const header = pillar.querySelector('.pillar-header');
+    header.addEventListener('click', () => {
+        // Небольшая задержка, чтобы DOM успел обновиться после открытия плашки
+        setTimeout(() => {
+            scrollToSecondSectionTop();
+        }, 50);
     });
 });
 
@@ -1422,6 +2391,7 @@ const fullTexts = [
 function openModal(title, content) {
     modalTitle.textContent = title;
     modalBody.innerHTML = content;
+    modalBody.scrollTop = 0;
     modalOverlay.classList.add('active');
 }
 
