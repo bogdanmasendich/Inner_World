@@ -1645,6 +1645,19 @@
     }
 }
 
+.logo-img {
+    width: 32px;
+    height: 32px;
+    display: block;
+    object-fit: contain;
+}
+
+@media (max-width: 500px) {
+    .logo-img {
+        width: 26px;
+        height: 26px;
+    }
+}
 
 
         /* ----- АДАПТИВ ДЛЯ ТЕЛЕФОНОВ ----- */
@@ -1733,7 +1746,9 @@
         <!-- ШАПКА -->
         <div class="app-header">
             <div class="header-left">
-                <div class="logo-icon">👁️</div>
+                <div class="logo-icon">
+                    <img src="logo.png" alt="Inner World" class="logo-img">
+                </div>
                 <div class="header-text">
                     <div class="app-logo">INNER WORLD</div>
                     <div class="quote">Овладей миром причин —<br> и мир результатов станет твоим</div>
